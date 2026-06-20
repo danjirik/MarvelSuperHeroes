@@ -43,6 +43,10 @@ export default function CardScanner({ onImportToSimulator }) {
   const [manualQuery, setManualQuery] = useState('');
   const [manualResults, setManualResults] = useState([]);
 
+  // Stavy pro vyhledávání a opravy v jednotlivých řádcích v batch review
+  const [rowQueries, setRowQueries] = useState({});
+  const [rowResults, setRowResults] = useState({});
+
   // Nastavení & Zobrazení
   const [showImages, setShowImages] = useState(true);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -289,6 +293,38 @@ export default function CardScanner({ onImportToSimulator }) {
     }
   };
 
+  // Umožní ručně přidat bounding box kliknutím na fotku
+  const handleImageClick = (e) => {
+    if (!batchPhoto || isProcessingBatch || batchResults.length > 0) return;
+    
+    // Získáme souřadnice kliknutí relativně k elementu obrázku
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickY = e.clientY - rect.top;
+    
+    // Přepočítáme do originální velikosti canvasu
+    const scaleX = batchPhoto.width / rect.width;
+    const scaleY = batchPhoto.height / rect.height;
+    
+    const origX = clickX * scaleX;
+    const origY = clickY * scaleY;
+    
+    // Odhadneme rozměr karty v originální velikosti (např. 22 % šířky obrázku)
+    const cardW = Math.round(batchPhoto.width * 0.22);
+    const cardH = Math.round(cardW * 1.4); // Standardní poměr stran 1.4
+    
+    const newBox = {
+      id: `manual-box-${Date.now()}`,
+      x: Math.round(Math.max(0, origX - cardW / 2)),
+      y: Math.round(Math.max(0, origY - cardH / 2)),
+      width: cardW,
+      height: cardH,
+      selected: true
+    };
+    
+    setDetectedBoxes(prev => [...prev, newBox]);
+  };
+
   // Spuštění hromadného zpracování detekovaných boxů
   const processBatchQueue = async () => {
     if (!batchPhoto || !worker) return;
@@ -417,6 +453,37 @@ export default function CardScanner({ onImportToSimulator }) {
     setBatchResults(prev => prev.map(res => 
       res.boxId === boxId ? { ...res, count: Math.max(1, res.count + amount) } : res
     ));
+  };
+
+  // Funkce pro našeptávání v řádcích Batch Review
+  const handleRowSearch = (boxId, query) => {
+    setRowQueries(prev => ({ ...prev, [boxId]: query }));
+    
+    if (!query || query.trim().length < 2) {
+      setRowResults(prev => ({ ...prev, [boxId]: [] }));
+      return;
+    }
+    
+    const lowerQuery = query.toLowerCase();
+    const matches = cardsData.filter(c => 
+      c.name.toLowerCase().includes(lowerQuery)
+    ).slice(0, 5);
+    
+    setRowResults(prev => ({ ...prev, [boxId]: matches }));
+  };
+
+  const selectRowCard = (boxId, card) => {
+    updateBatchResultCard(boxId, card.id);
+    setRowQueries(prev => {
+      const copy = { ...prev };
+      delete copy[boxId];
+      return copy;
+    });
+    setRowResults(prev => {
+      const copy = { ...prev };
+      delete copy[boxId];
+      return copy;
+    });
   };
 
   // --- RUČNÍ ZADÁVÁNÍ KARET ---
@@ -703,18 +770,18 @@ export default function CardScanner({ onImportToSimulator }) {
               
               <div style={{ position: 'relative', maxWidth: '720px', margin: '0 auto', overflow: 'hidden', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
                 {/* Vykreslíme canvas s fotkou */}
-                <div style={{ position: 'relative' }}>
+                <div style={{ position: 'relative', cursor: 'crosshair' }} onClick={handleImageClick}>
                   <img 
                     src={batchPhoto.toDataURL()} 
                     alt="Vyfocený snímek" 
-                    style={{ width: '100%', display: 'block' }} 
+                    style={{ width: '100%', display: 'block', userSelect: 'none' }} 
                   />
                   
                   {/* Vykreslíme nalezené bounding boxy */}
                   {detectedBoxes.map((box) => (
                     <div
                       key={box.id}
-                      onClick={() => toggleBoxSelection(box.id)}
+                      onClick={(e) => { e.stopPropagation(); toggleBoxSelection(box.id); }}
                       style={{
                         position: 'absolute',
                         left: `${(box.x / batchPhoto.width) * 100}%`,
@@ -832,19 +899,43 @@ export default function CardScanner({ onImportToSimulator }) {
                         </div>
                       )}
 
-                      {/* Dropdown pro manuální opravu */}
-                      <div style={{ marginTop: '0.25rem' }}>
-                        <select
+                      {/* Našeptávač pro rychlou manuální opravu */}
+                      <div style={{ marginTop: '0.25rem', position: 'relative' }}>
+                        <input
+                          type="text"
                           className="search-input"
+                          placeholder="Vyhledat a opravit název..."
                           style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', width: '100%', height: '28px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)' }}
-                          value={res.card?.id || ''}
-                          onChange={(e) => updateBatchResultCard(res.boxId, e.target.value)}
-                        >
-                          <option value="">-- Vyberte správnou kartu --</option>
-                          {cardsData.map(c => (
-                            <option key={c.id} value={c.id}>{c.name}</option>
-                          ))}
-                        </select>
+                          value={rowQueries[res.boxId] !== undefined ? rowQueries[res.boxId] : ''}
+                          onChange={(e) => handleRowSearch(res.boxId, e.target.value)}
+                        />
+                        
+                        {rowResults[res.boxId]?.length > 0 && (
+                          <div style={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            right: 0,
+                            background: '#121217',
+                            border: '1px solid rgba(255,255,255,0.15)',
+                            borderRadius: '4px',
+                            zIndex: 100,
+                            maxHeight: '120px',
+                            overflowY: 'auto',
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+                          }}>
+                            {rowResults[res.boxId].map(card => (
+                              <div
+                                key={card.id}
+                                onClick={() => selectRowCard(res.boxId, card)}
+                                style={{ padding: '0.4rem 0.6rem', borderBottom: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer', fontSize: '0.75rem', color: '#fff' }}
+                                className="manual-search-item"
+                              >
+                                {card.name}
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       {/* Množství karty */}

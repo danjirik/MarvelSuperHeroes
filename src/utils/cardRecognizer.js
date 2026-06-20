@@ -151,8 +151,9 @@ export function detectCardRegions(canvas) {
         
         const ratio = boxH / boxW; // Poměr stran (karta na výšku by měla mít ~1.4)
         
-        // Odfiltrujeme extrémně malé/velké objekty nebo objekty s nevhodným poměrem
-        if (boxW >= 24 && boxH >= 24 && ratio > 0.8 && ratio < 2.0) {
+        // Odfiltrujeme extrémně malé/velké objekty nebo objekty s nevhodným poměrem.
+        // V 300px šířce odpovídá celá karta zhruba šířce 25-110px.
+        if (boxW >= 25 && boxW <= 110 && boxH >= 35 && boxH <= 150 && ratio >= 1.1 && ratio <= 1.8) {
           boxes.push({
             id: `box-${minC}-${minR}`,
             x: Math.round(boxX * scaleX),
