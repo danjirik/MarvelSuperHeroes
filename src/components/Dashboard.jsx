@@ -73,35 +73,60 @@ export default function Dashboard({ setActiveTab }) {
       </div>
 
       {/* Rychlý rozcestník */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
-        <div className="glass-panel" style={{ cursor: 'pointer', textAlign: 'center', padding: '1.5rem' }} onClick={() => setActiveTab('guide')}>
-          <BookOpen size={32} style={{ color: '#a78bfa', marginBottom: '0.75rem' }} />
-          <h3>Taktický průvodce</h3>
-          <p style={{ fontSize: '0.85rem', marginBottom: 0 }}>Prostudujte metagame, rozdělení rolí a pravidla 2HG.</p>
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
+        gap: '1.5rem',
+        marginTop: '2rem'
+      }}>
+        <div 
+          className="glass-panel" 
+          style={{ cursor: 'pointer', textAlign: 'center', padding: '1.75rem', marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} 
+          onClick={() => setActiveTab('guide')}
+        >
+          <BookOpen size={36} style={{ color: '#a78bfa', marginBottom: '1rem' }} />
+          <h3 style={{ fontSize: '1.15rem', marginBottom: '0.5rem' }}>Taktický průvodce</h3>
+          <p style={{ fontSize: '0.85rem', marginBottom: 0, color: 'var(--text-muted)' }}>Prostudujte metagame, rozdělení rolí a pravidla 2HG.</p>
         </div>
 
-        <div className="glass-panel" style={{ cursor: 'pointer', textAlign: 'center', padding: '1.5rem' }} onClick={() => setActiveTab('tierlist')}>
-          <Users size={32} style={{ color: '#8b5cf6', marginBottom: '0.75rem' }} />
-          <h3>Tier List karet</h3>
-          <p style={{ fontSize: '0.85rem', marginBottom: 0 }}>Prohlédněte si hodnocení jednotlivých karet s 2HG kontextem.</p>
+        <div 
+          className="glass-panel" 
+          style={{ cursor: 'pointer', textAlign: 'center', padding: '1.75rem', marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} 
+          onClick={() => setActiveTab('tierlist')}
+        >
+          <Users size={36} style={{ color: '#8b5cf6', marginBottom: '1rem' }} />
+          <h3 style={{ fontSize: '1.15rem', marginBottom: '0.5rem' }}>Tier List karet</h3>
+          <p style={{ fontSize: '0.85rem', marginBottom: 0, color: 'var(--text-muted)' }}>Hodnocení 314 karet s detailními 2HG auditními komentáři.</p>
         </div>
 
-        <div className="glass-panel" style={{ cursor: 'pointer', textAlign: 'center', padding: '1.5rem' }} onClick={() => setActiveTab('matcher')}>
-          <Users size={32} style={{ color: '#3b82f6', marginBottom: '0.75rem' }} />
-          <h3>Párovač archetypů</h3>
-          <p style={{ fontSize: '0.85rem', marginBottom: 0 }}>Vyberte dva archetypy a zjistěte jejich synergii a rizika.</p>
+        <div 
+          className="glass-panel" 
+          style={{ cursor: 'pointer', textAlign: 'center', padding: '1.75rem', marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} 
+          onClick={() => setActiveTab('matcher')}
+        >
+          <Users size={36} style={{ color: '#3b82f6', marginBottom: '1rem' }} />
+          <h3 style={{ fontSize: '1.15rem', marginBottom: '0.5rem' }}>Párovač archetypů</h3>
+          <p style={{ fontSize: '0.85rem', marginBottom: 0, color: 'var(--text-muted)' }}>Analyzujte kompatibilitu dvou balíčků a odhalte rizika.</p>
         </div>
 
-        <div className="glass-panel" style={{ cursor: 'pointer', textAlign: 'center', padding: '1.5rem' }} onClick={() => setActiveTab('simulator')}>
-          <Sword size={32} style={{ color: '#ef4444', marginBottom: '0.75rem' }} />
-          <h3>Sealed Simulator</h3>
-          <p style={{ fontSize: '0.85rem', marginBottom: 0 }}>Otevřete 12 boosterů a rozdělte karty do dvou 40-karetních balíků.</p>
+        <div 
+          className="glass-panel" 
+          style={{ cursor: 'pointer', textAlign: 'center', padding: '1.75rem', marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} 
+          onClick={() => setActiveTab('simulator')}
+        >
+          <Sword size={36} style={{ color: '#ef4444', marginBottom: '1rem' }} />
+          <h3 style={{ fontSize: '1.15rem', marginBottom: '0.5rem' }}>Sealed Simulator</h3>
+          <p style={{ fontSize: '0.85rem', marginBottom: 0, color: 'var(--text-muted)' }}>Trénujte stavbu ze 12 boosterů s asistencí mana křivek.</p>
         </div>
 
-        <div className="glass-panel" style={{ cursor: 'pointer', textAlign: 'center', padding: '1.5rem' }} onClick={() => setActiveTab('calculators')}>
-          <Zap size={32} style={{ color: '#f59e0b', marginBottom: '0.75rem' }} />
-          <h3>Akademie a Kalkulačka</h3>
-          <p style={{ fontSize: '0.85rem', marginBottom: 0 }}>Spočítejte si poškození a prostudujte pravidla 2HG mechanik.</p>
+        <div 
+          className="glass-panel" 
+          style={{ cursor: 'pointer', textAlign: 'center', padding: '1.75rem', marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} 
+          onClick={() => setActiveTab('calculators')}
+        >
+          <Zap size={36} style={{ color: '#f59e0b', marginBottom: '1rem' }} />
+          <h3 style={{ fontSize: '1.15rem', marginBottom: '0.5rem' }}>Kalkulačka a Akademie</h3>
+          <p style={{ fontSize: '0.85rem', marginBottom: 0, color: 'var(--text-muted)' }}>Pravidla 2HG mechanik a interaktivní výpočty poškození.</p>
         </div>
       </div>
     </div>

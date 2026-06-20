@@ -15,7 +15,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2c6ab9bb-dba2-4b5b-a4d9-54735f65ac21.jpg"
   },
   {
     "id": "7114ef87-53ff-43e9-864c-9faa455d86ef",
@@ -33,7 +34,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/7114ef87-53ff-43e9-864c-9faa455d86ef.jpg"
   },
   {
     "id": "e727ec1c-dc3b-4f1a-8a62-18549f118b89",
@@ -51,7 +53,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e727ec1c-dc3b-4f1a-8a62-18549f118b89.jpg"
   },
   {
     "id": "107cb521-9806-47dc-92d8-b43112b63caa",
@@ -69,7 +72,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/107cb521-9806-47dc-92d8-b43112b63caa.jpg"
   },
   {
     "id": "9e327c67-1cf1-4d82-903c-b41c8e7cf747",
@@ -87,7 +91,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9e327c67-1cf1-4d82-903c-b41c8e7cf747.jpg"
   },
   {
     "id": "a9db550e-ed1f-4973-a7f5-ec2e6adb8e6b",
@@ -105,7 +110,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/a9db550e-ed1f-4973-a7f5-ec2e6adb8e6b.jpg"
   },
   {
     "id": "1383e587-df58-4b45-9067-b9399e90b9ed",
@@ -123,7 +129,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1383e587-df58-4b45-9067-b9399e90b9ed.jpg"
   },
   {
     "id": "857fef2e-df1f-4ec6-a262-f6fa52389cf9",
@@ -141,7 +148,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/857fef2e-df1f-4ec6-a262-f6fa52389cf9.jpg"
   },
   {
     "id": "d9b5e156-0764-44e0-b0c7-de2561ea9e04",
@@ -159,7 +167,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d9b5e156-0764-44e0-b0c7-de2561ea9e04.jpg"
   },
   {
     "id": "ab96b656-100e-491a-a8c9-94dbb9482c4d",
@@ -177,7 +186,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/ab96b656-100e-491a-a8c9-94dbb9482c4d.jpg"
   },
   {
     "id": "f29dee50-ea7e-4a54-bc91-99928a8405e3",
@@ -195,7 +205,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f29dee50-ea7e-4a54-bc91-99928a8405e3.jpg"
   },
   {
     "id": "f46a7158-5807-4750-a1f3-853aabb56b99",
@@ -213,7 +224,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f46a7158-5807-4750-a1f3-853aabb56b99.jpg"
   },
   {
     "id": "7d2f262a-dc38-4414-8c66-0ef5eac7ad20",
@@ -231,7 +243,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/7d2f262a-dc38-4414-8c66-0ef5eac7ad20.jpg"
   },
   {
     "id": "26faf2db-ad86-462f-b61f-c1893c9aebbf",
@@ -249,7 +262,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/26faf2db-ad86-462f-b61f-c1893c9aebbf.jpg"
   },
   {
     "id": "61a89566-06c1-404f-8217-e5276e2dc5a2",
@@ -267,7 +281,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/61a89566-06c1-404f-8217-e5276e2dc5a2.jpg"
   },
   {
     "id": "5d393449-bdbe-4638-ba0b-7ec83f81b51e",
@@ -285,7 +300,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/5d393449-bdbe-4638-ba0b-7ec83f81b51e.jpg"
   },
   {
     "id": "339acb17-4b8e-4836-9cc5-8a0a946ebc73",
@@ -303,7 +319,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/339acb17-4b8e-4836-9cc5-8a0a946ebc73.jpg"
   },
   {
     "id": "3e121d65-d341-40b9-bebc-1e7d1b83905c",
@@ -321,7 +338,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3e121d65-d341-40b9-bebc-1e7d1b83905c.jpg"
   },
   {
     "id": "11a13397-1d31-4257-87c2-a757a751c601",
@@ -339,7 +357,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/11a13397-1d31-4257-87c2-a757a751c601.jpg"
   },
   {
     "id": "07c70df6-b064-424a-852e-201b312a5b54",
@@ -357,7 +376,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/07c70df6-b064-424a-852e-201b312a5b54.jpg"
   },
   {
     "id": "1319bf54-8705-4cc4-8d08-40f05fd09837",
@@ -375,7 +395,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1319bf54-8705-4cc4-8d08-40f05fd09837.jpg"
   },
   {
     "id": "40bc4380-055d-4913-93cb-280c9c1d1a87",
@@ -393,7 +414,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/40bc4380-055d-4913-93cb-280c9c1d1a87.jpg"
   },
   {
     "id": "c3d5add1-0d0e-414b-a964-8da326472d35",
@@ -411,7 +433,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c3d5add1-0d0e-414b-a964-8da326472d35.jpg"
   },
   {
     "id": "ef2efb63-2bc4-4808-9ded-ba93d89dedea",
@@ -429,7 +452,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/ef2efb63-2bc4-4808-9ded-ba93d89dedea.jpg"
   },
   {
     "id": "bf736399-af74-4f52-9159-67ea67d0cf83",
@@ -447,7 +471,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/bf736399-af74-4f52-9159-67ea67d0cf83.jpg"
   },
   {
     "id": "72d3e750-870b-497d-80d7-e3df097db554",
@@ -465,7 +490,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/72d3e750-870b-497d-80d7-e3df097db554.jpg"
   },
   {
     "id": "3c379a3f-bde1-4dc1-9843-afcb5f40792f",
@@ -483,7 +509,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3c379a3f-bde1-4dc1-9843-afcb5f40792f.jpg"
   },
   {
     "id": "c2aadc25-7755-4bc8-a8af-b01d27eec364",
@@ -501,7 +528,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c2aadc25-7755-4bc8-a8af-b01d27eec364.jpg"
   },
   {
     "id": "eaf2251a-ffaf-4055-9474-7e3d08d89609",
@@ -519,7 +547,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/eaf2251a-ffaf-4055-9474-7e3d08d89609.jpg"
   },
   {
     "id": "a92a95d2-9529-417a-b7d5-b4244d7fdca7",
@@ -537,7 +566,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/a92a95d2-9529-417a-b7d5-b4244d7fdca7.jpg"
   },
   {
     "id": "b6b6c66f-e3e0-4904-ae41-2ecc786f70c5",
@@ -555,7 +585,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/b6b6c66f-e3e0-4904-ae41-2ecc786f70c5.jpg"
   },
   {
     "id": "e208d3bc-9a1d-40a5-8ab9-c0cca5d129f5",
@@ -573,7 +604,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/e208d3bc-9a1d-40a5-8ab9-c0cca5d129f5.jpg"
   },
   {
     "id": "9e308f77-206b-4c9d-bfba-f4c476ea574a",
@@ -591,7 +623,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9e308f77-206b-4c9d-bfba-f4c476ea574a.jpg"
   },
   {
     "id": "a1b11ef2-2285-40eb-b11c-223c159e3d1f",
@@ -609,7 +642,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/a1b11ef2-2285-40eb-b11c-223c159e3d1f.jpg"
   },
   {
     "id": "aa8dbbb9-36a5-48e0-9e30-aeed0fb5d522",
@@ -627,7 +661,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/aa8dbbb9-36a5-48e0-9e30-aeed0fb5d522.jpg"
   },
   {
     "id": "63ce0909-7d7d-410d-ab6c-c87fa3e23877",
@@ -645,7 +680,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/63ce0909-7d7d-410d-ab6c-c87fa3e23877.jpg"
   },
   {
     "id": "8447c3d6-8c65-4d3c-81c4-609801602d06",
@@ -663,7 +699,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8447c3d6-8c65-4d3c-81c4-609801602d06.jpg"
   },
   {
     "id": "10644127-3da0-484e-9afc-de26d9c34390",
@@ -681,7 +718,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/10644127-3da0-484e-9afc-de26d9c34390.jpg"
   },
   {
     "id": "bb753ac8-67e1-44b0-b404-37f04c2b7438",
@@ -699,7 +737,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/bb753ac8-67e1-44b0-b404-37f04c2b7438.jpg"
   },
   {
     "id": "2242b5c3-42ef-4be0-a61f-65c93e56fcab",
@@ -717,7 +756,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2242b5c3-42ef-4be0-a61f-65c93e56fcab.jpg"
   },
   {
     "id": "e0dbbdcf-84e1-494f-8b8c-0a094f603fa9",
@@ -735,7 +775,8 @@ export const cardsData = [
     "mechanics": [
       "MDFC"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e0dbbdcf-84e1-494f-8b8c-0a094f603fa9.jpg"
   },
   {
     "id": "fd1f0b5f-5e0e-4da1-ab54-a62db5af3591",
@@ -753,7 +794,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/fd1f0b5f-5e0e-4da1-ab54-a62db5af3591.jpg"
   },
   {
     "id": "de1ed886-c33b-4cfd-8442-944cec654a8b",
@@ -771,7 +813,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/de1ed886-c33b-4cfd-8442-944cec654a8b.jpg"
   },
   {
     "id": "0669ffcf-30c1-4d90-ae5f-3deca0f82526",
@@ -789,7 +832,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/0669ffcf-30c1-4d90-ae5f-3deca0f82526.jpg"
   },
   {
     "id": "6516f292-469d-4092-b099-97c698f373cd",
@@ -807,7 +851,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/6516f292-469d-4092-b099-97c698f373cd.jpg"
   },
   {
     "id": "4b5433ac-0d36-4472-bf8b-d22f0ffd367b",
@@ -825,7 +870,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4b5433ac-0d36-4472-bf8b-d22f0ffd367b.jpg"
   },
   {
     "id": "33631d6c-c584-42ff-afe5-2647b5fb321f",
@@ -843,7 +889,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/33631d6c-c584-42ff-afe5-2647b5fb321f.jpg"
   },
   {
     "id": "c87ca9ce-5034-4137-99cc-c2b28f298912",
@@ -861,7 +908,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c87ca9ce-5034-4137-99cc-c2b28f298912.jpg"
   },
   {
     "id": "eb098550-22e6-4079-8c59-ed9ec2f764e3",
@@ -879,7 +927,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/eb098550-22e6-4079-8c59-ed9ec2f764e3.jpg"
   },
   {
     "id": "27924c2f-756c-42af-9830-18a5a2735137",
@@ -897,7 +946,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/27924c2f-756c-42af-9830-18a5a2735137.jpg"
   },
   {
     "id": "2a6c3d3b-93ec-43df-a0cd-ea12ab047d51",
@@ -915,7 +965,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/2a6c3d3b-93ec-43df-a0cd-ea12ab047d51.jpg"
   },
   {
     "id": "cf13bfb1-5b44-4363-8de9-ece234233870",
@@ -933,7 +984,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/cf13bfb1-5b44-4363-8de9-ece234233870.jpg"
   },
   {
     "id": "fa01d35f-1064-4a7c-9475-4504566df850",
@@ -951,7 +1003,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/fa01d35f-1064-4a7c-9475-4504566df850.jpg"
   },
   {
     "id": "8bffc505-608e-4a5b-9ed9-2321e4cab484",
@@ -969,7 +1022,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8bffc505-608e-4a5b-9ed9-2321e4cab484.jpg"
   },
   {
     "id": "6b6b0a9f-0373-43c0-9c84-5c2efe902676",
@@ -987,7 +1041,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/6b6b0a9f-0373-43c0-9c84-5c2efe902676.jpg"
   },
   {
     "id": "448de757-ac16-4529-b851-1a1331b821a5",
@@ -1005,7 +1060,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/448de757-ac16-4529-b851-1a1331b821a5.jpg"
   },
   {
     "id": "d1cf1ead-fe91-4328-89ab-6d0bc9ff6cbe",
@@ -1023,7 +1079,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d1cf1ead-fe91-4328-89ab-6d0bc9ff6cbe.jpg"
   },
   {
     "id": "379f4020-a58c-484d-9b44-72b200884079",
@@ -1041,7 +1098,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/379f4020-a58c-484d-9b44-72b200884079.jpg"
   },
   {
     "id": "c4bc077c-f220-47a5-aaf4-5324ca23d0c5",
@@ -1059,7 +1117,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c4bc077c-f220-47a5-aaf4-5324ca23d0c5.jpg"
   },
   {
     "id": "1576148a-2371-49ba-8eef-0bc2ec3dcaf3",
@@ -1077,7 +1136,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1576148a-2371-49ba-8eef-0bc2ec3dcaf3.jpg"
   },
   {
     "id": "4b2fffb8-d538-4772-8fbc-9bec3b9c4d9c",
@@ -1095,7 +1155,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4b2fffb8-d538-4772-8fbc-9bec3b9c4d9c.jpg"
   },
   {
     "id": "d895d5a1-d382-438b-8551-e142bb5142af",
@@ -1113,7 +1174,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d895d5a1-d382-438b-8551-e142bb5142af.jpg"
   },
   {
     "id": "9319c91c-fad3-4840-b3ca-5d3d94eb7ddf",
@@ -1131,7 +1193,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/9319c91c-fad3-4840-b3ca-5d3d94eb7ddf.jpg"
   },
   {
     "id": "14e821bb-55cc-474e-9b63-0ceecc2666c1",
@@ -1149,7 +1212,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/14e821bb-55cc-474e-9b63-0ceecc2666c1.jpg"
   },
   {
     "id": "49e36cac-3999-40b3-91b3-85af4fded679",
@@ -1167,7 +1231,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/49e36cac-3999-40b3-91b3-85af4fded679.jpg"
   },
   {
     "id": "ee10e249-5000-4348-8e8e-6b9ac879db12",
@@ -1185,7 +1250,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/ee10e249-5000-4348-8e8e-6b9ac879db12.jpg"
   },
   {
     "id": "e0f658ff-323e-4e32-beaa-1d5753b4f081",
@@ -1203,7 +1269,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/e0f658ff-323e-4e32-beaa-1d5753b4f081.jpg"
   },
   {
     "id": "f2a8f518-c0b5-4e15-aab2-49b5ef29fb41",
@@ -1221,7 +1288,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f2a8f518-c0b5-4e15-aab2-49b5ef29fb41.jpg"
   },
   {
     "id": "d8719b74-48ef-4f68-b59a-949edd644ddc",
@@ -1239,7 +1307,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d8719b74-48ef-4f68-b59a-949edd644ddc.jpg"
   },
   {
     "id": "66fe10bb-9f05-400b-a8b7-6d6affe8c0f8",
@@ -1257,7 +1326,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/66fe10bb-9f05-400b-a8b7-6d6affe8c0f8.jpg"
   },
   {
     "id": "c035c625-4de5-4c3b-9d07-aa1df8fc7b78",
@@ -1275,7 +1345,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c035c625-4de5-4c3b-9d07-aa1df8fc7b78.jpg"
   },
   {
     "id": "36e9a6e9-1f9d-4860-97ee-f01e66f8eb4d",
@@ -1293,7 +1364,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/36e9a6e9-1f9d-4860-97ee-f01e66f8eb4d.jpg"
   },
   {
     "id": "87c899c1-401f-4090-8f71-307e7106cdf2",
@@ -1311,7 +1383,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/87c899c1-401f-4090-8f71-307e7106cdf2.jpg"
   },
   {
     "id": "19dc5fcc-d05d-41a0-84c5-2dec996f3e4f",
@@ -1329,7 +1402,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/19dc5fcc-d05d-41a0-84c5-2dec996f3e4f.jpg"
   },
   {
     "id": "9b1f213a-e1d4-4a0f-954b-c83915698d98",
@@ -1347,7 +1421,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9b1f213a-e1d4-4a0f-954b-c83915698d98.jpg"
   },
   {
     "id": "c55e5f0d-8a4b-4b6f-ab43-1268b6fac74e",
@@ -1365,7 +1440,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/c55e5f0d-8a4b-4b6f-ab43-1268b6fac74e.jpg"
   },
   {
     "id": "9b99894b-c774-45c2-9ee9-4d6a8e7522f5",
@@ -1383,7 +1459,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9b99894b-c774-45c2-9ee9-4d6a8e7522f5.jpg"
   },
   {
     "id": "b38b9bd6-1dd7-4bbc-8a82-ce391c1172e1",
@@ -1401,7 +1478,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/b38b9bd6-1dd7-4bbc-8a82-ce391c1172e1.jpg"
   },
   {
     "id": "cd9b9be6-0143-467c-8a2a-937ecafe0473",
@@ -1419,7 +1497,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/cd9b9be6-0143-467c-8a2a-937ecafe0473.jpg"
   },
   {
     "id": "ac3e586c-d654-4631-beda-a5e29cf04717",
@@ -1437,7 +1516,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/ac3e586c-d654-4631-beda-a5e29cf04717.jpg"
   },
   {
     "id": "621e3239-b527-4154-bce6-b51241809fc5",
@@ -1455,7 +1535,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/621e3239-b527-4154-bce6-b51241809fc5.jpg"
   },
   {
     "id": "d521b80b-4b0b-4d69-bd95-4c83feaf2145",
@@ -1473,7 +1554,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d521b80b-4b0b-4d69-bd95-4c83feaf2145.jpg"
   },
   {
     "id": "82267f18-ceff-4f98-bf6f-e0cbf94072d3",
@@ -1491,7 +1573,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/82267f18-ceff-4f98-bf6f-e0cbf94072d3.jpg"
   },
   {
     "id": "310e30cd-b8c3-40ea-9d61-57c5c5fc2a0b",
@@ -1509,7 +1592,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/310e30cd-b8c3-40ea-9d61-57c5c5fc2a0b.jpg"
   },
   {
     "id": "f6bcf690-c532-4d2d-8458-78a5613a6090",
@@ -1527,7 +1611,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/f6bcf690-c532-4d2d-8458-78a5613a6090.jpg"
   },
   {
     "id": "20e93f86-9e20-4e08-9bf7-ae6ebebf6876",
@@ -1545,7 +1630,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/20e93f86-9e20-4e08-9bf7-ae6ebebf6876.jpg"
   },
   {
     "id": "8dc209ed-0d4c-4d0c-90e8-04cadc3d4c3d",
@@ -1563,7 +1649,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8dc209ed-0d4c-4d0c-90e8-04cadc3d4c3d.jpg"
   },
   {
     "id": "318eb163-fd1d-47bc-976c-89ffd67ee8d4",
@@ -1581,7 +1668,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/318eb163-fd1d-47bc-976c-89ffd67ee8d4.jpg"
   },
   {
     "id": "ee1475d1-4f24-4719-b7a5-c6e3a2a9d63e",
@@ -1599,7 +1687,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/ee1475d1-4f24-4719-b7a5-c6e3a2a9d63e.jpg"
   },
   {
     "id": "c3a474a8-b2f0-4392-9f5d-0f78b3fb29e5",
@@ -1617,7 +1706,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/c3a474a8-b2f0-4392-9f5d-0f78b3fb29e5.jpg"
   },
   {
     "id": "a5abbfdb-0460-4f78-be7f-d3e8a4b3afb5",
@@ -1635,7 +1725,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/a5abbfdb-0460-4f78-be7f-d3e8a4b3afb5.jpg"
   },
   {
     "id": "7777fac1-7bf5-4454-960d-26ec3183e392",
@@ -1653,7 +1744,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/7777fac1-7bf5-4454-960d-26ec3183e392.jpg"
   },
   {
     "id": "e507e356-6241-4347-bd56-e0609954f378",
@@ -1671,7 +1763,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/e507e356-6241-4347-bd56-e0609954f378.jpg"
   },
   {
     "id": "a990260b-39b7-4799-930a-bf9ac208d9ed",
@@ -1689,7 +1782,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/a990260b-39b7-4799-930a-bf9ac208d9ed.jpg"
   },
   {
     "id": "5eaaca68-47e1-49f8-bf2e-c0eaad721e86",
@@ -1707,7 +1801,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/5eaaca68-47e1-49f8-bf2e-c0eaad721e86.jpg"
   },
   {
     "id": "a50feebf-c660-43f1-9fae-75294703b346",
@@ -1725,7 +1820,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/a50feebf-c660-43f1-9fae-75294703b346.jpg"
   },
   {
     "id": "c22bb4d5-6b6f-4c43-b005-48ae4042739d",
@@ -1743,7 +1839,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c22bb4d5-6b6f-4c43-b005-48ae4042739d.jpg"
   },
   {
     "id": "fd1f95bf-48ea-455a-8a6c-0249b11c8900",
@@ -1761,7 +1858,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/fd1f95bf-48ea-455a-8a6c-0249b11c8900.jpg"
   },
   {
     "id": "da529bb3-725b-41aa-ac34-b4117ff5d95b",
@@ -1779,7 +1877,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/da529bb3-725b-41aa-ac34-b4117ff5d95b.jpg"
   },
   {
     "id": "152a7b5b-2d95-45d3-8fd9-0ca1d5a79f8b",
@@ -1797,7 +1896,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/152a7b5b-2d95-45d3-8fd9-0ca1d5a79f8b.jpg"
   },
   {
     "id": "4b1cedfe-4712-4602-a8a8-112bd54c9938",
@@ -1815,7 +1915,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4b1cedfe-4712-4602-a8a8-112bd54c9938.jpg"
   },
   {
     "id": "af6bc9d2-5783-489a-8963-af65f54f4f17",
@@ -1833,7 +1934,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/af6bc9d2-5783-489a-8963-af65f54f4f17.jpg"
   },
   {
     "id": "cd8c028c-82bb-4d47-a9cb-ed34c25f2599",
@@ -1851,7 +1953,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/cd8c028c-82bb-4d47-a9cb-ed34c25f2599.jpg"
   },
   {
     "id": "9991b684-0ae0-4aa4-8f22-a9c473f5d69c",
@@ -1869,7 +1972,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9991b684-0ae0-4aa4-8f22-a9c473f5d69c.jpg"
   },
   {
     "id": "485be72b-d784-4886-bb3a-48cff8f781c6",
@@ -1887,7 +1991,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/485be72b-d784-4886-bb3a-48cff8f781c6.jpg"
   },
   {
     "id": "3cebccbb-dde2-41fe-bfdc-0a46ee185749",
@@ -1905,7 +2010,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3cebccbb-dde2-41fe-bfdc-0a46ee185749.jpg"
   },
   {
     "id": "6e518842-ce44-4af2-8f38-89869828294a",
@@ -1923,7 +2029,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/6e518842-ce44-4af2-8f38-89869828294a.jpg"
   },
   {
     "id": "d7922c5f-d6ee-4b62-a537-3be5aa280e10",
@@ -1941,7 +2048,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d7922c5f-d6ee-4b62-a537-3be5aa280e10.jpg"
   },
   {
     "id": "3496d0d4-3fab-4ea4-8986-afe5a7155ec6",
@@ -1959,7 +2067,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3496d0d4-3fab-4ea4-8986-afe5a7155ec6.jpg"
   },
   {
     "id": "d610d9fe-f8ae-473f-9325-e2f28f7e8a69",
@@ -1977,7 +2086,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d610d9fe-f8ae-473f-9325-e2f28f7e8a69.jpg"
   },
   {
     "id": "32d05c3d-cf03-492e-a956-2e77c36e36c4",
@@ -1995,7 +2105,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/32d05c3d-cf03-492e-a956-2e77c36e36c4.jpg"
   },
   {
     "id": "12edbdcc-085f-48c8-9605-3c7e3fe63bc7",
@@ -2013,7 +2124,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/12edbdcc-085f-48c8-9605-3c7e3fe63bc7.jpg"
   },
   {
     "id": "105a937b-289c-47b5-96a4-654c697bbb7d",
@@ -2031,7 +2143,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/105a937b-289c-47b5-96a4-654c697bbb7d.jpg"
   },
   {
     "id": "259bed47-1950-43ae-8efd-3009537529a8",
@@ -2049,7 +2162,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/259bed47-1950-43ae-8efd-3009537529a8.jpg"
   },
   {
     "id": "50a6aa80-79a3-46f3-9cc1-5bf663b64976",
@@ -2067,7 +2181,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/50a6aa80-79a3-46f3-9cc1-5bf663b64976.jpg"
   },
   {
     "id": "e37487e4-c553-4495-a839-6a96209eaaa1",
@@ -2085,7 +2200,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/e37487e4-c553-4495-a839-6a96209eaaa1.jpg"
   },
   {
     "id": "9e0034dd-396e-46af-b931-0daa25da4406",
@@ -2103,7 +2219,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9e0034dd-396e-46af-b931-0daa25da4406.jpg"
   },
   {
     "id": "682b9f91-18bb-4113-9d5c-a381c191def9",
@@ -2121,7 +2238,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/682b9f91-18bb-4113-9d5c-a381c191def9.jpg"
   },
   {
     "id": "9018477f-a67b-4fa4-8661-11ab91fae863",
@@ -2139,7 +2257,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9018477f-a67b-4fa4-8661-11ab91fae863.jpg"
   },
   {
     "id": "374ffb3e-0753-4682-936a-ae6921ace475",
@@ -2157,7 +2276,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/374ffb3e-0753-4682-936a-ae6921ace475.jpg"
   },
   {
     "id": "8f8659f6-a793-4edc-8401-d9126840c1c2",
@@ -2175,7 +2295,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8f8659f6-a793-4edc-8401-d9126840c1c2.jpg"
   },
   {
     "id": "e3b23fff-7d3b-4341-b556-82136f8c113b",
@@ -2193,7 +2314,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e3b23fff-7d3b-4341-b556-82136f8c113b.jpg"
   },
   {
     "id": "c2e446e1-e384-4d5f-8099-544f78c08510",
@@ -2211,7 +2333,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c2e446e1-e384-4d5f-8099-544f78c08510.jpg"
   },
   {
     "id": "40c202f1-6e0d-42f4-a41e-e0be3362d585",
@@ -2229,7 +2352,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/40c202f1-6e0d-42f4-a41e-e0be3362d585.jpg"
   },
   {
     "id": "06d8a2a0-775b-4813-973f-8b15612b38d1",
@@ -2247,7 +2371,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/06d8a2a0-775b-4813-973f-8b15612b38d1.jpg"
   },
   {
     "id": "9c401abb-5978-41c0-962b-0432f9433929",
@@ -2265,7 +2390,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9c401abb-5978-41c0-962b-0432f9433929.jpg"
   },
   {
     "id": "2f80394b-2f7e-40a7-8203-720bcf39d71b",
@@ -2283,7 +2409,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2f80394b-2f7e-40a7-8203-720bcf39d71b.jpg"
   },
   {
     "id": "5cc2d948-ac8b-4466-b604-3fabc0ab6bb9",
@@ -2301,7 +2428,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5cc2d948-ac8b-4466-b604-3fabc0ab6bb9.jpg"
   },
   {
     "id": "395e477a-861f-4661-b329-6c1ad5343ed5",
@@ -2319,7 +2447,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/395e477a-861f-4661-b329-6c1ad5343ed5.jpg"
   },
   {
     "id": "355e7197-2f20-43b6-9305-73c4e1fd4a3c",
@@ -2337,7 +2466,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/355e7197-2f20-43b6-9305-73c4e1fd4a3c.jpg"
   },
   {
     "id": "361c2f3b-f04e-446b-a683-9195e238daf0",
@@ -2355,7 +2485,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/361c2f3b-f04e-446b-a683-9195e238daf0.jpg"
   },
   {
     "id": "8f84ab0a-bf6e-4f28-9da8-998512a224ed",
@@ -2373,7 +2504,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8f84ab0a-bf6e-4f28-9da8-998512a224ed.jpg"
   },
   {
     "id": "20d54b22-62e8-48ac-ba65-0bdbf42d6cad",
@@ -2391,7 +2523,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/20d54b22-62e8-48ac-ba65-0bdbf42d6cad.jpg"
   },
   {
     "id": "61237530-ad49-469c-a952-67c92315708e",
@@ -2409,7 +2542,8 @@ export const cardsData = [
     "mechanics": [
       "MDFC"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/61237530-ad49-469c-a952-67c92315708e.jpg"
   },
   {
     "id": "b48278fd-1d95-4ad6-9a51-f1c5a2ab9f4b",
@@ -2427,7 +2561,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/b48278fd-1d95-4ad6-9a51-f1c5a2ab9f4b.jpg"
   },
   {
     "id": "f1448731-d50e-4b9c-8eb2-3d85c21516c6",
@@ -2445,7 +2580,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f1448731-d50e-4b9c-8eb2-3d85c21516c6.jpg"
   },
   {
     "id": "fb96ee86-5139-472a-9c4b-8a8a4280fc7e",
@@ -2463,7 +2599,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/fb96ee86-5139-472a-9c4b-8a8a4280fc7e.jpg"
   },
   {
     "id": "79747b45-fd7b-4023-9a9c-4d9dab2429fe",
@@ -2481,7 +2618,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/79747b45-fd7b-4023-9a9c-4d9dab2429fe.jpg"
   },
   {
     "id": "caf70fc5-87a0-4b4d-bedd-74dd09569bed",
@@ -2499,7 +2637,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/caf70fc5-87a0-4b4d-bedd-74dd09569bed.jpg"
   },
   {
     "id": "5c9ff69e-6489-49f3-b401-64856f0b7c11",
@@ -2517,7 +2656,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5c9ff69e-6489-49f3-b401-64856f0b7c11.jpg"
   },
   {
     "id": "5060aa13-4b33-4b3a-8bdb-dd81308fa3e3",
@@ -2535,7 +2675,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5060aa13-4b33-4b3a-8bdb-dd81308fa3e3.jpg"
   },
   {
     "id": "64056edb-6de2-4694-b771-f35542c25771",
@@ -2553,7 +2694,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/64056edb-6de2-4694-b771-f35542c25771.jpg"
   },
   {
     "id": "add7d3ce-aa58-4da0-8c2a-cfd01c3a8975",
@@ -2571,7 +2713,8 @@ export const cardsData = [
     "mechanics": [
       "MDFC"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/add7d3ce-aa58-4da0-8c2a-cfd01c3a8975.jpg"
   },
   {
     "id": "c79a86f8-24e9-49a2-8b1c-72a72fed1985",
@@ -2589,7 +2732,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c79a86f8-24e9-49a2-8b1c-72a72fed1985.jpg"
   },
   {
     "id": "f3003766-9383-44e0-8b51-35ccbed137ed",
@@ -2607,7 +2751,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f3003766-9383-44e0-8b51-35ccbed137ed.jpg"
   },
   {
     "id": "401f9ccf-f30c-4777-9a5b-4c340e724fff",
@@ -2625,7 +2770,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/401f9ccf-f30c-4777-9a5b-4c340e724fff.jpg"
   },
   {
     "id": "ba5e441d-d036-4080-9571-6cf76df7b452",
@@ -2643,7 +2789,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/ba5e441d-d036-4080-9571-6cf76df7b452.jpg"
   },
   {
     "id": "e6e8359d-12be-49be-8cbe-6a3b8506a9e6",
@@ -2661,7 +2808,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e6e8359d-12be-49be-8cbe-6a3b8506a9e6.jpg"
   },
   {
     "id": "2c8aab8d-2dfe-49c8-9aa8-536b0587b467",
@@ -2679,7 +2827,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2c8aab8d-2dfe-49c8-9aa8-536b0587b467.jpg"
   },
   {
     "id": "88b13bc0-da54-4c3b-917c-7c8345a329f5",
@@ -2697,7 +2846,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/88b13bc0-da54-4c3b-917c-7c8345a329f5.jpg"
   },
   {
     "id": "f78673f6-8173-4d0e-ae50-539cad30aa5c",
@@ -2715,7 +2865,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/f78673f6-8173-4d0e-ae50-539cad30aa5c.jpg"
   },
   {
     "id": "236c437f-ee9d-4145-a4db-b665908089cf",
@@ -2733,7 +2884,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/236c437f-ee9d-4145-a4db-b665908089cf.jpg"
   },
   {
     "id": "53b795a7-11f8-423a-b021-f811007fc82f",
@@ -2751,7 +2903,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/53b795a7-11f8-423a-b021-f811007fc82f.jpg"
   },
   {
     "id": "2e26f6c6-c043-4b71-ab90-584dceeec092",
@@ -2769,7 +2922,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/2e26f6c6-c043-4b71-ab90-584dceeec092.jpg"
   },
   {
     "id": "3b72c9e9-1cb2-4374-873a-53af293d86d0",
@@ -2787,7 +2941,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3b72c9e9-1cb2-4374-873a-53af293d86d0.jpg"
   },
   {
     "id": "802e663e-9529-46da-8af4-eb9ca07971b1",
@@ -2805,7 +2960,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/802e663e-9529-46da-8af4-eb9ca07971b1.jpg"
   },
   {
     "id": "e94ccedb-1d27-4098-8823-d8d99b30387c",
@@ -2823,7 +2979,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e94ccedb-1d27-4098-8823-d8d99b30387c.jpg"
   },
   {
     "id": "f54197b8-6279-43ee-9340-69bd22cf3775",
@@ -2841,7 +2998,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f54197b8-6279-43ee-9340-69bd22cf3775.jpg"
   },
   {
     "id": "7cdd99ba-b96c-4808-89fc-ba675c546779",
@@ -2859,7 +3017,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/7cdd99ba-b96c-4808-89fc-ba675c546779.jpg"
   },
   {
     "id": "27bd54ab-5512-4011-a60f-ec2899b34327",
@@ -2877,7 +3036,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/27bd54ab-5512-4011-a60f-ec2899b34327.jpg"
   },
   {
     "id": "17ef068b-61fc-443d-97b0-1e41f2622425",
@@ -2895,7 +3055,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/17ef068b-61fc-443d-97b0-1e41f2622425.jpg"
   },
   {
     "id": "3cf30476-ed92-4dc2-86b7-2b5fd60a2de7",
@@ -2913,7 +3074,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3cf30476-ed92-4dc2-86b7-2b5fd60a2de7.jpg"
   },
   {
     "id": "6b963642-a103-44a0-9eb7-9c3fdde181b7",
@@ -2931,7 +3093,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/6b963642-a103-44a0-9eb7-9c3fdde181b7.jpg"
   },
   {
     "id": "e0c7f566-5351-44e3-a346-b84b0eb10209",
@@ -2949,7 +3112,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e0c7f566-5351-44e3-a346-b84b0eb10209.jpg"
   },
   {
     "id": "0f5701ac-ec30-4fb1-bd71-4bac4693c075",
@@ -2967,7 +3131,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/0f5701ac-ec30-4fb1-bd71-4bac4693c075.jpg"
   },
   {
     "id": "38e87542-50f7-4812-9338-84e4b9b7bb44",
@@ -2985,7 +3150,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/38e87542-50f7-4812-9338-84e4b9b7bb44.jpg"
   },
   {
     "id": "1b406cc5-75c9-430a-83a2-de0f2a8aeae6",
@@ -3003,7 +3169,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1b406cc5-75c9-430a-83a2-de0f2a8aeae6.jpg"
   },
   {
     "id": "3f995518-b12a-4623-9ab3-b79a5cef3cba",
@@ -3021,7 +3188,8 @@ export const cardsData = [
     "mechanics": [
       "MDFC"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3f995518-b12a-4623-9ab3-b79a5cef3cba.jpg"
   },
   {
     "id": "9ebf25f9-844c-40c6-b0f0-d5c82ee04656",
@@ -3039,7 +3207,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/9ebf25f9-844c-40c6-b0f0-d5c82ee04656.jpg"
   },
   {
     "id": "8c6a6d11-45cb-4def-a04b-51b91e1747db",
@@ -3057,7 +3226,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8c6a6d11-45cb-4def-a04b-51b91e1747db.jpg"
   },
   {
     "id": "1a1b2bd0-e17d-4b34-a8ee-7c913a6bc945",
@@ -3075,7 +3245,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1a1b2bd0-e17d-4b34-a8ee-7c913a6bc945.jpg"
   },
   {
     "id": "9dd2d627-10fc-4045-8545-03bcf75e60ca",
@@ -3093,7 +3264,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9dd2d627-10fc-4045-8545-03bcf75e60ca.jpg"
   },
   {
     "id": "8a505f6f-933c-4644-838f-897f5e4133b0",
@@ -3111,7 +3283,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8a505f6f-933c-4644-838f-897f5e4133b0.jpg"
   },
   {
     "id": "98df64ca-39c3-47e6-8143-4106c8e9cf59",
@@ -3129,7 +3302,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/98df64ca-39c3-47e6-8143-4106c8e9cf59.jpg"
   },
   {
     "id": "7aaefcf9-fbe1-4767-92a5-09825761d116",
@@ -3147,7 +3321,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/7aaefcf9-fbe1-4767-92a5-09825761d116.jpg"
   },
   {
     "id": "0355887d-eec7-4b1c-ada1-014ac7fce5c6",
@@ -3165,7 +3340,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/0355887d-eec7-4b1c-ada1-014ac7fce5c6.jpg"
   },
   {
     "id": "3aa6fc02-ef76-426b-accd-6c0ef88b2a5e",
@@ -3183,7 +3359,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3aa6fc02-ef76-426b-accd-6c0ef88b2a5e.jpg"
   },
   {
     "id": "3199907b-9f24-4554-942a-8ab5a7701717",
@@ -3201,7 +3378,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3199907b-9f24-4554-942a-8ab5a7701717.jpg"
   },
   {
     "id": "6b8116d8-2cc6-449b-a8b4-8a5166553497",
@@ -3219,7 +3397,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/6b8116d8-2cc6-449b-a8b4-8a5166553497.jpg"
   },
   {
     "id": "8a37de6b-3a92-4a32-a940-e0f303e316c1",
@@ -3237,7 +3416,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/8a37de6b-3a92-4a32-a940-e0f303e316c1.jpg"
   },
   {
     "id": "2c89acf5-20f0-4441-b96f-2c5cacd685fb",
@@ -3255,7 +3435,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2c89acf5-20f0-4441-b96f-2c5cacd685fb.jpg"
   },
   {
     "id": "9b0701e8-e365-425a-b897-92f4df9edcb8",
@@ -3273,7 +3454,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9b0701e8-e365-425a-b897-92f4df9edcb8.jpg"
   },
   {
     "id": "4122ae40-800d-4b6b-93c9-aa503c33f1a9",
@@ -3291,7 +3473,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4122ae40-800d-4b6b-93c9-aa503c33f1a9.jpg"
   },
   {
     "id": "e2e30b25-b710-4566-8b0f-56f6e390a446",
@@ -3309,7 +3492,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/e2e30b25-b710-4566-8b0f-56f6e390a446.jpg"
   },
   {
     "id": "1467d7c9-00d8-43f1-b4e7-a279d2b10503",
@@ -3327,7 +3511,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1467d7c9-00d8-43f1-b4e7-a279d2b10503.jpg"
   },
   {
     "id": "108a0b92-2134-4776-a2f7-da92050f1b21",
@@ -3345,7 +3530,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/108a0b92-2134-4776-a2f7-da92050f1b21.jpg"
   },
   {
     "id": "f85a77d2-e11e-44bc-a1e7-d783cd49d714",
@@ -3363,7 +3549,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f85a77d2-e11e-44bc-a1e7-d783cd49d714.jpg"
   },
   {
     "id": "dec3dd36-b8ca-432b-8973-d37c6efc4c1a",
@@ -3381,7 +3568,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/dec3dd36-b8ca-432b-8973-d37c6efc4c1a.jpg"
   },
   {
     "id": "801f0417-b663-4e28-9a61-9570061654d7",
@@ -3399,7 +3587,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/801f0417-b663-4e28-9a61-9570061654d7.jpg"
   },
   {
     "id": "38d16f3a-a20f-4e98-8085-e4e09bc525d6",
@@ -3417,7 +3606,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/38d16f3a-a20f-4e98-8085-e4e09bc525d6.jpg"
   },
   {
     "id": "05961dad-9fe6-409f-8bfd-c6176072e9b1",
@@ -3435,7 +3625,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/05961dad-9fe6-409f-8bfd-c6176072e9b1.jpg"
   },
   {
     "id": "5c21a120-4ec7-46ec-974a-2204edb92abb",
@@ -3453,7 +3644,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5c21a120-4ec7-46ec-974a-2204edb92abb.jpg"
   },
   {
     "id": "a33a4cb4-1b57-47ca-8e5e-58ff46a6e0ce",
@@ -3471,7 +3663,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/a33a4cb4-1b57-47ca-8e5e-58ff46a6e0ce.jpg"
   },
   {
     "id": "928dfa54-1ead-4eff-a538-36cb94f05b78",
@@ -3489,7 +3682,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/928dfa54-1ead-4eff-a538-36cb94f05b78.jpg"
   },
   {
     "id": "92dad216-ef8e-4af2-a3c6-1d215721c478",
@@ -3507,7 +3701,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/92dad216-ef8e-4af2-a3c6-1d215721c478.jpg"
   },
   {
     "id": "2d5819ca-165d-4f4c-9500-3ac206994880",
@@ -3525,7 +3720,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2d5819ca-165d-4f4c-9500-3ac206994880.jpg"
   },
   {
     "id": "f9b9f9d6-b50c-4b29-80be-284ba773c70b",
@@ -3543,7 +3739,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f9b9f9d6-b50c-4b29-80be-284ba773c70b.jpg"
   },
   {
     "id": "377792bf-2d72-40eb-9e47-1d4a86980fa4",
@@ -3561,7 +3758,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/377792bf-2d72-40eb-9e47-1d4a86980fa4.jpg"
   },
   {
     "id": "d739e636-681e-4423-84e3-91efd02b2c94",
@@ -3579,7 +3777,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d739e636-681e-4423-84e3-91efd02b2c94.jpg"
   },
   {
     "id": "d20ce47d-f08f-475d-a8c3-8a4ebeb0b4f2",
@@ -3597,7 +3796,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/d20ce47d-f08f-475d-a8c3-8a4ebeb0b4f2.jpg"
   },
   {
     "id": "875dfbf5-9313-439b-b021-8b92d898baa4",
@@ -3615,7 +3815,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/875dfbf5-9313-439b-b021-8b92d898baa4.jpg"
   },
   {
     "id": "c08f8163-319a-4a31-b15a-93974cacd5b7",
@@ -3633,7 +3834,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c08f8163-319a-4a31-b15a-93974cacd5b7.jpg"
   },
   {
     "id": "e25468e2-17c6-47b2-8eb6-fcb8ae6f4c17",
@@ -3651,7 +3853,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e25468e2-17c6-47b2-8eb6-fcb8ae6f4c17.jpg"
   },
   {
     "id": "f52a5ba3-a618-4f52-9d33-ba85345eb627",
@@ -3669,7 +3872,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f52a5ba3-a618-4f52-9d33-ba85345eb627.jpg"
   },
   {
     "id": "472db3f2-23df-46c1-86c6-f35fbe5ab4e3",
@@ -3687,7 +3891,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/472db3f2-23df-46c1-86c6-f35fbe5ab4e3.jpg"
   },
   {
     "id": "837265b0-fc15-4d96-9d6b-fd1c78534262",
@@ -3705,7 +3910,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/837265b0-fc15-4d96-9d6b-fd1c78534262.jpg"
   },
   {
     "id": "dbe9102d-b92b-4c32-93f6-5b6dc0fa08e6",
@@ -3723,7 +3929,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/dbe9102d-b92b-4c32-93f6-5b6dc0fa08e6.jpg"
   },
   {
     "id": "bbc54478-d2f8-4abf-b664-cf014027c0dc",
@@ -3741,7 +3948,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/bbc54478-d2f8-4abf-b664-cf014027c0dc.jpg"
   },
   {
     "id": "91fdf444-3f41-4b8b-b9f5-f3ae3d903649",
@@ -3759,7 +3967,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/91fdf444-3f41-4b8b-b9f5-f3ae3d903649.jpg"
   },
   {
     "id": "29bffd7c-73be-4185-976b-36a42a4512fe",
@@ -3777,7 +3986,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/29bffd7c-73be-4185-976b-36a42a4512fe.jpg"
   },
   {
     "id": "e6a3a9fd-9653-45dd-b592-a36f85af8fc4",
@@ -3795,7 +4005,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/e6a3a9fd-9653-45dd-b592-a36f85af8fc4.jpg"
   },
   {
     "id": "6d3c06a5-a0b2-47a2-a583-d579c24a44c9",
@@ -3813,7 +4024,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/6d3c06a5-a0b2-47a2-a583-d579c24a44c9.jpg"
   },
   {
     "id": "b26bb968-6612-43fe-9147-a3d4786cbc20",
@@ -3831,7 +4043,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/b26bb968-6612-43fe-9147-a3d4786cbc20.jpg"
   },
   {
     "id": "f74b9794-946e-4ddc-93b2-5a321fc51fd0",
@@ -3849,7 +4062,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f74b9794-946e-4ddc-93b2-5a321fc51fd0.jpg"
   },
   {
     "id": "66550490-74e1-4bf1-8741-1266dfab3a03",
@@ -3867,7 +4081,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/66550490-74e1-4bf1-8741-1266dfab3a03.jpg"
   },
   {
     "id": "562bd376-3fba-4de0-b9fc-183004b03732",
@@ -3885,7 +4100,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/562bd376-3fba-4de0-b9fc-183004b03732.jpg"
   },
   {
     "id": "0473a990-88c4-4921-a492-377d9171318a",
@@ -3903,7 +4119,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/0473a990-88c4-4921-a492-377d9171318a.jpg"
   },
   {
     "id": "e361b2f4-cd2f-44e9-a56d-c1d6b5ae742d",
@@ -3921,7 +4138,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e361b2f4-cd2f-44e9-a56d-c1d6b5ae742d.jpg"
   },
   {
     "id": "e2449983-c54c-49d8-8289-c591e465527e",
@@ -3939,7 +4157,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/e2449983-c54c-49d8-8289-c591e465527e.jpg"
   },
   {
     "id": "72727c2a-08a9-47bc-a5eb-cda52e21684b",
@@ -3957,7 +4176,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/72727c2a-08a9-47bc-a5eb-cda52e21684b.jpg"
   },
   {
     "id": "2edbb62f-ad45-4422-850b-68dcc18b4c73",
@@ -3975,7 +4195,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2edbb62f-ad45-4422-850b-68dcc18b4c73.jpg"
   },
   {
     "id": "d22a8d02-023c-4f71-a771-16b5aa2a05d7",
@@ -3993,7 +4214,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d22a8d02-023c-4f71-a771-16b5aa2a05d7.jpg"
   },
   {
     "id": "c3d0f02f-dfaf-47b6-8053-514417f4dfe2",
@@ -4011,7 +4233,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c3d0f02f-dfaf-47b6-8053-514417f4dfe2.jpg"
   },
   {
     "id": "8e651410-b829-4468-b866-a9dd15f909ad",
@@ -4029,7 +4252,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8e651410-b829-4468-b866-a9dd15f909ad.jpg"
   },
   {
     "id": "364dc091-3161-4cd7-838c-742b9325fc32",
@@ -4047,7 +4271,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/364dc091-3161-4cd7-838c-742b9325fc32.jpg"
   },
   {
     "id": "4938e23f-b5da-493b-9904-af61a3733ba0",
@@ -4065,7 +4290,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4938e23f-b5da-493b-9904-af61a3733ba0.jpg"
   },
   {
     "id": "aee8a17a-de57-4a76-9613-d3c6b161e378",
@@ -4083,7 +4309,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/aee8a17a-de57-4a76-9613-d3c6b161e378.jpg"
   },
   {
     "id": "65005522-555e-4479-939c-be16e0262f6f",
@@ -4101,7 +4328,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/65005522-555e-4479-939c-be16e0262f6f.jpg"
   },
   {
     "id": "c201946b-0746-4f8b-bd7b-84dc0fa60395",
@@ -4119,7 +4347,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/c201946b-0746-4f8b-bd7b-84dc0fa60395.jpg"
   },
   {
     "id": "e040b456-9853-4e94-9bf8-9374888168bb",
@@ -4137,7 +4366,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e040b456-9853-4e94-9bf8-9374888168bb.jpg"
   },
   {
     "id": "d15d187b-dc5d-482d-a79a-b9b98193ad7a",
@@ -4155,7 +4385,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d15d187b-dc5d-482d-a79a-b9b98193ad7a.jpg"
   },
   {
     "id": "e5db6968-1ca3-46bd-8cf9-e2c411ab29c1",
@@ -4173,7 +4404,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e5db6968-1ca3-46bd-8cf9-e2c411ab29c1.jpg"
   },
   {
     "id": "a0325cb5-4c43-418a-8f1b-cf5bf29e74d7",
@@ -4191,7 +4423,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/a0325cb5-4c43-418a-8f1b-cf5bf29e74d7.jpg"
   },
   {
     "id": "709ffd07-706c-471f-b74d-4637afa11686",
@@ -4209,7 +4442,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/709ffd07-706c-471f-b74d-4637afa11686.jpg"
   },
   {
     "id": "fe692959-64ca-4065-9f9e-1abe590e3d0f",
@@ -4227,7 +4461,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/fe692959-64ca-4065-9f9e-1abe590e3d0f.jpg"
   },
   {
     "id": "44398c81-593a-4967-acf2-ec9823a10d33",
@@ -4245,7 +4480,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/44398c81-593a-4967-acf2-ec9823a10d33.jpg"
   },
   {
     "id": "c443ee78-6bdc-4a74-9cad-93727b9fdbd6",
@@ -4263,7 +4499,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/c443ee78-6bdc-4a74-9cad-93727b9fdbd6.jpg"
   },
   {
     "id": "db4557ad-4141-4dae-870e-a587506f4914",
@@ -4281,7 +4518,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/db4557ad-4141-4dae-870e-a587506f4914.jpg"
   },
   {
     "id": "08cd4665-9fc3-48f1-a136-41d4585b1bb4",
@@ -4299,7 +4537,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/08cd4665-9fc3-48f1-a136-41d4585b1bb4.jpg"
   },
   {
     "id": "e90196a9-5a76-42f8-9b40-097d02b47f33",
@@ -4317,7 +4556,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e90196a9-5a76-42f8-9b40-097d02b47f33.jpg"
   },
   {
     "id": "2aa6ff08-efd2-4f51-b899-19ba6815767a",
@@ -4335,7 +4575,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/2aa6ff08-efd2-4f51-b899-19ba6815767a.jpg"
   },
   {
     "id": "fbbd8609-5a00-4188-96fe-77251579b88d",
@@ -4353,7 +4594,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/fbbd8609-5a00-4188-96fe-77251579b88d.jpg"
   },
   {
     "id": "f26613a1-b4ad-4c7f-8dd9-8f82de995f0c",
@@ -4371,7 +4613,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f26613a1-b4ad-4c7f-8dd9-8f82de995f0c.jpg"
   },
   {
     "id": "11fc8221-756a-4919-9272-38793e9c1ad9",
@@ -4389,7 +4632,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/11fc8221-756a-4919-9272-38793e9c1ad9.jpg"
   },
   {
     "id": "845b0be1-4f85-4a8c-8205-dc85c8cf9a61",
@@ -4407,7 +4651,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/845b0be1-4f85-4a8c-8205-dc85c8cf9a61.jpg"
   },
   {
     "id": "2aa2e596-e5e0-4c60-8eea-14adda1cdaae",
@@ -4425,7 +4670,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2aa2e596-e5e0-4c60-8eea-14adda1cdaae.jpg"
   },
   {
     "id": "1d24d200-63d4-44cf-8d3a-6c6ece5e16ff",
@@ -4443,7 +4689,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1d24d200-63d4-44cf-8d3a-6c6ece5e16ff.jpg"
   },
   {
     "id": "e87f3a26-c2e5-47c7-b19d-bc01cb794805",
@@ -4461,7 +4708,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e87f3a26-c2e5-47c7-b19d-bc01cb794805.jpg"
   },
   {
     "id": "1af5a1ca-3d11-45e3-ba12-c455c5a7fea1",
@@ -4479,7 +4727,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1af5a1ca-3d11-45e3-ba12-c455c5a7fea1.jpg"
   },
   {
     "id": "908770e0-5927-486a-b99b-64f165da4d90",
@@ -4497,7 +4746,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/908770e0-5927-486a-b99b-64f165da4d90.jpg"
   },
   {
     "id": "6572aafe-18ed-4182-92e9-25f003f5fe3d",
@@ -4515,7 +4765,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/6572aafe-18ed-4182-92e9-25f003f5fe3d.jpg"
   },
   {
     "id": "5199d708-8b11-461d-9e91-3e8cd70906f7",
@@ -4533,7 +4784,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5199d708-8b11-461d-9e91-3e8cd70906f7.jpg"
   },
   {
     "id": "0d4265fd-cbfa-4e57-89fd-a1d757acfe81",
@@ -4551,7 +4803,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/0d4265fd-cbfa-4e57-89fd-a1d757acfe81.jpg"
   },
   {
     "id": "db1c7a71-3d01-4f2a-9b25-2a19bb0d1a56",
@@ -4569,7 +4822,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/db1c7a71-3d01-4f2a-9b25-2a19bb0d1a56.jpg"
   },
   {
     "id": "c54d5ea1-0cc9-4e84-b712-642d55915dae",
@@ -4587,7 +4841,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/c54d5ea1-0cc9-4e84-b712-642d55915dae.jpg"
   },
   {
     "id": "e669c0b2-0011-4feb-9263-f1ecc0a98f18",
@@ -4605,7 +4860,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/e669c0b2-0011-4feb-9263-f1ecc0a98f18.jpg"
   },
   {
     "id": "5d98073e-2828-4365-a8d6-f631aac0cca9",
@@ -4623,7 +4879,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5d98073e-2828-4365-a8d6-f631aac0cca9.jpg"
   },
   {
     "id": "04a38b92-619e-4fe8-b0cb-6fa31f0824ff",
@@ -4641,7 +4898,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/04a38b92-619e-4fe8-b0cb-6fa31f0824ff.jpg"
   },
   {
     "id": "495c08ea-5502-4bfe-aa15-fa85556755ae",
@@ -4659,7 +4917,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/495c08ea-5502-4bfe-aa15-fa85556755ae.jpg"
   },
   {
     "id": "65ba4439-3282-4179-85b9-67a25e2e5d24",
@@ -4677,7 +4936,8 @@ export const cardsData = [
     "mechanics": [
       "Plan"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/65ba4439-3282-4179-85b9-67a25e2e5d24.jpg"
   },
   {
     "id": "082cc8cc-bbea-4ca7-a0e8-da1f865d6626",
@@ -4695,7 +4955,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/082cc8cc-bbea-4ca7-a0e8-da1f865d6626.jpg"
   },
   {
     "id": "87f1e69a-6d74-4982-afda-82613637799a",
@@ -4713,7 +4974,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/87f1e69a-6d74-4982-afda-82613637799a.jpg"
   },
   {
     "id": "4d8c8ceb-84cd-46d2-9230-ab6ca4569334",
@@ -4731,7 +4993,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4d8c8ceb-84cd-46d2-9230-ab6ca4569334.jpg"
   },
   {
     "id": "407e8993-e56d-477d-ab85-d10a2522eab3",
@@ -4749,7 +5012,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/407e8993-e56d-477d-ab85-d10a2522eab3.jpg"
   },
   {
     "id": "3f56c0e7-5b07-48e3-b0ca-5d09ddc8de9a",
@@ -4767,7 +5031,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3f56c0e7-5b07-48e3-b0ca-5d09ddc8de9a.jpg"
   },
   {
     "id": "209855ee-d531-4b58-926b-8da171d46619",
@@ -4785,7 +5050,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/209855ee-d531-4b58-926b-8da171d46619.jpg"
   },
   {
     "id": "fbd1f333-5640-41f8-b9dd-1c322ac7724a",
@@ -4803,7 +5069,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/fbd1f333-5640-41f8-b9dd-1c322ac7724a.jpg"
   },
   {
     "id": "2332bc91-b0f2-4911-844d-d1cc915cd6c8",
@@ -4821,7 +5088,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2332bc91-b0f2-4911-844d-d1cc915cd6c8.jpg"
   },
   {
     "id": "3f1933a8-046f-471a-afcf-cfb08ca0d239",
@@ -4839,7 +5107,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/3f1933a8-046f-471a-afcf-cfb08ca0d239.jpg"
   },
   {
     "id": "d8b94ebb-0b3a-4e68-8c0c-3a61ac32f3ef",
@@ -4857,7 +5126,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d8b94ebb-0b3a-4e68-8c0c-3a61ac32f3ef.jpg"
   },
   {
     "id": "2961cf20-33c8-4e66-9d0f-6daca8ea7880",
@@ -4875,7 +5145,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2961cf20-33c8-4e66-9d0f-6daca8ea7880.jpg"
   },
   {
     "id": "484e80a4-1d5f-4c27-98a8-ee2ef9d6cbdc",
@@ -4893,7 +5164,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/484e80a4-1d5f-4c27-98a8-ee2ef9d6cbdc.jpg"
   },
   {
     "id": "5f4f77e5-0019-4a5f-bae6-136121946929",
@@ -4911,7 +5183,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5f4f77e5-0019-4a5f-bae6-136121946929.jpg"
   },
   {
     "id": "cddd314c-c271-475a-b076-01a8599c8015",
@@ -4929,7 +5202,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/cddd314c-c271-475a-b076-01a8599c8015.jpg"
   },
   {
     "id": "0e06f730-ae30-4ef2-88b1-073e02afdb25",
@@ -4947,7 +5221,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/0e06f730-ae30-4ef2-88b1-073e02afdb25.jpg"
   },
   {
     "id": "c39be5b1-b693-4b1b-b40b-8bf6d1fe986d",
@@ -4965,7 +5240,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/c39be5b1-b693-4b1b-b40b-8bf6d1fe986d.jpg"
   },
   {
     "id": "f498c1a4-54d2-4e87-952f-8cf7e408930c",
@@ -4983,7 +5259,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f498c1a4-54d2-4e87-952f-8cf7e408930c.jpg"
   },
   {
     "id": "73c11aea-4fa4-438d-b886-2fafa60c82f9",
@@ -5001,7 +5278,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/73c11aea-4fa4-438d-b886-2fafa60c82f9.jpg"
   },
   {
     "id": "c281e0ee-155b-4022-b921-ebc391535aad",
@@ -5019,7 +5297,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c281e0ee-155b-4022-b921-ebc391535aad.jpg"
   },
   {
     "id": "4cea42fd-035e-4b8f-8b1d-ff363b694f14",
@@ -5037,7 +5316,8 @@ export const cardsData = [
     "mechanics": [
       "MDFC"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4cea42fd-035e-4b8f-8b1d-ff363b694f14.jpg"
   },
   {
     "id": "f471e9ce-73bb-4090-98f2-f591c7cf4efe",
@@ -5055,7 +5335,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f471e9ce-73bb-4090-98f2-f591c7cf4efe.jpg"
   },
   {
     "id": "a27aee6d-1fc3-4307-bb16-b964d723fe2f",
@@ -5073,7 +5354,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/a27aee6d-1fc3-4307-bb16-b964d723fe2f.jpg"
   },
   {
     "id": "620376d0-dc0c-405f-8121-eb36d9b4f4c2",
@@ -5091,7 +5373,8 @@ export const cardsData = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/620376d0-dc0c-405f-8121-eb36d9b4f4c2.jpg"
   },
   {
     "id": "60f02fbf-1416-48a3-bf94-f27509f6983a",
@@ -5109,7 +5392,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/60f02fbf-1416-48a3-bf94-f27509f6983a.jpg"
   },
   {
     "id": "32ddd5ac-57ed-4e78-8932-a65980191f6e",
@@ -5127,7 +5411,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/32ddd5ac-57ed-4e78-8932-a65980191f6e.jpg"
   },
   {
     "id": "149a0a3b-c470-414c-a7de-d773b8b4cc82",
@@ -5145,7 +5430,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/149a0a3b-c470-414c-a7de-d773b8b4cc82.jpg"
   },
   {
     "id": "90b9a3c0-3fd6-403e-9d6c-201342fea0ad",
@@ -5163,7 +5449,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/90b9a3c0-3fd6-403e-9d6c-201342fea0ad.jpg"
   },
   {
     "id": "ce08f4bb-7da3-4199-8b90-fcdb29e84e98",
@@ -5181,7 +5468,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/ce08f4bb-7da3-4199-8b90-fcdb29e84e98.jpg"
   },
   {
     "id": "6b30090a-17b1-4e4d-a70c-bd232b5b3316",
@@ -5199,7 +5487,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/6b30090a-17b1-4e4d-a70c-bd232b5b3316.jpg"
   },
   {
     "id": "35e11911-799c-4d82-9109-3ca27964bef0",
@@ -5217,7 +5506,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/35e11911-799c-4d82-9109-3ca27964bef0.jpg"
   },
   {
     "id": "4fe5952d-f50f-443a-b960-657fc4bc1965",
@@ -5235,7 +5525,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4fe5952d-f50f-443a-b960-657fc4bc1965.jpg"
   },
   {
     "id": "5604cee1-a2ea-48ed-88f4-6878bd053fc8",
@@ -5253,7 +5544,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5604cee1-a2ea-48ed-88f4-6878bd053fc8.jpg"
   },
   {
     "id": "c01afea6-645d-4d4f-bdaa-90794a628bcd",
@@ -5271,7 +5563,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c01afea6-645d-4d4f-bdaa-90794a628bcd.jpg"
   },
   {
     "id": "f8f1e4f9-7415-437f-b694-ecbdd76db114",
@@ -5289,7 +5582,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/f8f1e4f9-7415-437f-b694-ecbdd76db114.jpg"
   },
   {
     "id": "85cc170a-ecd2-4870-b675-7ece88813995",
@@ -5307,7 +5601,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/85cc170a-ecd2-4870-b675-7ece88813995.jpg"
   },
   {
     "id": "4f48ba40-9934-40fd-a251-e15a68e772d2",
@@ -5325,7 +5620,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4f48ba40-9934-40fd-a251-e15a68e772d2.jpg"
   },
   {
     "id": "4b12dc1f-2218-4c71-aafa-ea6a26eeb0aa",
@@ -5343,7 +5639,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4b12dc1f-2218-4c71-aafa-ea6a26eeb0aa.jpg"
   },
   {
     "id": "9bf0b1e9-32b5-4591-8dd2-6b5f9768c72d",
@@ -5361,7 +5658,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9bf0b1e9-32b5-4591-8dd2-6b5f9768c72d.jpg"
   },
   {
     "id": "b98c57b1-6138-49a2-884a-995828cf4c50",
@@ -5379,7 +5677,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/b98c57b1-6138-49a2-884a-995828cf4c50.jpg"
   },
   {
     "id": "433a7d97-9c0b-4f5c-85ad-b55342c02d22",
@@ -5397,7 +5696,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/433a7d97-9c0b-4f5c-85ad-b55342c02d22.jpg"
   },
   {
     "id": "9a1b057b-229c-4f65-ba4e-12dd342238de",
@@ -5415,7 +5715,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9a1b057b-229c-4f65-ba4e-12dd342238de.jpg"
   },
   {
     "id": "13b70321-75bd-4d44-b9f6-5f062a5dda0f",
@@ -5433,7 +5734,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/13b70321-75bd-4d44-b9f6-5f062a5dda0f.jpg"
   },
   {
     "id": "6f6e6767-4d20-469c-9f4b-7286b8cc1979",
@@ -5451,7 +5753,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/6f6e6767-4d20-469c-9f4b-7286b8cc1979.jpg"
   },
   {
     "id": "c1589e2e-32a8-48b8-93eb-a9af344e7084",
@@ -5469,7 +5772,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c1589e2e-32a8-48b8-93eb-a9af344e7084.jpg"
   },
   {
     "id": "57da765f-7d87-42ac-9eb0-a49c296fbbf8",
@@ -5487,7 +5791,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/57da765f-7d87-42ac-9eb0-a49c296fbbf8.jpg"
   },
   {
     "id": "5d27ddec-716d-47e5-ac48-365e91b88ff1",
@@ -5505,7 +5810,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5d27ddec-716d-47e5-ac48-365e91b88ff1.jpg"
   },
   {
     "id": "dbee18af-9ade-4251-81a1-f6e7ffbf480f",
@@ -5523,7 +5829,8 @@ export const cardsData = [
     "mechanics": [
       "Teamwork"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/dbee18af-9ade-4251-81a1-f6e7ffbf480f.jpg"
   },
   {
     "id": "ebf71ffc-6e3e-4ca0-a84a-3c1ebd2b64b1",
@@ -5541,7 +5848,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/ebf71ffc-6e3e-4ca0-a84a-3c1ebd2b64b1.jpg"
   },
   {
     "id": "9976c1a8-ef3d-4911-854d-f53394fd709d",
@@ -5559,7 +5867,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": true
+    "isSourceMaterial": true,
+    "imageUrl": "/images/cards/9976c1a8-ef3d-4911-854d-f53394fd709d.jpg"
   },
   {
     "id": "c1c7aa22-51b0-45ee-9a8e-5493a1820d8c",
@@ -5577,7 +5886,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c1c7aa22-51b0-45ee-9a8e-5493a1820d8c.jpg"
   },
   {
     "id": "1ee52395-9523-4da1-9108-8ab79229fc7a",
@@ -5595,7 +5905,8 @@ export const cardsData = [
     "mechanics": [
       "Power-up"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1ee52395-9523-4da1-9108-8ab79229fc7a.jpg"
   },
   {
     "id": "4765e39c-cbf2-4605-9bf1-3baad7d92cfb",
@@ -5613,7 +5924,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4765e39c-cbf2-4605-9bf1-3baad7d92cfb.jpg"
   },
   {
     "id": "9032f05b-5c21-4996-90c1-268dc6dffbaa",
@@ -5631,7 +5943,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/9032f05b-5c21-4996-90c1-268dc6dffbaa.jpg"
   },
   {
     "id": "d8f91212-2ff5-4024-8f14-86bb5c4a9754",
@@ -5649,7 +5962,8 @@ export const cardsData = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d8f91212-2ff5-4024-8f14-86bb5c4a9754.jpg"
   }
 ];
 
@@ -5670,7 +5984,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/ca24cd9f-fd9f-4ea0-8b9c-ecf98db219a6.jpg"
   },
   {
     "id": "d5f88c3d-b17b-46aa-a573-449350f95d46",
@@ -5688,7 +6003,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/d5f88c3d-b17b-46aa-a573-449350f95d46.jpg"
   },
   {
     "id": "c5d03ebb-1ce9-4a6b-b13e-a72f0b075ae8",
@@ -5706,7 +6022,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c5d03ebb-1ce9-4a6b-b13e-a72f0b075ae8.jpg"
   },
   {
     "id": "88f0d9c9-8a1f-4b5a-b6f9-821ddd658d27",
@@ -5724,7 +6041,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/88f0d9c9-8a1f-4b5a-b6f9-821ddd658d27.jpg"
   },
   {
     "id": "1abc652f-8e9d-4df7-bc4e-d8b515a40fec",
@@ -5742,7 +6060,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1abc652f-8e9d-4df7-bc4e-d8b515a40fec.jpg"
   },
   {
     "id": "41463827-46de-40c4-ac2b-1fdf6aa36f65",
@@ -5760,7 +6079,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/41463827-46de-40c4-ac2b-1fdf6aa36f65.jpg"
   },
   {
     "id": "6b39d7a6-ca2d-4376-a18e-efd0138e83bc",
@@ -5778,7 +6098,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/6b39d7a6-ca2d-4376-a18e-efd0138e83bc.jpg"
   },
   {
     "id": "c16fd43c-7c47-4c1b-860f-91146532e89d",
@@ -5796,7 +6117,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c16fd43c-7c47-4c1b-860f-91146532e89d.jpg"
   },
   {
     "id": "7690e624-93c1-46f4-8f33-e28d881787d3",
@@ -5814,7 +6136,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/7690e624-93c1-46f4-8f33-e28d881787d3.jpg"
   },
   {
     "id": "22463284-2478-4b1e-9a37-6dd2383266cf",
@@ -5832,7 +6155,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/22463284-2478-4b1e-9a37-6dd2383266cf.jpg"
   },
   {
     "id": "081cdbd0-5081-4a9e-90ba-f5baf4ac137e",
@@ -5850,7 +6174,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/081cdbd0-5081-4a9e-90ba-f5baf4ac137e.jpg"
   },
   {
     "id": "c9131bf5-17e3-4aa6-97ed-ed6426b247d0",
@@ -5868,7 +6193,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c9131bf5-17e3-4aa6-97ed-ed6426b247d0.jpg"
   },
   {
     "id": "6137c34e-cc4c-4342-a8e4-cfa9c767c67b",
@@ -5886,7 +6212,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/6137c34e-cc4c-4342-a8e4-cfa9c767c67b.jpg"
   },
   {
     "id": "0742ddb6-71ed-444e-91ad-84f876725a4a",
@@ -5904,7 +6231,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/0742ddb6-71ed-444e-91ad-84f876725a4a.jpg"
   },
   {
     "id": "5a74175b-2418-4226-8435-1490532e644f",
@@ -5922,7 +6250,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5a74175b-2418-4226-8435-1490532e644f.jpg"
   },
   {
     "id": "2123fcb5-8181-47ab-9a2d-7ede5b5118e8",
@@ -5940,7 +6269,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/2123fcb5-8181-47ab-9a2d-7ede5b5118e8.jpg"
   },
   {
     "id": "4bdbae27-9a55-485f-a1fc-3fa988184e9d",
@@ -5958,7 +6288,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/4bdbae27-9a55-485f-a1fc-3fa988184e9d.jpg"
   },
   {
     "id": "5f029c91-f20b-4aa5-a7d9-dd6ddef1c877",
@@ -5976,7 +6307,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/5f029c91-f20b-4aa5-a7d9-dd6ddef1c877.jpg"
   },
   {
     "id": "1de583ce-e805-45f1-907f-198bc82fd3b5",
@@ -5994,7 +6326,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/1de583ce-e805-45f1-907f-198bc82fd3b5.jpg"
   },
   {
     "id": "fe3609d8-71a2-49d9-a3fa-25e0906a1a0e",
@@ -6012,7 +6345,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/fe3609d8-71a2-49d9-a3fa-25e0906a1a0e.jpg"
   },
   {
     "id": "038bf500-e23a-4d38-9312-db1909e20353",
@@ -6030,7 +6364,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/038bf500-e23a-4d38-9312-db1909e20353.jpg"
   },
   {
     "id": "8fb51fbb-ab7f-4484-a3c9-dc50cb6f2756",
@@ -6048,7 +6383,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/8fb51fbb-ab7f-4484-a3c9-dc50cb6f2756.jpg"
   },
   {
     "id": "74414c62-4b68-4e1b-9241-feff3231b9ee",
@@ -6066,7 +6402,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/74414c62-4b68-4e1b-9241-feff3231b9ee.jpg"
   },
   {
     "id": "c91e28db-307f-462a-88aa-581d10e77f10",
@@ -6084,7 +6421,8 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "None"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/c91e28db-307f-462a-88aa-581d10e77f10.jpg"
   },
   {
     "id": "822b0249-e1df-453d-8b60-75a5196ed818",
@@ -6102,6 +6440,7 @@ export const basicLandsAndFillers = [
     "mechanics": [
       "Connive"
     ],
-    "isSourceMaterial": false
+    "isSourceMaterial": false,
+    "imageUrl": "/images/cards/822b0249-e1df-453d-8b60-75a5196ed818.jpg"
   }
 ];

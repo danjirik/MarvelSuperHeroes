@@ -7,6 +7,45 @@ export default function SealedSimulator() {
   const [boostersOpened, setBoostersOpened] = useState(false);
   const [poolFilterColor, setPoolFilterColor] = useState('All');
 
+  // Accordion state for color groups in sideboard pool
+  const [openGroups, setOpenGroups] = useState({
+    W: true,
+    U: true,
+    B: true,
+    R: true,
+    G: true,
+    Multicolor: true,
+    Colorless: true,
+    Land: true
+  });
+
+  const toggleGroup = (group) => {
+    setOpenGroups(prev => ({ ...prev, [group]: !prev[group] }));
+  };
+
+  const getCardGroupKey = (card) => {
+    if (card.type && card.type.includes('Land')) return 'Land';
+    if (card.color.includes('Multicolor')) return 'Multicolor';
+    if (card.color.includes('Colorless')) return 'Colorless';
+    if (card.color.includes('W')) return 'W';
+    if (card.color.includes('U')) return 'U';
+    if (card.color.includes('B')) return 'B';
+    if (card.color.includes('R')) return 'R';
+    if (card.color.includes('G')) return 'G';
+    return 'Colorless';
+  };
+
+  const colorGroups = [
+    { key: 'W', name: 'Bílá (White)', color: '#f3f4f6' },
+    { key: 'U', name: 'Modrá (Blue)', color: '#3b82f6' },
+    { key: 'B', name: 'Černá (Black)', color: '#1f2937' },
+    { key: 'R', name: 'Červená (Red)', color: '#ef4444' },
+    { key: 'G', name: 'Zelená (Green)', color: '#10b981' },
+    { key: 'Multicolor', name: 'Vícebarevné (Multicolor)', color: 'linear-gradient(135deg, #fbbf24, #f43f5e, #3b82f6)' },
+    { key: 'Colorless', name: 'Bezbarvé (Colorless)', color: '#9ca3af' },
+    { key: 'Land', name: 'Země (Lands)', color: '#8b5cf6' }
+  ];
+
   // Open 12 boosters logic
   const open12Boosters = () => {
     const newPool = [];
@@ -225,65 +264,166 @@ export default function SealedSimulator() {
                 <h3>Karty v Poolu ({sideboard.length})</h3>
               </div>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxHeight: '1100px', overflowY: 'auto', paddingRight: '0.5rem' }}>
-                {groupedSideboard.map(({ cardData, instances }) => {
-                  const count = instances.length;
-                  return (
-                    <div 
-                      key={cardData.id} 
-                      className={`mtg-card-item glow-${cardData.tier2HG || 'Common'}`}
-                      style={{ padding: '0.85rem' }}
-                    >
-                      <div className="mtg-card-header" style={{ marginBottom: '0.4rem' }}>
-                        <span className="mtg-card-title" style={{ fontSize: '0.95rem' }}>
-                          {cardData.name} {count > 1 && <span style={{ color: '#ec4899', fontWeight: 800 }}>({count}x)</span>}
-                        </span>
-                        <span className="mtg-card-cost" style={{ fontSize: '0.75rem' }}>{cardData.cost || 'Land'}</span>
-                      </div>
-                      
-                      <div style={{ display: 'flex', gap: '0.25rem', alignItems: 'center', marginBottom: '0.5rem' }}>
-                        {cardData.tier2HG && (
-                          <span className={`badge-tier ${cardData.tier2HG}`} style={{ fontSize: '0.65rem', padding: '0.05rem 0.3rem' }}>
-                            Tier {cardData.tier2HG}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', maxHeight: '1100px', overflowY: 'auto', paddingRight: '0.5rem' }}>
+                {(() => {
+                  // Seskupit sideboard do barev
+                  const sideboardGroups = {
+                    W: [],
+                    U: [],
+                    B: [],
+                    R: [],
+                    G: [],
+                    Multicolor: [],
+                    Colorless: [],
+                    Land: []
+                  };
+
+                  filteredSideboard.forEach(card => {
+                    const groupKey = getCardGroupKey(card);
+                    sideboardGroups[groupKey].push(card);
+                  });
+
+                  let hasAnyCards = false;
+
+                  const elements = colorGroups.map(group => {
+                    const cardsInGroup = sideboardGroups[group.key];
+                    if (!cardsInGroup || cardsInGroup.length === 0) return null;
+                    
+                    hasAnyCards = true;
+                    const isGroupOpen = !!openGroups[group.key];
+
+                    // Seskupit duplicity v rámci barvy
+                    const groupedInGroupMap = {};
+                    cardsInGroup.forEach(c => {
+                      if (!groupedInGroupMap[c.id]) {
+                        groupedInGroupMap[c.id] = { cardData: c, instances: [] };
+                      }
+                      groupedInGroupMap[c.id].instances.push(c);
+                    });
+                    const groupedCards = Object.values(groupedInGroupMap);
+
+                    return (
+                      <div key={group.key} className="sealed-pool-group">
+                        <div 
+                          className="sealed-pool-group-header" 
+                          onClick={() => toggleGroup(group.key)}
+                        >
+                          <span style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem' }}>
+                            <span style={{ 
+                              display: 'inline-block', 
+                              width: '10px', 
+                              height: '10px', 
+                              borderRadius: '50%', 
+                              background: group.key === 'Multicolor' ? 'linear-gradient(135deg, #fbbf24, #f43f5e, #3b82f6)' : group.color 
+                            }}></span>
+                            {group.name}
                           </span>
+                          <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                            {cardsInGroup.length}x {isGroupOpen ? '▲' : '▼'}
+                          </span>
+                        </div>
+                        
+                        {isGroupOpen && (
+                          <div className="sealed-pool-group-content">
+                            {groupedCards.map(({ cardData, instances }) => {
+                              const count = instances.length;
+                              return (
+                                <div key={cardData.id} className="compact-card-row">
+                                  <div className="card-row-info">
+                                    {/* Small Tier Indicator */}
+                                    <span className={`badge-tier ${cardData.tier2HG || 'C'}`} style={{ 
+                                      fontSize: '0.62rem', 
+                                      padding: '0.05rem 0.25rem', 
+                                      minWidth: '42px', 
+                                      textAlign: 'center',
+                                      display: 'inline-block' 
+                                    }}>
+                                      Tier {cardData.tier2HG || 'C'}
+                                    </span>
+                                    
+                                    {/* Tooltip trigger name */}
+                                    <div className="card-tooltip-trigger">
+                                      <strong style={{ color: '#fff', fontSize: '0.82rem', cursor: 'help' }}>
+                                        {cardData.name} {count > 1 && <span style={{ color: '#ec4899', fontWeight: 800 }}>({count}x)</span>}
+                                      </strong>
+                                      
+                                      {/* Tooltip Popup */}
+                                      <div className="card-tooltip-content" style={{ width: '260px' }}>
+                                        {cardData.imageUrl && (
+                                          <div style={{ width: '100%', marginBottom: '0.5rem', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                                            <img src={cardData.imageUrl} alt={cardData.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                                          </div>
+                                        )}
+                                        <div style={{ 
+                                          fontWeight: 800, 
+                                          marginBottom: '0.35rem', 
+                                          borderBottom: '1px solid rgba(255,255,255,0.08)', 
+                                          paddingBottom: '0.25rem', 
+                                          display: 'flex', 
+                                          justifyContent: 'space-between',
+                                          fontSize: '0.85rem'
+                                        }}>
+                                          <span>{cardData.name}</span>
+                                          <span style={{ color: '#a78bfa' }}>{cardData.cost || 'Země'}</span>
+                                        </div>
+                                        <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.75rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                                          {cardData.type} — {cardData.rarity}
+                                        </p>
+                                        {!cardData.imageUrl && (
+                                          <p style={{ margin: '0 0 0.6rem 0', fontSize: '0.78rem', color: 'var(--text-primary)', lineHeight: 1.35 }}>
+                                            {cardData.description}
+                                          </p>
+                                        )}
+                                        <div style={{ 
+                                          background: 'rgba(139, 92, 246, 0.08)', 
+                                          border: '1px dashed rgba(139, 92, 246, 0.25)', 
+                                          borderRadius: '6px', 
+                                          padding: '0.5rem', 
+                                          fontSize: '0.75rem', 
+                                          color: '#c084fc',
+                                          lineHeight: 1.35
+                                        }}>
+                                          <strong style={{ display: 'block', marginBottom: '0.1rem' }}>2HG Taktický audit:</strong> 
+                                          {cardData.impact2HG || 'Bez specifických komentářů.'}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
+                                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{cardData.cost || 'Země'}</span>
+                                  </div>
+                                  
+                                  {/* Actions */}
+                                  <div className="card-row-actions">
+                                    <button 
+                                      className="btn-secondary" 
+                                      style={{ padding: '0.15rem 0.4rem', fontSize: '0.7rem', borderRadius: '4px' }}
+                                      onClick={() => moveCard(instances[0].instanceId, 'A')}
+                                    >
+                                      +A
+                                    </button>
+                                    <button 
+                                      className="btn-secondary" 
+                                      style={{ padding: '0.15rem 0.4rem', fontSize: '0.7rem', borderRadius: '4px' }}
+                                      onClick={() => moveCard(instances[0].instanceId, 'B')}
+                                    >
+                                      +B
+                                    </button>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
                         )}
-                        {cardData.color && cardData.color.map(col => (
-                          <span key={col} className={`badge-color ${col}`} style={{ width: '16px', height: '16px', fontSize: '0.6rem' }}>{col[0]}</span>
-                        ))}
-                        <span style={{ fontSize: '0.75rem', color: '#9ca3af', marginLeft: 'auto' }}>{cardData.type}</span>
                       </div>
+                    );
+                  });
 
-                      {cardData.description && (
-                        <p style={{ fontSize: '0.78rem', color: '#9ca3af', marginBottom: '0.75rem', lineHeight: '1.3' }}>
-                          {cardData.description}
-                        </p>
-                      )}
-
-                      {/* Action buttons to assign */}
-                      <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
-                        <button 
-                          className="btn-secondary" 
-                          style={{ flex: 1, padding: '0.35rem', fontSize: '0.75rem', borderRadius: '4px' }}
-                          onClick={() => moveCard(instances[0].instanceId, 'A')}
-                        >
-                          Přiřadit A
-                        </button>
-                        <button 
-                          className="btn-secondary" 
-                          style={{ flex: 1, padding: '0.35rem', fontSize: '0.75rem', borderRadius: '4px' }}
-                          onClick={() => moveCard(instances[0].instanceId, 'B')}
-                        >
-                          Přiřadit B
-                        </button>
-                      </div>
-                    </div>
+                  return hasAnyCards ? elements : (
+                    <p style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '2rem' }}>
+                      Žádné karty neodpovídají filtru.
+                    </p>
                   );
-                })}
-                {groupedSideboard.length === 0 && (
-                  <p style={{ textAlign: 'center', color: '#9ca3af', padding: '2rem' }}>
-                    Žádné karty neodpovídají filtru.
-                  </p>
-                )}
+                })()}
               </div>
             </div>
 
@@ -317,16 +457,67 @@ export default function SealedSimulator() {
                       <div 
                         key={card.instanceId} 
                         className="deck-card-strip"
-                        onClick={() => moveCard(card.instanceId, 'Sideboard')}
+                        style={{ position: 'relative' }}
                       >
-                        <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center', flex: 1 }}>
                           {card.color && card.color.map(col => (
                             <span key={col} className={`badge-color ${col}`} style={{ width: '12px', height: '12px', fontSize: '0.5rem' }}>{col[0]}</span>
                           ))}
-                          <span style={{ fontWeight: 600 }}>{card.name}</span>
+                          
+                          {/* Tooltip trigger */}
+                          <div className="card-tooltip-trigger" style={{ cursor: 'help' }}>
+                            <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{card.name}</span>
+                            
+                            {/* Tooltip Popup */}
+                            <div className="card-tooltip-content" style={{ width: '260px', left: '0', transform: 'none' }}>
+                              {card.imageUrl && (
+                                <div style={{ width: '100%', marginBottom: '0.5rem', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                                  <img src={card.imageUrl} alt={card.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                                </div>
+                              )}
+                              <div style={{ 
+                                fontWeight: 800, 
+                                marginBottom: '0.35rem', 
+                                borderBottom: '1px solid rgba(255,255,255,0.08)', 
+                                paddingBottom: '0.25rem', 
+                                display: 'flex', 
+                                justifyContent: 'space-between',
+                                fontSize: '0.85rem'
+                              }}>
+                                <span>{card.name}</span>
+                                <span style={{ color: '#a78bfa' }}>{card.cost || 'Země'}</span>
+                              </div>
+                              <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.75rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                                {card.type} — {card.rarity}
+                              </p>
+                              {!card.imageUrl && (
+                                <p style={{ margin: '0 0 0.6rem 0', fontSize: '0.78rem', color: 'var(--text-primary)', lineHeight: 1.35 }}>
+                                  {card.description}
+                                </p>
+                              )}
+                              {card.impact2HG && (
+                                <div style={{ 
+                                  background: 'rgba(139, 92, 246, 0.08)', 
+                                  border: '1px dashed rgba(139, 92, 246, 0.25)', 
+                                  borderRadius: '6px', 
+                                  padding: '0.5rem', 
+                                  fontSize: '0.75rem', 
+                                  color: '#c084fc',
+                                  lineHeight: 1.35
+                                }}>
+                                  <strong style={{ display: 'block', marginBottom: '0.1rem' }}>2HG Taktický audit:</strong> 
+                                  {card.impact2HG}
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                          <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>{card.cost || 'Land'}</span>
+                        
+                        <div 
+                          style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', cursor: 'pointer' }}
+                          onClick={() => moveCard(card.instanceId, 'Sideboard')}
+                        >
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{card.cost || 'Země'}</span>
                           <span style={{ fontSize: '0.7rem', color: '#ef4444', fontWeight: 800 }}>✖</span>
                         </div>
                       </div>
@@ -338,7 +529,7 @@ export default function SealedSimulator() {
                     )}
                   </div>
                 </div>
-
+ 
                 {/* Player B Deck Column */}
                 <div className="deck-column">
                   <div className="deck-column-header">
@@ -365,16 +556,67 @@ export default function SealedSimulator() {
                       <div 
                         key={card.instanceId} 
                         className="deck-card-strip"
-                        onClick={() => moveCard(card.instanceId, 'Sideboard')}
+                        style={{ position: 'relative' }}
                       >
-                        <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center', flex: 1 }}>
                           {card.color && card.color.map(col => (
                             <span key={col} className={`badge-color ${col}`} style={{ width: '12px', height: '12px', fontSize: '0.5rem' }}>{col[0]}</span>
                           ))}
-                          <span style={{ fontWeight: 600 }}>{card.name}</span>
+                          
+                          {/* Tooltip trigger */}
+                          <div className="card-tooltip-trigger" style={{ cursor: 'help' }}>
+                            <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{card.name}</span>
+                            
+                            {/* Tooltip Popup */}
+                            <div className="card-tooltip-content" style={{ width: '260px', left: '0', transform: 'none' }}>
+                              {card.imageUrl && (
+                                <div style={{ width: '100%', marginBottom: '0.5rem', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                                  <img src={card.imageUrl} alt={card.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                                </div>
+                              )}
+                              <div style={{ 
+                                fontWeight: 800, 
+                                marginBottom: '0.35rem', 
+                                borderBottom: '1px solid rgba(255,255,255,0.08)', 
+                                paddingBottom: '0.25rem', 
+                                display: 'flex', 
+                                justifyContent: 'space-between',
+                                fontSize: '0.85rem'
+                              }}>
+                                <span>{card.name}</span>
+                                <span style={{ color: '#a78bfa' }}>{card.cost || 'Země'}</span>
+                              </div>
+                              <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.75rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                                {card.type} — {card.rarity}
+                              </p>
+                              {!card.imageUrl && (
+                                <p style={{ margin: '0 0 0.6rem 0', fontSize: '0.78rem', color: 'var(--text-primary)', lineHeight: 1.35 }}>
+                                  {card.description}
+                                </p>
+                              )}
+                              {card.impact2HG && (
+                                <div style={{ 
+                                  background: 'rgba(139, 92, 246, 0.08)', 
+                                  border: '1px dashed rgba(139, 92, 246, 0.25)', 
+                                  borderRadius: '6px', 
+                                  padding: '0.5rem', 
+                                  fontSize: '0.75rem', 
+                                  color: '#c084fc',
+                                  lineHeight: 1.35
+                                }}>
+                                  <strong style={{ display: 'block', marginBottom: '0.1rem' }}>2HG Taktický audit:</strong> 
+                                  {card.impact2HG}
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                          <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>{card.cost || 'Land'}</span>
+                        
+                        <div 
+                          style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', cursor: 'pointer' }}
+                          onClick={() => moveCard(card.instanceId, 'Sideboard')}
+                        >
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{card.cost || 'Země'}</span>
                           <span style={{ fontSize: '0.7rem', color: '#ef4444', fontWeight: 800 }}>✖</span>
                         </div>
                       </div>

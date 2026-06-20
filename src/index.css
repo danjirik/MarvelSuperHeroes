@@ -6,7 +6,8 @@
   --bg-panel: rgba(22, 22, 30, 0.7);
   --border-glow: rgba(147, 51, 234, 0.3);
   --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
   --accent-cosmic: #8b5cf6;
   --accent-iron: #ef4444;
   --accent-cap: #3b82f6;
@@ -40,6 +41,7 @@ body {
     radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.06) 0%, transparent 40%);
   background-attachment: fixed;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 /* Scrollbar Customization */
@@ -69,7 +71,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: calc(1rem + env(safe-area-inset-top, 0px)) 2rem 1rem 2rem;
   background: rgba(10, 10, 12, 0.8);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -141,8 +143,6 @@ body {
 .main-content {
   flex: 1;
   padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -692,3 +692,132 @@ input[type="range"] {
   max-height: 1000px;
   transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
 }
+
+/* Compact Table View for Tier List */
+.tier-table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(15, 15, 22, 0.85);
+}
+
+.tier-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.tier-table th {
+  background: rgba(20, 20, 30, 0.9);
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tier-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  vertical-align: middle;
+}
+
+.tier-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tier-table tr.row-expanded-data td {
+  background: rgba(139, 92, 246, 0.02);
+  padding: 1rem 1.5rem;
+}
+
+/* Collapsible Color Groups for Sealed Pool */
+.sealed-pool-group {
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(10, 10, 12, 0.2);
+}
+
+.sealed-pool-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-smooth);
+}
+
+.sealed-pool-group-header:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sealed-pool-group-content {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Compact Card Strip in Pool */
+.compact-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  transition: var(--transition-smooth);
+}
+
+.compact-card-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.card-row-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.card-row-actions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.card-tooltip-trigger {
+  position: relative;
+  cursor: help;
+}
+
+.card-tooltip-content {
+  display: none;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  padding: 0.75rem;
+  background: #121217;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.card-tooltip-trigger:hover .card-tooltip-content {
+  display: block;
+}
+

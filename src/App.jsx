@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dashboard from './components/Dashboard';
 import TierList from './components/TierList';
 import ArchetypeMatcher from './components/ArchetypeMatcher';
 import SealedSimulator from './components/SealedSimulator';
 import Calculators from './components/Calculators';
 import StrategyGuide from './components/StrategyGuide';
-import { Shield, BookOpen, Users, Sword, Calculator, Home } from 'lucide-react';
+import { Shield, BookOpen, Users, Sword, Calculator, Home, Maximize, Minimize } from 'lucide-react';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen()
+        .then(() => setIsFullscreen(true))
+        .catch(err => console.error("Error enabling fullscreen:", err));
+    } else {
+      document.exitFullscreen()
+        .then(() => setIsFullscreen(false))
+        .catch(err => console.error("Error disabling fullscreen:", err));
+    }
+  };
 
   return (
     <div className="app-container">
@@ -67,6 +88,20 @@ function App() {
           >
             <Calculator size={16} />
             Kalkulačka
+          </button>
+          
+          <button 
+            className="nav-button fullscreen-toggle"
+            onClick={toggleFullscreen}
+            style={{ 
+              marginLeft: '0.75rem', 
+              background: 'rgba(139, 92, 246, 0.1)', 
+              border: '1px solid rgba(139, 92, 246, 0.25)',
+              color: '#c084fc'
+            }}
+          >
+            {isFullscreen ? <Minimize size={16} /> : <Maximize size={16} />}
+            {isFullscreen ? 'Okno' : 'Fullscreen'}
           </button>
         </nav>
       </header>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cardsData } from '../data/cardsData';
-import { Search, Filter, Info, ShieldAlert } from 'lucide-react';
+import { Search, Filter, Info, ShieldAlert, ChevronDown, ChevronUp, LayoutGrid, List } from 'lucide-react';
 
 export default function TierList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,11 +9,24 @@ export default function TierList() {
   const [selectedTier, setSelectedTier] = useState('All');
   const [selectedMechanic, setSelectedMechanic] = useState('All');
   const [selectedSource, setSelectedSource] = useState('All');
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'table'
+  const [showImages, setShowImages] = useState(false);
+
+  // Pagination state
+  const [visibleCount, setVisibleCount] = useState(24);
+  
+  // Expanded descriptions state
+  const [expandedCards, setExpandedCards] = useState({});
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setVisibleCount(24);
+  }, [searchTerm, selectedColor, selectedRarity, selectedTier, selectedMechanic, selectedSource]);
 
   // Available filters options
   const colors = ['All', 'W', 'U', 'B', 'R', 'G', 'Multicolor', 'Colorless'];
   const rarities = ['All', 'Common', 'Uncommon', 'Rare', 'Mythic'];
-  const tiers = ['All', 'S', 'A', 'B', 'C', 'F'];
+  const tiers = ['All', 'S', 'A', 'B', 'C', 'D', 'F'];
   const mechanics = ['All', 'Teamwork', 'Power-up', 'Plan', 'Connive', 'MDFC'];
 
   // Filter logic
@@ -36,22 +49,32 @@ export default function TierList() {
     return matchesSearch && matchesColor && matchesRarity && matchesTier && matchesMechanic && matchesSource;
   });
 
+  const toggleCard = (id) => {
+    setExpandedCards(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 24);
+  };
+
+  const visibleCards = filteredCards.slice(0, visibleCount);
+
   return (
     <div className="tierlist-container">
       {/* Page Header */}
       <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
         <h2 style={{ marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Filter style={{ color: '#8b5cf6' }} />
-          Interaktivní 2HG Tier List karet
+          Interaktivní 2HG Tier List
         </h2>
         <p style={{ fontSize: '0.95rem', margin: 0 }}>
-          Procházejte hodnocení klíčových karet edice Marvel Super Heroes upravené speciálně pro turnajové 2HG prostředí. S-Tier reprezentuje zápas vyhrávající bomby, F-Tier naopak pasti, kterým se raději vyhněte.
+          Procházejte hodnocení všech 314 karet upravené speciálně pro turnajové 2HG prostředí. S-Tier reprezentuje zápas vyhrávající bomby, D-Tier naopak pasti, kterým se raději vyhněte.
         </p>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '2rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', alignItems: 'center' }}>
+      <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', alignItems: 'center' }}>
           
           {/* Search Input */}
           <div style={{ position: 'relative' }}>
@@ -136,64 +159,323 @@ export default function TierList() {
         </div>
       </div>
 
-      {/* Cards Grid */}
-      {filteredCards.length > 0 ? (
-        <div className="grid-cards">
-          {filteredCards.map(card => (
-            <div 
-              key={card.id} 
-              className={`mtg-card-item glow-${card.tier2HG}`}
+      {/* Results stats */}
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        marginBottom: '1.5rem', 
+        padding: '0 0.5rem',
+        flexWrap: 'wrap',
+        gap: '1rem'
+      }}>
+        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+          Zobrazeno <strong style={{ color: '#fff' }}>{Math.min(visibleCards.length, filteredCards.length)}</strong> z <strong style={{ color: '#fff' }}>{filteredCards.length}</strong> nalezených karet
+        </span>
+        
+        {/* View Mode Toggle */}
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          {viewMode === 'grid' && (
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-muted)', cursor: 'pointer', marginRight: '0.5rem', userSelect: 'none' }}>
+              <input 
+                type="checkbox" 
+                checked={showImages} 
+                onChange={(e) => setShowImages(e.target.checked)}
+                style={{ accentColor: '#8b5cf6', width: '15px', height: '15px', cursor: 'pointer' }}
+              />
+              Zobrazit obrázky
+            </label>
+          )}
+
+          <div style={{ 
+            display: 'flex', 
+            gap: '0.25rem', 
+            background: 'rgba(255,255,255,0.02)', 
+            padding: '0.25rem', 
+            borderRadius: '8px', 
+            border: '1px solid rgba(255,255,255,0.05)' 
+          }}>
+            <button 
+              onClick={() => setViewMode('grid')}
+              className={`nav-button ${viewMode === 'grid' ? 'active' : ''}`}
+              style={{ padding: '0.35rem 0.75rem', fontSize: '0.8rem', borderRadius: '6px' }}
             >
-              {/* Header */}
-              <div className="mtg-card-header">
-                <span className="mtg-card-title">{card.name}</span>
-                <span className="mtg-card-cost">{card.cost}</span>
-              </div>
+              <LayoutGrid size={14} />
+              Mřížka
+            </button>
+            <button 
+              onClick={() => setViewMode('table')}
+              className={`nav-button ${viewMode === 'table' ? 'active' : ''}`}
+              style={{ padding: '0.35rem 0.75rem', fontSize: '0.8rem', borderRadius: '6px' }}
+            >
+              <List size={14} />
+              Tabulka
+            </button>
+          </div>
+        </div>
+      </div>
 
-              {/* Meta information */}
-              <div className="mtg-card-meta">
-                <span className={`badge-tier ${card.tier2HG}`}>
-                  Tier {card.tier2HG}
-                </span>
-                
-                {card.color.map(col => (
-                  <span key={col} className={`badge-color ${col}`}>
-                    {col === 'Multicolor' ? 'M' : col === 'Colorless' ? 'C' : col}
-                  </span>
-                ))}
+      {/* Cards List Viewport */}
+      {visibleCards.length > 0 ? (
+        <div>
+          {viewMode === 'grid' ? (
+            /* Grid layout */
+            <div className="grid-cards">
+              {visibleCards.map(card => {
+                const isExpanded = !!expandedCards[card.id];
+                const hasLongText = card.impact2HG && card.impact2HG.length > 95;
+                const displayText = hasLongText && !isExpanded 
+                  ? card.impact2HG.slice(0, 95) + '...' 
+                  : card.impact2HG;
 
-                <span className="mtg-card-type">{card.type}</span>
-                {card.isSourceMaterial && (
-                  <span style={{ fontSize: '0.65rem', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#f87171', padding: '0.1rem 0.3rem', borderRadius: '4px', fontWeight: 800, textTransform: 'uppercase' }}>
-                    Source Material
-                  </span>
-                )}
-              </div>
+                return (
+                  <div 
+                    key={card.id} 
+                    className={`mtg-card-item glow-${card.tier2HG}`}
+                    style={{ minHeight: '220px' }}
+                  >
+                    {/* Card Image header */}
+                    {showImages && card.imageUrl && (
+                      <div style={{ 
+                        width: '100%', 
+                        height: 'auto', 
+                        overflow: 'hidden', 
+                        borderRadius: '8px', 
+                        marginBottom: '0.75rem',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                        background: '#121217'
+                      }}>
+                        <img 
+                          src={card.imageUrl} 
+                          alt={card.name} 
+                          style={{ 
+                            width: '100%', 
+                            height: 'auto', 
+                            display: 'block' 
+                          }} 
+                        />
+                      </div>
+                    )}
 
-              {/* Description */}
-              <div className="mtg-card-description">
-                {card.description}
-                {card.mechanics[0] !== 'None' && (
-                  <div style={{ marginTop: '0.5rem' }}>
-                    {card.mechanics.map(mech => (
-                      <span key={mech} style={{ display: 'inline-block', background: 'rgba(255,255,255,0.05)', fontSize: '0.7rem', padding: '0.1rem 0.4rem', borderRadius: '4px', marginRight: '0.25rem', color: '#a78bfa', border: '1px solid rgba(139,92,246,0.2)' }}>
-                        {mech}
+                    {/* Header */}
+                    <div className="mtg-card-header">
+                      <span className="mtg-card-title" style={{ fontSize: '1rem', lineHeight: '1.2' }}>{card.name}</span>
+                      <span className="mtg-card-cost" style={{ fontSize: '0.75rem' }}>{card.cost || 'Země'}</span>
+                    </div>
+
+                    {/* Meta information */}
+                    <div className="mtg-card-meta">
+                      <span className={`badge-tier ${card.tier2HG}`} style={{ fontSize: '0.75rem', padding: '0.1rem 0.4rem' }}>
+                        Tier {card.tier2HG}
                       </span>
-                    ))}
-                  </div>
-                )}
-              </div>
+                      
+                      {card.color.map(col => (
+                        <span key={col} className={`badge-color ${col}`} style={{ width: '18px', height: '18px', fontSize: '0.65rem' }}>
+                          {col === 'Multicolor' ? 'M' : col === 'Colorless' ? 'C' : col[0]}
+                        </span>
+                      ))}
 
-              {/* 2HG Impact section */}
-              <div className="mtg-card-2hg-impact">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.8rem', color: '#c084fc', marginBottom: '0.25rem' }}>
-                  {card.tier2HG === 'F' ? <ShieldAlert size={14} style={{ color: '#ef4444' }} /> : <Info size={14} />}
-                  <span>{card.tier2HG === 'F' ? 'Proč v 2HG selhává:' : 'Dopad v 2HG:'}</span>
-                </div>
-                {card.impact2HG}
-              </div>
+                      <span className="mtg-card-type" style={{ fontSize: '0.7rem' }}>{card.type}</span>
+                      {card.isSourceMaterial && (
+                        <span style={{ fontSize: '0.6rem', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#f87171', padding: '0.05rem 0.25rem', borderRadius: '4px', fontWeight: 800, textTransform: 'uppercase' }}>
+                          Source
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Description */}
+                    {!showImages && (
+                      <div className="mtg-card-description" style={{ fontSize: '0.8rem', marginBottom: '0.75rem', color: 'var(--text-secondary)' }}>
+                        {card.description}
+                        {card.mechanics[0] !== 'None' && (
+                          <div style={{ marginTop: '0.4rem' }}>
+                            {card.mechanics.map(mech => (
+                              <span key={mech} style={{ display: 'inline-block', background: 'rgba(255,255,255,0.03)', fontSize: '0.65rem', padding: '0.05rem 0.3rem', borderRadius: '4px', marginRight: '0.25rem', color: '#a78bfa', border: '1px solid rgba(139,92,246,0.15)' }}>
+                                {mech}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* 2HG Impact section */}
+                    <div className="mtg-card-2hg-impact" style={{ marginTop: 'auto', background: 'rgba(139, 92, 246, 0.02)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.75rem', color: '#c084fc', marginBottom: '0.2rem' }}>
+                        {card.tier2HG === 'D' || card.tier2HG === 'F' ? <ShieldAlert size={12} style={{ color: '#ef4444' }} /> : <Info size={12} />}
+                        <span>{card.tier2HG === 'D' || card.tier2HG === 'F' ? 'Proč v 2HG selhává:' : '2HG Taktický audit:'}</span>
+                      </div>
+                      <div style={{ fontSize: '0.78rem', color: '#d1d5db', lineHeight: '1.4' }}>
+                        {displayText}
+                        {hasLongText && (
+                          <button 
+                            onClick={() => toggleCard(card.id)}
+                            style={{ 
+                              background: 'transparent', 
+                              border: 'none', 
+                              color: '#a78bfa', 
+                              fontSize: '0.75rem', 
+                              fontWeight: 700, 
+                              cursor: 'pointer', 
+                              padding: 0, 
+                              marginLeft: '0.35rem',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.1rem'
+                            }}
+                          >
+                            {isExpanded ? 'méně ▲' : 'více ▼'}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ))}
+          ) : (
+            /* Table layout */
+            <div className="tier-table-container">
+              <table className="tier-table">
+                <thead>
+                  <tr>
+                    <th style={{ width: '40px' }}></th>
+                    <th>Název karty</th>
+                    <th>Cena</th>
+                    <th>Barva</th>
+                    <th>Rarita</th>
+                    <th>Typ</th>
+                    <th style={{ textAlign: 'center' }}>2HG Tier</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {visibleCards.map(card => {
+                    const isExpanded = !!expandedCards[card.id];
+                    return (
+                      <React.Fragment key={card.id}>
+                        {/* Main row */}
+                        <tr 
+                          onClick={() => toggleCard(card.id)}
+                          style={{ cursor: 'pointer', background: isExpanded ? 'rgba(139, 92, 246, 0.04)' : 'transparent' }}
+                        >
+                          <td style={{ textAlign: 'center' }}>
+                            <span style={{ fontSize: '0.7rem', color: '#8b5cf6' }}>
+                              {isExpanded ? '▼' : '▶'}
+                            </span>
+                          </td>
+                          <td>
+                            <strong style={{ color: '#fff' }}>{card.name}</strong>
+                            {card.isSourceMaterial && (
+                              <span style={{ marginLeft: '0.5rem', fontSize: '0.6rem', background: 'rgba(239, 68, 68, 0.15)', color: '#f87171', padding: '0.05rem 0.25rem', borderRadius: '4px', fontWeight: 700 }}>
+                                Source
+                              </span>
+                            )}
+                          </td>
+                          <td><code style={{ fontSize: '0.85rem' }}>{card.cost || '—'}</code></td>
+                          <td>
+                            <div style={{ display: 'flex', gap: '0.2rem' }}>
+                              {card.color.map(col => (
+                                <span key={col} className={`badge-color ${col}`} style={{ width: '16px', height: '16px', fontSize: '0.6rem' }}>
+                                  {col === 'Multicolor' ? 'M' : col === 'Colorless' ? 'C' : col[0]}
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                          <td style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{card.rarity}</td>
+                          <td style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{card.type}</td>
+                          <td style={{ textAlign: 'center' }}>
+                            <span className={`badge-tier ${card.tier2HG}`} style={{ fontSize: '0.75rem', padding: '0.1rem 0.4rem', display: 'inline-block', minWidth: '55px' }}>
+                              Tier {card.tier2HG}
+                            </span>
+                          </td>
+                        </tr>
+
+                        {/* Expanded details row */}
+                        {isExpanded && (
+                          <tr className="row-expanded-data">
+                            <td></td>
+                            <td colSpan="6">
+                              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'flex-start', padding: '0.5rem 0' }}>
+                                {/* Card image preview */}
+                                {card.imageUrl && (
+                                  <div style={{ 
+                                    flexShrink: 0, 
+                                    width: '160px', 
+                                    borderRadius: '8px', 
+                                    overflow: 'hidden', 
+                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+                                  }}>
+                                    <img 
+                                      src={card.imageUrl} 
+                                      alt={card.name} 
+                                      style={{ width: '100%', height: 'auto', display: 'block' }} 
+                                    />
+                                  </div>
+                                )}
+
+                                {/* Card details */}
+                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                  {/* Oracle-like card text */}
+                                  {!card.imageUrl && (
+                                    <div>
+                                      <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 800, display: 'block', marginBottom: '0.15rem' }}>Text karty</span>
+                                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{card.description}</p>
+                                    </div>
+                                  )}
+
+                                  {/* Mechanics badges */}
+                                  {card.mechanics[0] !== 'None' && (
+                                    <div>
+                                      <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 800, display: 'block', marginBottom: '0.25rem' }}>Mechaniky</span>
+                                      <div style={{ display: 'flex', gap: '0.25rem' }}>
+                                        {card.mechanics.map(mech => (
+                                          <span key={mech} style={{ background: 'rgba(255,255,255,0.04)', fontSize: '0.7rem', padding: '0.1rem 0.4rem', borderRadius: '4px', color: '#a78bfa', border: '1px solid rgba(139,92,246,0.15)' }}>
+                                            {mech}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* 2HG Audit details */}
+                                  <div style={{ 
+                                    background: 'rgba(139, 92, 246, 0.03)', 
+                                    border: '1px dashed rgba(139, 92, 246, 0.15)', 
+                                    borderRadius: '8px', 
+                                    padding: '0.85rem' 
+                                  }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.75rem', color: '#c084fc', marginBottom: '0.25rem' }}>
+                                      {card.tier2HG === 'D' || card.tier2HG === 'F' ? <ShieldAlert size={12} style={{ color: '#ef4444' }} /> : <Info size={12} />}
+                                      <span>{card.tier2HG === 'D' || card.tier2HG === 'F' ? 'PROČ V 2HG SELHÁVÁ:' : '2HG TAKTICKÝ AUDIT / SYNERGIE:'}</span>
+                                    </div>
+                                    <p style={{ margin: 0, fontSize: '0.82rem', color: '#fff', lineHeight: '1.45' }}>
+                                      {card.impact2HG}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Load More Button */}
+          {filteredCards.length > visibleCount && (
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+              <button className="btn-primary" onClick={handleLoadMore} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                Načíst další (+24)
+                <ChevronDown size={18} />
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem' }}>

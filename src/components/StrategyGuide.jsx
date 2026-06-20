@@ -93,41 +93,101 @@ export default function StrategyGuide() {
           Odborné přehodnocení všech 314 karet ukázalo, že standardní 1v1 žebříčky často podhodnocují širokou interakci a naopak přeceňují lineární duelové strategie:
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem' }}>
           {/* Upgrades */}
-          <div style={{ background: 'rgba(16, 185, 129, 0.02)', border: '1px solid rgba(16, 185, 129, 0.1)', padding: '1.25rem', borderRadius: '12px' }}>
-            <h4 style={{ color: '#34d399', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <ArrowUpRight size={18} />
+          <div style={{ background: 'rgba(16, 185, 129, 0.01)', border: '1px solid rgba(16, 185, 129, 0.1)', padding: '1.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <h4 style={{ color: '#34d399', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.05rem', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '0.75rem' }}>
+              <ArrowUpRight size={20} style={{ strokeWidth: 3 }} />
               Největší Upgrady (Posílení)
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <div style={{ fontSize: '0.82rem', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '0.5rem' }}>
-                <strong style={{ color: '#fff' }}>Warleader’s Call</strong> (A ➔ S): Posiluje celou vaši armádu a každý ETB trigger udílí poškození oběma soupeřům současně. Dokonalý finisher.
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              {/* Item 1 */}
+              <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '8px', borderLeft: '3px solid #10b981' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <strong style={{ color: '#fff', fontSize: '0.9rem' }}>Warleader’s Call</strong>
+                  <span style={{ fontSize: '0.75rem', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                    A ➔ S
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.82rem', margin: 0, color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                  Posiluje celou vaši armádu a každý ETB trigger udílí poškození oběma soupeřům současně. Dokonalý finisher.
+                </p>
               </div>
-              <div style={{ fontSize: '0.82rem', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '0.5rem' }}>
-                <strong style={{ color: '#fff' }}>Counterspell, Path to Exile, Beast Within</strong> (C ➔ A): Jednomanové a dvoumanové univerzální odpovědi na cokoliv jsou v 2HG k nezaplacení kvůli nutnosti reagovat na širokou paletu bomb.
+
+              {/* Item 2 */}
+              <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '8px', borderLeft: '3px solid #10b981' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <strong style={{ color: '#fff', fontSize: '0.9rem' }}>Universal Answers</strong>
+                  <span style={{ fontSize: '0.75rem', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                    C ➔ A
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.82rem', margin: 0, color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                  Jednomanové a dvoumanové univerzální odpovědi (<em style={{ color: '#a78bfa' }}>Path to Exile, Beast Within, Counterspell</em>) na cokoliv jsou v 2HG k nezaplacení kvůli nutnosti reagovat na širokou paletu bomb.
+                </p>
               </div>
-              <div style={{ fontSize: '0.82rem' }}>
-                <strong style={{ color: '#fff' }}>Construct a Cosmic Cube</strong> (C ➔ A): Pomalý rozjezd v 2HG nevadí, a finální odměna kontroly nad tahem oponenta v týmové hře ochromí oba protihráče najednou.
+
+              {/* Item 3 */}
+              <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '8px', borderLeft: '3px solid #10b981' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <strong style={{ color: '#fff', fontSize: '0.9rem' }}>Construct a Cosmic Cube</strong>
+                  <span style={{ fontSize: '0.75rem', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                    C ➔ A
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.82rem', margin: 0, color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                  Pomalý rozjezd v 2HG nevadí, a finální odměna kontroly nad tahem oponenta v týmové hře ochromí oba protihráče najednou.
+                </p>
               </div>
             </div>
           </div>
 
           {/* Downgrades */}
-          <div style={{ background: 'rgba(239, 68, 68, 0.02)', border: '1px solid rgba(239, 68, 68, 0.1)', padding: '1.25rem', borderRadius: '12px' }}>
-            <h4 style={{ color: '#f87171', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <ArrowDownRight size={18} />
+          <div style={{ background: 'rgba(239, 68, 68, 0.01)', border: '1px solid rgba(239, 68, 68, 0.1)', padding: '1.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <h4 style={{ color: '#f87171', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.05rem', borderBottom: '1px solid rgba(239, 68, 68, 0.15)', paddingBottom: '0.75rem' }}>
+              <ArrowDownRight size={20} style={{ strokeWidth: 3 }} />
               Největší Downgrady (Oslabení)
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <div style={{ fontSize: '0.82rem', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '0.5rem' }}>
-                <strong style={{ color: '#fff' }}>Agent 13, Sharon Carter</strong> (B ➔ D): Těží z mechaniky „attacks alone“. V 2HG, kde soupeři blokují společně, je útok jedinou bytostí bez evasion téměř vždy sebevražda.
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              {/* Item 1 */}
+              <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '8px', borderLeft: '3px solid #ef4444' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <strong style={{ color: '#fff', fontSize: '0.9rem' }}>Agent 13, Sharon Carter</strong>
+                  <span style={{ fontSize: '0.75rem', background: 'rgba(239, 68, 68, 0.15)', color: '#f87171', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                    B ➔ D
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.82rem', margin: 0, color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                  Těží z mechaniky „attacks alone“. V 2HG, kde soupeři blokují společně, je útok jedinou bytostí bez evasion téměř vždy sebevražda.
+                </p>
               </div>
-              <div style={{ fontSize: '0.82rem', borderBottom: '1px solid rgba(255,255,255,0.03)', paddingBottom: '0.5rem' }}>
-                <strong style={{ color: '#fff' }}>Show and Tell</strong> (A ➔ C): Příliš symetrický efekt. Pokud jej zahrajete, položí kartu zdarma jeden váš spoluhráč, ale zároveň oba soupeři. Dáváte oponentům obří výhodu.
+
+              {/* Item 2 */}
+              <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '8px', borderLeft: '3px solid #ef4444' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <strong style={{ color: '#fff', fontSize: '0.9rem' }}>Show and Tell</strong>
+                  <span style={{ fontSize: '0.75rem', background: 'rgba(239, 68, 68, 0.15)', color: '#f87171', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                    A ➔ C
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.82rem', margin: 0, color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                  Příliš symetrický efekt. Pokud jej zahrajete, položí kartu zdarma jeden váš spoluhráč, ale zároveň oba soupeři. Dáváte oponentům obří výhodu.
+                </p>
               </div>
-              <div style={{ fontSize: '0.82rem' }}>
-                <strong style={{ color: '#fff' }}>Bedlam</strong> (C ➔ D): Zákaz blokování zní pro agresivní deck skvěle, ale v 2HG tím vystavujete svůj sdílený pool 30 životů brutálnímu protiútoku od dvou oponentů naráz.
+
+              {/* Item 3 */}
+              <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '8px', borderLeft: '3px solid #ef4444' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <strong style={{ color: '#fff', fontSize: '0.9rem' }}>Bedlam</strong>
+                  <span style={{ fontSize: '0.75rem', background: 'rgba(239, 68, 68, 0.15)', color: '#f87171', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                    C ➔ D
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.82rem', margin: 0, color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                  Zákaz blokování zní pro agresivní deck skvěle, ale v 2HG tím vystavujete svůj sdílený pool 30 životů brutálnímu protiútoku od dvou oponentů naráz.
+                </p>
               </div>
             </div>
           </div>
