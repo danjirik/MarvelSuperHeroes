@@ -1,8 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BookOpen, Users, Sword, Shield, Award, ArrowUpRight, ArrowDownRight, Lightbulb, Sparkles } from 'lucide-react';
 import { archetypesData } from '../data/archetypesData';
 
 export default function StrategyGuide() {
+  const [checkedItems, setCheckedItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('msh_2hg_checklist');
+      return saved ? JSON.parse(saved) : [false, false, false, false, false, false];
+    } catch {
+      return [false, false, false, false, false, false];
+    }
+  });
+
+  const toggleChecklist = (index) => {
+    const updated = checkedItems.map((item, idx) => idx === index ? !item : item);
+    setCheckedItems(updated);
+    try {
+      localStorage.setItem('msh_2hg_checklist', JSON.stringify(updated));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const checklistItems = [
+    {
+      title: "Bezplatný 2HG Mulligan",
+      desc: "Pamatuji, že první mulligan v 2HG je ZDARMA (kreslím zpět 7 karet). Pokud mám špatnou startovní ruku, okamžitě mulliganuji."
+    },
+    {
+      title: "Koordinace barev Sealed poolu",
+      desc: "S partnerem nesdílíme stejné barvy (vyjma malé splash s fixací), abychom si nekradli nejlepší bomby ze společných 12 boosterů."
+    },
+    {
+      title: "Pravidlo 15 jedů (Poison)",
+      desc: "Vím, že v 2HG prohráváme až při obdržení 15 jedových (poison) žetonů, takže nemusíme panikařit hned při prvním útoku."
+    },
+    {
+      title: "Koordinované spojené blokování",
+      desc: "Během bojové fáze komunikujeme a spojujeme naše obránce k bezpečnému zničení větších hrozeb soupeře."
+    },
+    {
+      title: "Dvojnásobný stack a instanty",
+      desc: "Neplýtváme dvěma counterspelly nebo removalem na jednu hrozbu. Vždy se před zahráním kouzla zeptám partnera."
+    },
+    {
+      title: "Pozor na 'Each Opponent' efekty",
+      desc: "Pamatuji, že efekty jako Crossbones nebo Doctor Doom ubírají našemu týmu 4 životy místo 2. Jsou naší prioritou pro removal."
+    }
+  ];
+
+  const checkedCount = checkedItems.filter(Boolean).length;
+  const percentReady = Math.round((checkedCount / checklistItems.length) * 100);
+
   return (
     <div className="strategy-guide-container">
       {/* Header Banner */}
@@ -278,7 +327,7 @@ export default function StrategyGuide() {
       </div>
 
       {/* Historical Precedent */}
-      <div className="glass-panel" style={{ marginBottom: 0 }}>
+      <div className="glass-panel" style={{ marginBottom: '1.5rem' }}>
         <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#f59e0b', marginBottom: '0.75rem' }}>
           <Award size={20} />
           Historické okénko: Pro Tour San Diego 2007
@@ -286,6 +335,85 @@ export default function StrategyGuide() {
         <p style={{ fontSize: '0.88rem', lineHeight: 1.6, margin: 0 }}>
           Historie turnajového 2HG potvrzuje, že klíčem k vítězství je synergie, nikoliv pouhý individuální power level karet. Jediné oficiální 2HG Pro Tour (San Diego 2007) vyhrál tým (Jacob Van Lunen a Chris Lachmann), který postavil a zkonstruoval balíček kolem <strong>Sliver tribal synergie</strong>. Dokázali využít faktu, že sliver efekty se sdílejí napříč stoly a násobí se, což deklasovalo oponenty hrající izolované „dobré karty“. Pamatujte na to při koordinaci stavby se svým partnerem!
         </p>
+      </div>
+
+      {/* Interactive 2HG Win Checklist */}
+      <div className="glass-panel" style={{ marginBottom: 0 }}>
+        <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#10b981', marginBottom: '0.75rem' }}>
+          <Award size={20} style={{ color: '#10b981' }} />
+          🏆 Checklist pro zítřejší výhru (2HG Cheat Sheet)
+        </h3>
+        <p style={{ fontSize: '0.9rem', marginBottom: '1.25rem', color: 'var(--text-secondary)' }}>
+          Odškrtněte si zásadní body taktické přípravy, které vás a vašeho partnera zítra dovedou k vítězství na Prerelease turnaji!
+        </p>
+
+        {/* Progress bar */}
+        <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.4rem', fontWeight: 600 }}>
+            <span>Stupeň připravenosti týmu:</span>
+            <span style={{ color: percentReady === 100 ? '#34d399' : '#f59e0b', fontWeight: 800 }}>
+              {percentReady}% PŘIPRAVEN
+            </span>
+          </div>
+          <div style={{ height: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ 
+              height: '100%', 
+              width: `${percentReady}%`, 
+              background: percentReady === 100 ? 'linear-gradient(90deg, #10b981, #34d399)' : 'linear-gradient(90deg, #8b5cf6, #ec4899)', 
+              transition: 'width 0.3s ease' 
+            }} />
+          </div>
+        </div>
+
+        {/* Checklist list */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          {checklistItems.map((item, idx) => (
+            <label 
+              key={idx}
+              style={{
+                display: 'flex',
+                gap: '0.75rem',
+                alignItems: 'flex-start',
+                padding: '0.85rem',
+                background: checkedItems[idx] ? 'rgba(16, 185, 129, 0.03)' : 'rgba(255,255,255,0.01)',
+                border: checkedItems[idx] ? '1px solid rgba(16, 185, 129, 0.15)' : '1px solid rgba(255,255,255,0.03)',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <input 
+                type="checkbox"
+                checked={checkedItems[idx]}
+                onChange={() => toggleChecklist(idx)}
+                style={{
+                  width: '18px',
+                  height: '18px',
+                  marginTop: '0.15rem',
+                  accentColor: '#10b981',
+                  cursor: 'pointer'
+                }}
+              />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                <strong style={{ 
+                  fontSize: '0.9rem', 
+                  color: checkedItems[idx] ? '#34d399' : '#fff',
+                  textDecoration: checkedItems[idx] ? 'line-through' : 'none',
+                  transition: 'all 0.2s ease'
+                }}>
+                  {item.title}
+                </strong>
+                <span style={{ 
+                  fontSize: '0.8rem', 
+                  color: checkedItems[idx] ? '#9ca3af' : 'var(--text-secondary)',
+                  lineHeight: 1.4
+                }}>
+                  {item.desc}
+                </span>
+              </div>
+            </label>
+          ))}
+        </div>
       </div>
 
     </div>
