@@ -91,7 +91,8 @@ export default function ArchetypeMatcher() {
           <Sparkles size={20} style={{ color: '#a78bfa' }} />
           Doporučené Týmové Kombinace (S & A-Tier)
         </h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+        <div className="grid-auto">
+
           {recommendedPairings.map((pair, idx) => (
             <button 
               key={idx}
@@ -282,7 +283,8 @@ export default function ArchetypeMatcher() {
           </div>
 
           {/* Details breakdown */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginTop: '1.5rem', borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '1.5rem' }}>
+          <div className="grid-2col" style={{ marginTop: '1.5rem', borderTop: '1px solid rgba(255, 255, 255, 0.05)', paddingTop: '1.5rem' }}>
+
             {/* Synergies Column */}
             <div>
               <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#34d399', fontSize: '1.1rem', marginBottom: '1rem' }}>

@@ -222,25 +222,28 @@ export default function SealedSimulator() {
         /* Active Deckbuilding Workspace */
         <div>
           {/* Action Row */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-            <button className="btn-secondary" onClick={resetSimulator}>
-              <Trash2 size={16} />
-              Resetovat a začít znovu
-            </button>
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', color: '#9ca3af', fontWeight: 600 }}>Filtr poolu:</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+              <button className="btn-secondary" onClick={resetSimulator} style={{ flex: '0 0 auto' }}>
+                <Trash2 size={16} />
+                Resetovat a začít znovu
+              </button>
+            </div>
+            <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '0.8rem', color: '#9ca3af', fontWeight: 600, flexShrink: 0 }}>Filtr:</span>
               {['All', 'W', 'U', 'B', 'R', 'G', 'Multicolor', 'Colorless'].map(col => (
                 <button 
                   key={col}
                   onClick={() => setPoolFilterColor(col)}
                   className={`nav-button ${poolFilterColor === col ? 'active' : ''}`}
-                  style={{ padding: '0.3rem 0.75rem', fontSize: '0.8rem', borderRadius: '4px' }}
+                  style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', borderRadius: '4px', minWidth: 'fit-content' }}
                 >
-                  {col}
+                  {col === 'Multicolor' ? 'Multi' : col === 'Colorless' ? 'CL' : col}
                 </button>
               ))}
             </div>
           </div>
+
 
           {/* Warnings container */}
           {warnings.length > 0 && (

@@ -74,7 +74,8 @@ export default function TierList() {
 
       {/* Filter and Search Bar */}
       <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', alignItems: 'center' }}>
+        <div className="grid-filters">
+
           
           {/* Search Input */}
           <div style={{ position: 'relative' }}>

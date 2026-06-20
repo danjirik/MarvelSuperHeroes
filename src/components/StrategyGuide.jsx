@@ -16,7 +16,8 @@ export default function StrategyGuide() {
       </div>
 
       {/* Grid: Rules & Roles */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+      <div className="grid-2col" style={{ marginBottom: '1.5rem' }}>
+
         
         {/* Rules realities */}
         <div className="glass-panel" style={{ height: '100%' }}>
@@ -51,7 +52,8 @@ export default function StrategyGuide() {
             Nejúspěšnější 2HG týmy nestaví dva identické balíčky. Místo toho rozdělují své strategické role na „tlačnou hlavu“ a „ochranáře“:
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="grid-2col-inner">
+
             <div style={{ background: 'rgba(59, 130, 246, 0.05)', border: '1px solid rgba(59, 130, 246, 0.15)', padding: '1rem', borderRadius: '10px' }}>
               <h4 style={{ color: '#60a5fa', fontSize: '0.95rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                 <Sword size={14} />
@@ -93,7 +95,8 @@ export default function StrategyGuide() {
           Odborné přehodnocení všech 314 karet ukázalo, že standardní 1v1 žebříčky často podhodnocují širokou interakci a naopak přeceňují lineární duelové strategie:
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem' }}>
+        <div className="grid-auto">
+
           {/* Upgrades */}
           <div style={{ background: 'rgba(16, 185, 129, 0.01)', border: '1px solid rgba(16, 185, 129, 0.1)', padding: '1.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <h4 style={{ color: '#34d399', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.05rem', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '0.75rem' }}>

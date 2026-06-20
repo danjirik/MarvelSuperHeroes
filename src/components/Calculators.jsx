@@ -151,7 +151,8 @@ export default function Calculators() {
         /* Calculators View */
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          <div className="grid-auto">
+
             {/* Black Widow Calculator */}
             <div className="calc-box" style={{ margin: 0 }}>
               <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ec4899', fontSize: '1.15rem' }}>
@@ -268,7 +269,8 @@ export default function Calculators() {
               Může jeden hráč zaplatit Teamwork cenu a jaké blockery týmu zůstanou?
             </p>
             
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
+            <div className="grid-auto" style={{ marginTop: '1rem' }}>
+
               <div className="slider-container" style={{ margin: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.25rem' }}>
                   <span>Cílová Teamwork hodnota kouzla:</span>

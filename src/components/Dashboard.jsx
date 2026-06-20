@@ -10,13 +10,15 @@ export default function Dashboard({ setActiveTab }) {
           <div className="logo-badge" style={{ display: 'inline-block', marginBottom: '1rem' }}>
             Edice 2026 - MSH
           </div>
-          <h1 style={{ fontSize: '3rem', marginBottom: '0.5rem', lineHeight: 1.1 }}>
+          <h1 className="hero-h1" style={{ marginBottom: '0.5rem', lineHeight: 1.1 }}>
+
             MTG Marvel 2HG Tactician
           </h1>
           <p style={{ fontSize: '1.2rem', color: '#d1d5db', maxWidth: '800px', marginBottom: '1.5rem' }}>
             Připravte se na turnaje formátu Two-Headed Giant (2HG) pro crossover edici Magic: The Gathering – Marvel Super Heroes. Analyzujte karty, simulujte sealed pooly a optimalizujte synergie vašeho týmu.
           </p>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="btn-row">
+
             <button className="btn-primary" onClick={() => setActiveTab('simulator')}>
               <Sword size={18} />
               Spustit Sealed Simulator
@@ -39,7 +41,8 @@ export default function Dashboard({ setActiveTab }) {
           Two-Headed Giant (2HG) je týmový formát, kde dva hráči sdílejí společný pool 30 životů a hrají své tahy současně. Zdvojená obranná linie a společné rozhodování radikálně mění hodnotu jednotlivých mechanik a karet:
         </p>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
+        <div className="grid-auto" style={{ marginTop: '1.5rem' }}>
+
           <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1.25rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
             <h3 style={{ color: '#ef4444', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Zap size={16} />
@@ -73,12 +76,8 @@ export default function Dashboard({ setActiveTab }) {
       </div>
 
       {/* Rychlý rozcestník */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
-        gap: '1.5rem',
-        marginTop: '2rem'
-      }}>
+      <div className="grid-auto" style={{ marginTop: '2rem' }}>
+
         <div 
           className="glass-panel" 
           style={{ cursor: 'pointer', textAlign: 'center', padding: '1.75rem', marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} 

@@ -87,6 +87,61 @@ body {
   margin-top: 3rem;
 }
 
+/* ====================================================
+   RESPONSIVE GRID UTILITIES
+   All grids collapse to 1 column on mobile
+   ==================================================== */
+
+/* 2-column grid: collapses to 1 col on mobile */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* 2-column inner sub-grid (roles etc.) */
+.grid-2col-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* auto-fit with reasonable min — works on mobile */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 1.5rem;
+}
+
+/* auto-fit filter bar: collapses to 2 cols on mobile */
+.grid-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
+/* hero buttons row */
+.btn-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Global safety: nothing overflows horizontally */
+* { max-width: 100%; box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+
+@media (max-width: 768px) {
+  .grid-2col     { grid-template-columns: 1fr !important; }
+  .grid-2col-inner { grid-template-columns: 1fr !important; }
+  .grid-auto     { grid-template-columns: 1fr !important; }
+  .grid-filters  { grid-template-columns: 1fr 1fr !important; }
+  .btn-row       { flex-direction: column; }
+  .btn-row .btn-primary,
+  .btn-row .btn-secondary { width: 100%; justify-content: center; }
+}
+
 /* Top Navbar */
 .navbar {
   display: flex;
@@ -209,6 +264,13 @@ p {
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 1rem;
+}
+
+/* Hero heading — responsive */
+.hero-h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 /* Form controls */
