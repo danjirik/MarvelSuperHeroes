@@ -5,13 +5,15 @@ import ArchetypeMatcher from './components/ArchetypeMatcher';
 import SealedSimulator from './components/SealedSimulator';
 import Calculators from './components/Calculators';
 import StrategyGuide from './components/StrategyGuide';
-import { Shield, BookOpen, Users, Sword, Calculator, Home, Maximize, Minimize } from 'lucide-react';
+import CardScanner from './components/CardScanner';
+import { Shield, BookOpen, Users, Sword, Calculator, Home, Maximize, Minimize, Camera } from 'lucide-react';
 
 const NAV_TABS = [
   { id: 'dashboard', label: 'Úvod',     icon: Home },
   { id: 'guide',     label: 'Strategie', icon: BookOpen },
   { id: 'tierlist',  label: 'Tier List', icon: Users },
   { id: 'matcher',   label: 'Párovač',   icon: Users },
+  { id: 'scanner',   label: 'Skener',    icon: Camera },
   { id: 'simulator', label: 'Sealed',    icon: Sword },
   { id: 'calculators',label:'Kalkulačka',icon: Calculator },
 ];
@@ -19,6 +21,8 @@ const NAV_TABS = [
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [importedPool, setImportedPool] = useState(null);
+
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -105,7 +109,18 @@ function App() {
         {activeTab === 'guide' && <StrategyGuide />}
         {activeTab === 'tierlist' && <TierList />}
         {activeTab === 'matcher' && <ArchetypeMatcher />}
-        {activeTab === 'simulator' && <SealedSimulator />}
+        {activeTab === 'scanner' && (
+          <CardScanner onImportToSimulator={(pool) => {
+            setImportedPool(pool);
+            setActiveTab('simulator');
+          }} />
+        )}
+        {activeTab === 'simulator' && (
+          <SealedSimulator 
+            initialPool={importedPool} 
+            clearInitialPool={() => setImportedPool(null)} 
+          />
+        )}
         {activeTab === 'calculators' && <Calculators />}
       </main>
 

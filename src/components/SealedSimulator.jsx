@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+ 
 import { cardsData, basicLandsAndFillers } from '../data/cardsData';
 import { Sparkles, Trash2, ArrowRight, BookOpen, AlertTriangle, CheckCircle, BarChart2 } from 'lucide-react';
-
-export default function SealedSimulator() {
-  const [cardPool, setCardPool] = useState([]);
-  const [boostersOpened, setBoostersOpened] = useState(false);
+ 
+export default function SealedSimulator({ initialPool, clearInitialPool }) {
+  const [cardPool, setCardPool] = useState(() => {
+    return initialPool || [];
+  });
+  const [boostersOpened, setBoostersOpened] = useState(() => {
+    return !!(initialPool && initialPool.length > 0);
+  });
   const [poolFilterColor, setPoolFilterColor] = useState('All');
+
+  useEffect(() => {
+    if (initialPool && initialPool.length > 0) {
+      setCardPool(initialPool);
+      setBoostersOpened(true);
+    }
+  }, [initialPool]);
+
 
   // Accordion state for color groups in sideboard pool
   const [openGroups, setOpenGroups] = useState({
@@ -106,6 +118,7 @@ export default function SealedSimulator() {
   const resetSimulator = () => {
     setCardPool([]);
     setBoostersOpened(false);
+    if (clearInitialPool) clearInitialPool();
   };
 
   // Grouped lists
