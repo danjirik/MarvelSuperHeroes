@@ -54,6 +54,7 @@ export default function CardScanner({ onImportToSimulator }) {
   // Výsledek optimalizátoru
   const [optimizationResult, setOptimizationResult] = useState(null);
   const [isOptimizing, setIsOptimizing] = useState(false);
+  const [useWinRate, setUseWinRate] = useState(false);
 
   // Načtení uloženého poolu karet z localStorage při mountu
   useEffect(() => {
@@ -545,7 +546,7 @@ export default function CardScanner({ onImportToSimulator }) {
     setOptimizationResult(null);
     
     setTimeout(() => {
-      const result = optimizeSealedPool(scannedPool, cardsData);
+      const result = optimizeSealedPool(scannedPool, cardsData, useWinRate);
       setOptimizationResult(result);
       setIsOptimizing(false);
     }, 400); // Krátká animace
@@ -1142,7 +1143,21 @@ export default function CardScanner({ onImportToSimulator }) {
             })}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <div style={{ textAlign: 'center', marginTop: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+            {/* Přepínač mezi Tier a 17Lands hodnocením */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0,0,0,0.2)', padding: '0.4rem 0.85rem', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              <input 
+                type="checkbox" 
+                id="use-winrate-toggle" 
+                checked={useWinRate} 
+                onChange={(e) => setUseWinRate(e.target.checked)}
+                style={{ width: '15px', height: '15px', accentColor: '#8b5cf6', cursor: 'pointer' }}
+              />
+              <label htmlFor="use-winrate-toggle" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', userSelect: 'none' }}>
+                Optimalizovat na základě <strong>17Lands Win Rate</strong> statistik
+              </label>
+            </div>
+
             <button 
               className="cta-button" 
               onClick={runDeckOptimizer} 
@@ -1150,10 +1165,10 @@ export default function CardScanner({ onImportToSimulator }) {
               style={{ background: '#8b5cf6', padding: '0.75rem 2rem', fontSize: '1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)' }}
             >
               {isOptimizing ? <Loader2 className="animate-spin" size={20} /> : <Sparkles size={20} />}
-              Navrhnout nejsilnější decky
+              Navrhnout nejsilnější decky {useWinRate ? 'podle 17Lands' : ''}
             </button>
             {scannedPool.length < 15 && (
-              <p style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '0.5rem' }}>
+              <p style={{ color: '#ef4444', fontSize: '0.75rem', margin: 0 }}>
                 * Naskenujte alespoň 15 karet, abyste mohli spustit optimalizaci.
               </p>
             )}

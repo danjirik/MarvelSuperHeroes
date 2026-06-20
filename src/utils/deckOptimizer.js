@@ -1,4 +1,5 @@
 import { archetypesData, evaluatePairing } from '../data/archetypesData';
+import { stats17lands } from '../data/stats17lands';
 
 // Pomocná tabulka pro převod Tier hodnocení na body
 const TIER_SCORES = {
@@ -13,9 +14,36 @@ const TIER_SCORES = {
 
 /**
  * Spočítá dynamickou sílu karty s ohledem na 2HG specifické modifikátory.
+ * Může použít buď výchozí Tier List body, nebo procento výher ze statistik 17Lands.
  */
-export function getCard2HGScore(card) {
-  let score = TIER_SCORES[card.tier2HG] || TIER_SCORES['None'];
+export function getCard2HGScore(card, useWinRate = false, customRatings = null) {
+  let score = 0;
+  
+  if (useWinRate) {
+    // Zkusíme najít online nahraný Win Rate (GIH WR)
+    const online = customRatings && (customRatings[card.name] || customRatings[card.id]);
+    let gihWR = null;
+    
+    if (online) {
+      gihWR = online.gihWR !== undefined ? online.gihWR : online;
+    } else {
+      // Pokud online data chybí, použijeme lokálně generovaná 17lands data
+      const localStat = stats17lands.find(s => s.name === card.name);
+      if (localStat) {
+        gihWR = localStat.gihWR;
+      }
+    }
+    
+    if (gihWR) {
+      // Normalizace Win Rate na bodové rozpětí: (WinRate - 46%) * 0.6
+      // Příklad: 60% WR -> (14) * 0.6 = 8.4 bodů. 50% WR -> (4) * 0.6 = 2.4 bodů.
+      score = Math.max(0.1, (gihWR - 46) * 0.6);
+    } else {
+      score = TIER_SCORES[card.tier2HG] || 0;
+    }
+  } else {
+    score = TIER_SCORES[card.tier2HG] || TIER_SCORES['None'];
+  }
   
   if (!card.description) return score;
   
@@ -102,9 +130,20 @@ export function isCardInColors(card, allowedColors) {
 /**
  * Hlavní optimalizační funkce. Vezme pool naskenovaných karet a navrhne 2 balíčky.
  */
-export function optimizeSealedPool(scannedCards, fullCardsDatabase) {
+export function optimizeSealedPool(scannedCards, fullCardsDatabase, useWinRate = false) {
   if (!scannedCards || scannedCards.length === 0) {
     return { error: 'Prázdný pool karet.' };
+  }
+
+  // Načteme online data z localStorage, pokud chceme optimalizovat podle Win Rate
+  let onlineRatings = null;
+  if (useWinRate) {
+    try {
+      const saved = localStorage.getItem('online_17lands_stats');
+      if (saved) onlineRatings = JSON.parse(saved);
+    } catch (e) {
+      console.error("Selhalo parsování online statistik pro optimalizaci:", e);
+    }
   }
 
   // 1. Zmapujeme naskenovaná data na plnohodnotné objekty z databáze karet
@@ -118,7 +157,7 @@ export function optimizeSealedPool(scannedCards, fullCardsDatabase) {
         poolInstances.push({
           ...dbCard,
           instanceId: `scanned-${dbCard.id}-${index}-${i}`,
-          score2HG: getCard2HGScore(dbCard),
+          score2HG: getCard2HGScore(dbCard, useWinRate, onlineRatings),
           cmc: getCardCMC(dbCard),
           location: 'Sideboard' // výchozí
         });

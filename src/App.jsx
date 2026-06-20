@@ -6,7 +6,8 @@ import SealedSimulator from './components/SealedSimulator';
 import Calculators from './components/Calculators';
 import StrategyGuide from './components/StrategyGuide';
 import CardScanner from './components/CardScanner';
-import { Shield, BookOpen, Users, Sword, Calculator, Home, Maximize, Minimize, Camera } from 'lucide-react';
+import StatsDashboard from './components/StatsDashboard';
+import { Shield, BookOpen, Users, Sword, Calculator, Home, Maximize, Minimize, Camera, BarChart2 } from 'lucide-react';
 
 const NAV_TABS = [
   { id: 'dashboard', label: 'Úvod',     icon: Home },
@@ -14,6 +15,7 @@ const NAV_TABS = [
   { id: 'tierlist',  label: 'Tier List', icon: Users },
   { id: 'matcher',   label: 'Párovač',   icon: Users },
   { id: 'scanner',   label: 'Skener',    icon: Camera },
+  { id: 'stats',     label: 'Statistiky',icon: BarChart2 },
   { id: 'simulator', label: 'Sealed',    icon: Sword },
   { id: 'calculators',label:'Kalkulačka',icon: Calculator },
 ];
@@ -115,6 +117,7 @@ function App() {
             setActiveTab('simulator');
           }} />
         )}
+        {activeTab === 'stats' && <StatsDashboard />}
         {activeTab === 'simulator' && (
           <SealedSimulator 
             initialPool={importedPool} 
