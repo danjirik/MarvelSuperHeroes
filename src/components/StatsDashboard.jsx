@@ -9,6 +9,14 @@ export default function StatsDashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterColor, setFilterColor] = useState('All');
   const [filterRarity, setFilterRarity] = useState('All');
+  const [selectedCardForModal, setSelectedCardForModal] = useState(null);
+
+  const handleCardClick = (cardName) => {
+    const card = cardsData.find(c => c.name === cardName);
+    if (card) {
+      setSelectedCardForModal(card);
+    }
+  };
   
   // Řazení tabulky
   const [sortConfig, setSortConfig] = useState({ key: 'gihWR', direction: 'desc' });
@@ -393,7 +401,12 @@ export default function StatsDashboard() {
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                 {gems.map(card => (
-                  <div key={card.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.4rem', background: 'rgba(255,255,255,0.02)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                  <div 
+                    key={card.id} 
+                    onClick={() => handleCardClick(card.name)}
+                    className="clickable-card-row"
+                    style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.4rem', background: 'rgba(255,255,255,0.02)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.03)' }}
+                  >
                     <div>
                       <span style={{ fontSize: '0.82rem', fontWeight: 'bold', color: '#fff', display: 'block' }}>{card.name}</span>
                       <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{getAdjustmentReason(card)}</span>
@@ -415,7 +428,12 @@ export default function StatsDashboard() {
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                 {traps.map(card => (
-                  <div key={card.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.4rem', background: 'rgba(255,255,255,0.02)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                  <div 
+                    key={card.id} 
+                    onClick={() => handleCardClick(card.name)}
+                    className="clickable-card-row"
+                    style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.4rem', background: 'rgba(255,255,255,0.02)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.03)' }}
+                  >
                     <div>
                       <span style={{ fontSize: '0.82rem', fontWeight: 'bold', color: '#fff', display: 'block' }}>{card.name}</span>
                       <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{getAdjustmentReason(card)}</span>
@@ -514,7 +532,13 @@ export default function StatsDashboard() {
             <tbody>
               {filteredStats.map(card => (
                 <tr key={card.cardId}>
-                  <td style={{ fontWeight: 'bold', color: '#fff' }}>{card.name}</td>
+                  <td 
+                    onClick={() => handleCardClick(card.name)}
+                    className="clickable-card-name"
+                    style={{ fontWeight: 'bold', color: '#fff' }}
+                  >
+                    {card.name}
+                  </td>
                   <td>
                     <div style={{ display: 'flex', gap: '0.25rem' }}>
                       {card.color.map(col => (
@@ -566,6 +590,151 @@ export default function StatsDashboard() {
         </div>
       </div>
 
+      {/* 5. Modal pro detailní náhled karty */}
+      {selectedCardForModal && (
+        <div 
+          onClick={() => setSelectedCardForModal(null)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(5, 5, 8, 0.85)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+            padding: '1.5rem',
+            animation: 'fadeIn 0.2s ease-out'
+          }}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: '#0e0e12',
+              border: '1px solid rgba(139, 92, 246, 0.25)',
+              borderRadius: '16px',
+              maxWidth: '420px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.7)',
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '1.25rem',
+              gap: '1rem',
+              animation: 'scaleIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'
+            }}
+          >
+            {/* Close Button */}
+            <button 
+              onClick={() => setSelectedCardForModal(null)}
+              style={{
+                position: 'absolute',
+                top: '0.75rem',
+                right: '0.75rem',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '32px',
+                height: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#fff',
+                fontSize: '1.2rem',
+                cursor: 'pointer',
+                transition: 'background 0.2s',
+                zIndex: 10
+              }}
+            >
+              &times;
+            </button>
+
+            {/* Image Preview Container */}
+            {selectedCardForModal.imageUrl ? (
+              <div style={{ 
+                width: '100%', 
+                display: 'flex', 
+                justifyContent: 'center', 
+                borderRadius: '8px', 
+                overflow: 'hidden',
+                background: '#121217',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                boxShadow: '0 8px 16px rgba(0,0,0,0.6)'
+              }}>
+                <img 
+                  src={selectedCardForModal.imageUrl} 
+                  alt={selectedCardForModal.name} 
+                  style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '380px', objectFit: 'contain' }} 
+                />
+              </div>
+            ) : (
+              <div style={{
+                height: '180px',
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px dashed rgba(255,255,255,0.1)',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--text-muted)'
+              }}>
+                Žádný obrázek k dispozici
+              </div>
+            )}
+
+            {/* Content info */}
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', marginBottom: '0.5rem' }}>
+                <h4 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: '#fff' }}>
+                  {selectedCardForModal.name}
+                </h4>
+                <code style={{ fontSize: '0.9rem', color: '#c084fc', background: 'rgba(139, 92, 246, 0.1)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>
+                  {selectedCardForModal.cost || 'Země'}
+                </code>
+              </div>
+
+              {/* Badges */}
+              <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', marginBottom: '0.75rem', alignItems: 'center' }}>
+                <span className={`badge-tier ${selectedCardForModal.tier2HG}`} style={{ fontSize: '0.75rem', padding: '0.1rem 0.4rem' }}>
+                  Tier {selectedCardForModal.tier2HG}
+                </span>
+
+                <span style={{ 
+                  fontSize: '0.75rem', 
+                  color: selectedCardForModal.rarity === 'Mythic' ? '#f43f5e' : selectedCardForModal.rarity === 'Rare' ? '#fbbf24' : selectedCardForModal.rarity === 'Uncommon' ? '#60a5fa' : '#9ca3af',
+                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid rgba(255,255,255,0.05)',
+                  padding: '0.1rem 0.4rem',
+                  borderRadius: '4px'
+                }}>
+                  {selectedCardForModal.rarity}
+                </span>
+
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  {selectedCardForModal.type}
+                </span>
+              </div>
+
+              {/* Description */}
+              <div style={{ fontSize: '0.85rem', color: '#d1d5db', lineHeight: '1.45', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)', padding: '0.75rem', borderRadius: '6px', marginBottom: '0.75rem' }}>
+                <span style={{ display: 'block', fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 800, marginBottom: '0.25rem' }}>Pravidla / Text:</span>
+                {selectedCardForModal.description || 'Bez textu.'}
+              </div>
+
+              {/* 2HG Analysis */}
+              <div style={{ fontSize: '0.82rem', color: '#fff', lineHeight: '1.4', background: 'rgba(139, 92, 246, 0.03)', border: '1px dashed rgba(139, 92, 246, 0.15)', padding: '0.75rem', borderRadius: '6px' }}>
+                <span style={{ display: 'block', fontSize: '0.7rem', color: '#c084fc', textTransform: 'uppercase', fontWeight: 800, marginBottom: '0.25rem' }}>2HG Audit / Hodnocení:</span>
+                {selectedCardForModal.impact2HG}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

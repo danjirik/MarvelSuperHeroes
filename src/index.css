@@ -1177,3 +1177,35 @@ input[type="range"] {
   animation: scan-laser 3s infinite linear;
   pointer-events: none;
 }
+
+/* Card click popups in statistics dashboard */
+.clickable-card-name {
+  cursor: pointer;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.clickable-card-name:hover {
+  color: #c084fc !important;
+  text-decoration: underline;
+}
+
+.clickable-card-row {
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.clickable-card-row:hover {
+  background: rgba(139, 92, 246, 0.08) !important;
+  border-color: rgba(139, 92, 246, 0.25) !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
