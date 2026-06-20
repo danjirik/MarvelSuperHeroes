@@ -6,12 +6,47 @@ import { Sparkles, Trash2, ArrowRight, BookOpen, AlertTriangle, CheckCircle, Bar
  
 export default function SealedSimulator({ initialPool, clearInitialPool }) {
   const [cardPool, setCardPool] = useState(() => {
-    return initialPool || [];
+    if (initialPool && initialPool.length > 0) {
+      return initialPool;
+    }
+    try {
+      const saved = localStorage.getItem('sealed_simulator_pool');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   });
   const [boostersOpened, setBoostersOpened] = useState(() => {
-    return !!(initialPool && initialPool.length > 0);
+    if (initialPool && initialPool.length > 0) {
+      return true;
+    }
+    try {
+      const saved = localStorage.getItem('sealed_simulator_boosters_opened');
+      return saved ? JSON.parse(saved) : false;
+    } catch {
+      return false;
+    }
   });
   const [poolFilterColor, setPoolFilterColor] = useState('All');
+
+  // Auto-save changes to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('sealed_simulator_pool', JSON.stringify(cardPool));
+      localStorage.setItem('sealed_simulator_boosters_opened', JSON.stringify(boostersOpened));
+    } catch (e) {
+      console.error("Error saving sealed simulator to localStorage:", e);
+    }
+  }, [cardPool, boostersOpened]);
+
+  // Synchronize when a new pool is imported from the scanner
+  useEffect(() => {
+    if (initialPool && initialPool.length > 0) {
+      setCardPool(initialPool);
+      setBoostersOpened(true);
+      if (clearInitialPool) clearInitialPool();
+    }
+  }, [initialPool]);
 
   // Card search and manual adder states
   const [manualSearchTerm, setManualSearchTerm] = useState('');
