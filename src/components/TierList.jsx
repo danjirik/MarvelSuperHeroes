@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { cardsData } from '../data/cardsData';
+import { stats17lands } from '../data/stats17lands';
 import { Search, Filter, Info, ShieldAlert, ChevronDown, ChevronUp, LayoutGrid, List } from 'lucide-react';
 
 export default function TierList() {
@@ -11,6 +12,31 @@ export default function TierList() {
   const [selectedSource, setSelectedSource] = useState('All');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'table'
   const [showImages, setShowImages] = useState(false);
+  const [showWinRate, setShowWinRate] = useState(false);
+  const [statsMap, setStatsMap] = useState({});
+
+  useEffect(() => {
+    // Načteme online data z localStorage pro synchronizaci
+    const saved = localStorage.getItem('online_17lands_stats');
+    let onlineMap = {};
+    if (saved) {
+      try {
+        onlineMap = JSON.parse(saved);
+      } catch (e) {
+        console.error("Selhalo načtení online statistik v Tier Listu:", e);
+      }
+    }
+    
+    // Namapujeme data karet
+    const map = {};
+    stats17lands.forEach(item => {
+      const onlineItem = onlineMap[item.name];
+      map[item.name] = {
+        gihWR: onlineItem && onlineItem.gihWR !== undefined ? onlineItem.gihWR : item.gihWR
+      };
+    });
+    setStatsMap(map);
+  }, []);
 
   // Pagination state
   const [visibleCount, setVisibleCount] = useState(24);
@@ -175,7 +201,17 @@ export default function TierList() {
         </span>
         
         {/* View Mode Toggle */}
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-muted)', cursor: 'pointer', marginRight: '0.5rem', userSelect: 'none' }}>
+            <input 
+              type="checkbox" 
+              checked={showWinRate} 
+              onChange={(e) => setShowWinRate(e.target.checked)}
+              style={{ accentColor: '#8b5cf6', width: '15px', height: '15px', cursor: 'pointer' }}
+            />
+            Zobrazit Win Rate (17Lands)
+          </label>
+
           {viewMode === 'grid' && (
             <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', color: 'var(--text-muted)', cursor: 'pointer', marginRight: '0.5rem', userSelect: 'none' }}>
               <input 
@@ -266,10 +302,23 @@ export default function TierList() {
                     </div>
 
                     {/* Meta information */}
-                    <div className="mtg-card-meta">
+                    <div className="mtg-card-meta" style={{ flexWrap: 'wrap', gap: '0.35rem' }}>
                       <span className={`badge-tier ${card.tier2HG}`} style={{ fontSize: '0.75rem', padding: '0.1rem 0.4rem' }}>
                         Tier {card.tier2HG}
                       </span>
+                      
+                      {showWinRate && statsMap[card.name] && (
+                        <span className="badge-tier" style={{ 
+                          fontSize: '0.75rem', 
+                          padding: '0.1rem 0.4rem', 
+                          background: 'rgba(16, 185, 129, 0.15)', 
+                          border: '1px solid rgba(16, 185, 129, 0.3)', 
+                          color: '#34d399', 
+                          fontWeight: 700 
+                        }}>
+                          WR {statsMap[card.name].gihWR.toFixed(1)}%
+                        </span>
+                      )}
                       
                       {card.color.map(col => (
                         <span key={col} className={`badge-color ${col}`} style={{ width: '18px', height: '18px', fontSize: '0.65rem' }}>
@@ -347,7 +396,7 @@ export default function TierList() {
                     <th>Barva</th>
                     <th>Rarita</th>
                     <th>Typ</th>
-                    <th style={{ textAlign: 'center' }}>2HG Tier</th>
+                    <th style={{ textAlign: 'center' }}>{showWinRate ? 'Tier / WR' : '2HG Tier'}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -386,9 +435,26 @@ export default function TierList() {
                           <td style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{card.rarity}</td>
                           <td style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{card.type}</td>
                           <td style={{ textAlign: 'center' }}>
-                            <span className={`badge-tier ${card.tier2HG}`} style={{ fontSize: '0.75rem', padding: '0.1rem 0.4rem', display: 'inline-block', minWidth: '55px' }}>
-                              Tier {card.tier2HG}
-                            </span>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                              <span className={`badge-tier ${card.tier2HG}`} style={{ fontSize: '0.75rem', padding: '0.1rem 0.4rem', display: 'inline-block', minWidth: '55px' }}>
+                                Tier {card.tier2HG}
+                              </span>
+                              {showWinRate && statsMap[card.name] && (
+                                <span style={{ 
+                                  fontSize: '0.72rem', 
+                                  fontWeight: 'bold', 
+                                  padding: '0.05rem 0.3rem', 
+                                  borderRadius: '4px', 
+                                  background: 'rgba(16, 185, 129, 0.12)', 
+                                  border: '1px solid rgba(16, 185, 129, 0.25)', 
+                                  color: '#34d399', 
+                                  minWidth: '55px', 
+                                  textAlign: 'center' 
+                                }}>
+                                  {statsMap[card.name].gihWR.toFixed(1)}%
+                                </span>
+                              )}
+                            </div>
                           </td>
                         </tr>
 
