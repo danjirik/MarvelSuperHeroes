@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { stats17lands } from '../data/stats17lands';
-import { BarChart2, Search, ArrowUpDown, RefreshCw, CheckCircle2, AlertTriangle, Info, HelpCircle } from 'lucide-react';
+import { cardsData } from '../data/cardsData';
+import { getCard2HGScore } from '../utils/deckOptimizer';
+import { BarChart2, Search, ArrowUpDown, RefreshCw, CheckCircle2, AlertTriangle, Info, HelpCircle, ArrowUpRight, ArrowDownRight, Sparkles } from 'lucide-react';
 
 export default function StatsDashboard() {
   const [activeStats, setActiveStats] = useState([]);
@@ -23,32 +25,37 @@ export default function StatsDashboard() {
 
   const loadStats = () => {
     const saved = localStorage.getItem('online_17lands_stats');
+    let parsed = {};
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
-        // Spojíme výchozí statistiky s online staženými hodnotami
-        const merged = stats17lands.map(local => {
-          const online = parsed[local.name] || parsed[local.cardId];
-          if (online) {
-            return {
-              ...local,
-              gihWR: online.gihWR !== undefined ? online.gihWR : local.gihWR,
-              alsa: online.alsa !== undefined ? online.alsa : local.alsa,
-              iwd: online.iwd !== undefined ? online.iwd : local.iwd
-            };
-          }
-          return local;
-        });
-        setActiveStats(merged);
-        setIsSynced(true);
+        parsed = JSON.parse(saved);
       } catch (e) {
         console.error("Nepodařilo se parsovat online 17lands data:", e);
-        setActiveStats(stats17lands);
       }
-    } else {
-      setActiveStats(stats17lands);
-      setIsSynced(false);
     }
+    
+    // Spojíme výchozí statistiky s online staženými hodnotami
+    const merged = stats17lands.map(local => {
+      const online = parsed[local.name] || parsed[local.cardId];
+      const gihWR = online && online.gihWR !== undefined ? online.gihWR : local.gihWR;
+      const alsa = online && online.alsa !== undefined ? online.alsa : local.alsa;
+      const iwd = online && online.iwd !== undefined ? online.iwd : local.iwd;
+      
+      const dbCard = cardsData.find(c => c.name === local.name) || {};
+      const score2HG = getCard2HGScore(dbCard, true, {
+        [local.name]: { gihWR }
+      });
+      
+      return {
+        ...local,
+        gihWR,
+        alsa,
+        iwd,
+        score2HG
+      };
+    });
+    setActiveStats(merged);
+    setIsSynced(!!saved);
   };
 
   // Funkce pro online synchronizaci
@@ -172,6 +179,73 @@ export default function StatsDashboard() {
   };
 
   const colorRates = getColorWinRates();
+
+  // 2HG Adjustment Helpers
+  const get2HGAdjustment = (card) => {
+    if (!card.description) return 0;
+    const desc = card.description.toLowerCase();
+    let adj = 0;
+    if (desc.includes('each opponent') || desc.includes('each player') || desc.includes('opponents control')) {
+      adj += 2.0;
+    }
+    if (desc.includes('teamwork')) {
+      adj += 1.5;
+    }
+    if (desc.includes('support ') || desc.includes('put a +1/+1 counter on another target') || desc.includes('another creature')) {
+      adj += 1.0;
+    }
+    if (desc.includes('attacks alone') || desc.includes('attack alone')) {
+      adj -= 3.0;
+    }
+    return adj;
+  };
+
+  const getAdjustmentReason = (card) => {
+    if (!card.description) return '';
+    const desc = card.description.toLowerCase();
+    const reasons = [];
+    if (desc.includes('each opponent') || desc.includes('each player') || desc.includes('opponents control')) {
+      reasons.push('Více soupeřů');
+    }
+    if (desc.includes('teamwork')) {
+      reasons.push('Teamwork');
+    }
+    if (desc.includes('support ') || desc.includes('put a +1/+1 counter on another target') || desc.includes('another creature')) {
+      reasons.push('Podpora');
+    }
+    if (desc.includes('attacks alone') || desc.includes('attack alone')) {
+      reasons.push('Útočí sám');
+    }
+    return reasons.join(', ');
+  };
+
+  // Získání Gems a Traps z cardsData
+  const getGemsAndTraps = () => {
+    if (activeStats.length === 0) return { gems: [], traps: [] };
+    const scored = cardsData.map(card => {
+      const stat = activeStats.find(s => s.name === card.name) || { gihWR: 50.0 };
+      const adj = get2HGAdjustment(card);
+      return {
+        ...card,
+        gihWR: stat.gihWR,
+        adjustment: adj
+      };
+    });
+
+    const gemsList = scored
+      .filter(c => c.adjustment > 0)
+      .sort((a, b) => b.adjustment - a.adjustment || b.gihWR - a.gihWR)
+      .slice(0, 6);
+
+    const trapsList = scored
+      .filter(c => c.adjustment < 0)
+      .sort((a, b) => a.adjustment - b.adjustment || a.gihWR - b.gihWR)
+      .slice(0, 6);
+
+    return { gems: gemsList, traps: trapsList };
+  };
+
+  const { gems, traps } = getGemsAndTraps();
 
   return (
     <div className="stats-dashboard-container" style={{ paddingBottom: '4rem' }}>
@@ -299,6 +373,65 @@ export default function StatsDashboard() {
         </div>
       </div>
 
+      {/* 3.5. 2HG Specifické Analýzy (Synergie a Pasti) */}
+      {gems.length > 0 && (
+        <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
+          <h3 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '1.1rem' }}>
+            <Sparkles size={18} style={{ color: '#fbbf24' }} />
+            2HG Specifické Synergie a Pasti v sadě
+          </h3>
+          <p style={{ margin: '0 0 1.25rem 0', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+            Některé mechaniky získávají v 2HG na síle (např. efekty cílící na všechny soupeře nebo týmová spolupráce), zatímco jiné jsou výrazně slabší než v běžné hře 1v1 (např. útok o samotě). Zde je automatická analýza největších rozdílů.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            {/* Sloupec Skokani (Gems) */}
+            <div style={{ background: 'rgba(16, 185, 129, 0.02)', border: '1px solid rgba(16, 185, 129, 0.1)', borderRadius: '8px', padding: '1rem' }}>
+              <h4 style={{ margin: '0 0 0.75rem 0', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.95rem' }}>
+                <ArrowUpRight size={16} />
+                Top 2HG Skokani (Hidden Gems)
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                {gems.map(card => (
+                  <div key={card.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.4rem', background: 'rgba(255,255,255,0.02)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                    <div>
+                      <span style={{ fontSize: '0.82rem', fontWeight: 'bold', color: '#fff', display: 'block' }}>{card.name}</span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{getAdjustmentReason(card)}</span>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', display: 'block' }}>WR {card.gihWR.toFixed(1)}%</span>
+                      <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#10b981' }}>+{card.adjustment.toFixed(1)}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Sloupec Pasti (Traps) */}
+            <div style={{ background: 'rgba(239, 68, 68, 0.02)', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '8px', padding: '1rem' }}>
+              <h4 style={{ margin: '0 0 0.75rem 0', color: '#f87171', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.95rem' }}>
+                <ArrowDownRight size={16} />
+                Top 2HG Pasti (Format Traps)
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                {traps.map(card => (
+                  <div key={card.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.4rem', background: 'rgba(255,255,255,0.02)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                    <div>
+                      <span style={{ fontSize: '0.82rem', fontWeight: 'bold', color: '#fff', display: 'block' }}>{card.name}</span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{getAdjustmentReason(card)}</span>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', display: 'block' }}>WR {card.gihWR.toFixed(1)}%</span>
+                      <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#ef4444' }}>{card.adjustment.toFixed(1)}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 4. Tabulka statistik karet */}
       <div className="glass-panel" style={{ padding: '1rem' }}>
         
@@ -364,6 +497,9 @@ export default function StatsDashboard() {
                 <th onClick={() => requestSort('gihWR')} style={{ cursor: 'pointer', textAlign: 'right', width: '110px' }}>
                   GIH WR (%) <ArrowUpDown size={12} style={{ display: 'inline', marginLeft: '0.2rem' }} />
                 </th>
+                <th onClick={() => requestSort('score2HG')} style={{ cursor: 'pointer', textAlign: 'right', width: '110px' }}>
+                  2HG Skóre <ArrowUpDown size={12} style={{ display: 'inline', marginLeft: '0.2rem' }} />
+                </th>
                 <th onClick={() => requestSort('alsa')} style={{ cursor: 'pointer', textAlign: 'right', width: '90px' }}>
                   ALSA <ArrowUpDown size={12} style={{ display: 'inline', marginLeft: '0.2rem' }} />
                 </th>
@@ -397,6 +533,9 @@ export default function StatsDashboard() {
                   <td style={{ textAlign: 'right', fontWeight: 'bold', color: card.gihWR >= 58 ? '#10b981' : card.gihWR <= 51 ? '#f87171' : '#fff' }}>
                     {card.gihWR.toFixed(1)}%
                   </td>
+                  <td style={{ textAlign: 'right', fontWeight: 'bold', color: '#c084fc' }}>
+                    {card.score2HG ? card.score2HG.toFixed(1) : '0.0'}
+                  </td>
                   <td style={{ textAlign: 'right', color: 'var(--text-secondary)' }}>{card.alsa.toFixed(1)}</td>
                   <td style={{ textAlign: 'right', color: card.iwd > 0 ? '#10b981' : card.iwd < 0 ? '#f87171' : 'var(--text-secondary)' }}>
                     {card.iwd > 0 ? `+${card.iwd.toFixed(1)}%` : `${card.iwd.toFixed(1)}%`}
@@ -417,7 +556,7 @@ export default function StatsDashboard() {
               ))}
               {filteredStats.length === 0 && (
                 <tr>
-                  <td colSpan="7" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
+                  <td colSpan="8" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
                     Nebyly nalezeny žádné karty odpovídající filtrům.
                   </td>
                 </tr>
