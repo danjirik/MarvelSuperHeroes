@@ -7,6 +7,15 @@ import Calculators from './components/Calculators';
 import StrategyGuide from './components/StrategyGuide';
 import { Shield, BookOpen, Users, Sword, Calculator, Home, Maximize, Minimize } from 'lucide-react';
 
+const NAV_TABS = [
+  { id: 'dashboard', label: 'Úvod',     icon: Home },
+  { id: 'guide',     label: 'Strategie', icon: BookOpen },
+  { id: 'tierlist',  label: 'Tier List', icon: Users },
+  { id: 'matcher',   label: 'Párovač',   icon: Users },
+  { id: 'simulator', label: 'Sealed',    icon: Sword },
+  { id: 'calculators',label:'Kalkulačka',icon: Calculator },
+];
+
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -33,8 +42,8 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Navigation Header */}
-      <header className="navbar">
+      {/* Desktop Navigation Header */}
+      <header className="navbar desktop-nav">
         <div className="logo-container" onClick={() => setActiveTab('dashboard')} style={{ cursor: 'pointer' }}>
           <Shield size={28} style={{ color: '#ef4444' }} />
           <span className="logo-text">Marvel 2HG Tactician</span>
@@ -42,53 +51,16 @@ function App() {
         </div>
         
         <nav className="nav-links">
-          <button 
-            className={`nav-button ${activeTab === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActiveTab('dashboard')}
-          >
-            <Home size={16} />
-            Úvod
-          </button>
-
-          <button 
-            className={`nav-button ${activeTab === 'guide' ? 'active' : ''}`}
-            onClick={() => setActiveTab('guide')}
-          >
-            <BookOpen size={16} />
-            Strategie
-          </button>
-          
-          <button 
-            className={`nav-button ${activeTab === 'tierlist' ? 'active' : ''}`}
-            onClick={() => setActiveTab('tierlist')}
-          >
-            <Users size={16} />
-            Tier List
-          </button>
-
-          <button 
-            className={`nav-button ${activeTab === 'matcher' ? 'active' : ''}`}
-            onClick={() => setActiveTab('matcher')}
-          >
-            <Users size={16} />
-            Párovač
-          </button>
-
-          <button 
-            className={`nav-button ${activeTab === 'simulator' ? 'active' : ''}`}
-            onClick={() => setActiveTab('simulator')}
-          >
-            <Sword size={16} />
-            Sealed Sim
-          </button>
-
-          <button 
-            className={`nav-button ${activeTab === 'calculators' ? 'active' : ''}`}
-            onClick={() => setActiveTab('calculators')}
-          >
-            <Calculator size={16} />
-            Kalkulačka
-          </button>
+          {NAV_TABS.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              className={`nav-button ${activeTab === id ? 'active' : ''}`}
+              onClick={() => setActiveTab(id)}
+            >
+              <Icon size={16} />
+              {label}
+            </button>
+          ))}
           
           <button 
             className="nav-button fullscreen-toggle"
@@ -106,6 +78,27 @@ function App() {
         </nav>
       </header>
 
+      {/* Mobile Top Bar */}
+      <header className="mobile-topbar">
+        <div className="logo-container" onClick={() => setActiveTab('dashboard')} style={{ cursor: 'pointer' }}>
+          <Shield size={22} style={{ color: '#ef4444' }} />
+          <span className="logo-text" style={{ fontSize: '1.1rem' }}>Marvel 2HG</span>
+        </div>
+        <button 
+          className="nav-button fullscreen-toggle"
+          onClick={toggleFullscreen}
+          style={{ 
+            padding: '0.4rem 0.75rem',
+            background: 'rgba(139, 92, 246, 0.1)', 
+            border: '1px solid rgba(139, 92, 246, 0.25)',
+            color: '#c084fc',
+            fontSize: '0.75rem'
+          }}
+        >
+          {isFullscreen ? <Minimize size={14} /> : <Maximize size={14} />}
+        </button>
+      </header>
+
       {/* Main Content Viewport */}
       <main className="main-content">
         {activeTab === 'dashboard' && <Dashboard setActiveTab={setActiveTab} />}
@@ -116,15 +109,8 @@ function App() {
         {activeTab === 'calculators' && <Calculators />}
       </main>
 
-      {/* Footer */}
-      <footer style={{ 
-        textAlign: 'center', 
-        padding: '2rem', 
-        borderTop: '1px solid rgba(255, 255, 255, 0.05)', 
-        color: '#6b7280', 
-        fontSize: '0.85rem',
-        marginTop: '3rem'
-      }}>
+      {/* Footer (hidden on mobile) */}
+      <footer className="app-footer">
         <p style={{ margin: 0 }}>
           MTG Marvel 2HG Tactician — Vytvořeno pro Prerelease Marvel Super Heroes edice.
         </p>
@@ -132,6 +118,20 @@ function App() {
           Tento projekt je neoficiální fanouškovská pomůcka. Magic: The Gathering a Marvel jsou ochranné známky Wizards of the Coast a Marvel Enterprises.
         </p>
       </footer>
+
+      {/* Mobile Bottom Tab Bar */}
+      <nav className="mobile-bottom-nav">
+        {NAV_TABS.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            className={`mobile-tab-btn ${activeTab === id ? 'active' : ''}`}
+            onClick={() => setActiveTab(id)}
+          >
+            <Icon size={20} />
+            <span>{label}</span>
+          </button>
+        ))}
+      </nav>
     </div>
   );
 }

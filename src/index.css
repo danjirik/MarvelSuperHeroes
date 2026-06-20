@@ -64,6 +64,27 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Mobile Top Bar (hidden on desktop) */
+.mobile-topbar {
+  display: none;
+}
+
+/* Mobile Bottom Tab Nav (hidden on desktop) */
+.mobile-bottom-nav {
+  display: none;
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin-top: 3rem;
 }
 
 /* Top Navbar */
@@ -144,6 +165,7 @@ body {
   flex: 1;
   padding: 2rem;
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* Glassmorphism Panel card */
@@ -817,7 +839,232 @@ input[type="range"] {
   pointer-events: none;
 }
 
-.card-tooltip-trigger:hover .card-tooltip-content {
+.card-tooltip-trigger:hover .card-tooltip-content,
+.card-tooltip-trigger:focus-within .card-tooltip-content,
+.card-tooltip-trigger.active .card-tooltip-content {
   display: block;
 }
 
+/* ======================================
+   MOBILE RESPONSIVE OVERHAUL (@media ≤768px)
+   ====================================== */
+@media (max-width: 768px) {
+
+  /* --- Layout & Nav --- */
+  .desktop-nav { display: none !important; }
+
+  .mobile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(0.75rem + env(safe-area-inset-top, 0px)) 1rem 0.75rem 1rem;
+    background: rgba(10, 10, 12, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: rgba(10, 10, 12, 0.95);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.35rem 0 calc(0.35rem + env(safe-area-inset-bottom, 0px)) 0;
+  }
+
+  .mobile-tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    padding: 0.4rem 0.25rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s;
+    min-width: 0;
+  }
+
+  .mobile-tab-btn.active {
+    color: var(--accent-cosmic);
+  }
+
+  .mobile-tab-btn svg {
+    flex-shrink: 0;
+  }
+
+  .main-content {
+    padding: 1rem;
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .app-footer { display: none; }
+
+  /* --- Typography --- */
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; }
+  h3 { font-size: 1.05rem; }
+
+  .glass-panel {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  /* --- Tier List Filters --- */
+  .tierlist-container > .glass-panel:first-child p {
+    font-size: 0.85rem;
+  }
+
+  /* filter grid: stack on mobile */
+  .glass-panel > div[style*="grid"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Grid cards: 1 column on mobile */
+  .grid-cards {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .mtg-card-item {
+    min-height: unset;
+  }
+
+  /* Tier Table: hide less important columns on mobile */
+  .tier-table th:nth-child(3),
+  .tier-table td:nth-child(3),
+  .tier-table th:nth-child(4),
+  .tier-table td:nth-child(4),
+  .tier-table th:nth-child(5),
+  .tier-table td:nth-child(5),
+  .tier-table th:nth-child(6),
+  .tier-table td:nth-child(6) {
+    display: none;
+  }
+
+  .tier-table th, .tier-table td {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* Expanded row image: stack vertically */
+  .tier-table tr.row-expanded-data td > div {
+    flex-direction: column !important;
+  }
+
+  .tier-table tr.row-expanded-data td > div > div:first-child {
+    width: 100% !important;
+    max-width: 180px;
+    margin: 0 auto;
+  }
+
+  /* --- Sealed Simulator --- */
+  .sealed-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  .sealed-split-container {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  .deck-column {
+    height: 320px;
+  }
+
+  /* Tooltip: replace hover with always-visible fixed tooltip (use JS activeClass) */
+  .card-tooltip-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: unset;
+    width: 88vw;
+    max-width: 340px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 300;
+    pointer-events: auto;
+  }
+
+  /* On mobile tooltips only show on .active class (set by JS) — disable hover */
+  .card-tooltip-trigger:hover .card-tooltip-content {
+    display: none;
+  }
+
+  .card-tooltip-trigger.active .card-tooltip-content {
+    display: block;
+  }
+
+  /* Compact card rows bigger tap targets */
+  .compact-card-row {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+
+  .card-row-actions .btn-secondary {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    min-height: 36px;
+  }
+
+  /* Pool filter buttons: wrap */
+  .sealed-simulator-container > div:nth-child(2) > div > div:last-child {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  /* --- Archetype Matcher --- */
+  .matcher-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  .result-synergy-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* --- Calculators --- */
+  .calcs-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Buttons full width on mobile */
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Hero banner: smaller text */
+  .hero-banner h1 {
+    font-size: 1.8rem !important;
+  }
+
+  /* Filter bar: 2 columns */
+  .glass-panel div[style*="auto-fit"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+  .mobile-tab-btn span { display: none; }
+  .mobile-tab-btn { padding: 0.5rem 0; }
+  .mobile-tab-btn svg { width: 24px; height: 24px; }
+}

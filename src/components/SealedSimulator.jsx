@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { cardsData, basicLandsAndFillers } from '../data/cardsData';
 import { Sparkles, Trash2, ArrowRight, BookOpen, AlertTriangle, CheckCircle, BarChart2 } from 'lucide-react';
 
@@ -18,6 +19,14 @@ export default function SealedSimulator() {
     Colorless: true,
     Land: true
   });
+
+  // Mobile tooltip state
+  const [activeTooltip, setActiveTooltip] = useState(null);
+
+  const handleTooltipToggle = (id) => {
+    setActiveTooltip(prev => prev === id ? null : id);
+  };
+
 
   const toggleGroup = (group) => {
     setOpenGroups(prev => ({ ...prev, [group]: !prev[group] }));
@@ -342,7 +351,10 @@ export default function SealedSimulator() {
                                     </span>
                                     
                                     {/* Tooltip trigger name */}
-                                    <div className="card-tooltip-trigger">
+                                    <div
+                                       className={`card-tooltip-trigger ${activeTooltip === `pool-${cardData.id}-${idx}` ? 'active' : ''}`}
+                                       onClick={() => handleTooltipToggle(`pool-${cardData.id}-${idx}`)}
+                                     >
                                       <strong style={{ color: '#fff', fontSize: '0.82rem', cursor: 'help' }}>
                                         {cardData.name} {count > 1 && <span style={{ color: '#ec4899', fontWeight: 800 }}>({count}x)</span>}
                                       </strong>
@@ -465,7 +477,11 @@ export default function SealedSimulator() {
                           ))}
                           
                           {/* Tooltip trigger */}
-                          <div className="card-tooltip-trigger" style={{ cursor: 'help' }}>
+                          <div
+                            className={`card-tooltip-trigger ${activeTooltip === `deckA-${card.instanceId}` ? 'active' : ''}`}
+                            style={{ cursor: 'help' }}
+                            onClick={() => handleTooltipToggle(`deckA-${card.instanceId}`)}
+                          >
                             <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{card.name}</span>
                             
                             {/* Tooltip Popup */}
@@ -564,7 +580,11 @@ export default function SealedSimulator() {
                           ))}
                           
                           {/* Tooltip trigger */}
-                          <div className="card-tooltip-trigger" style={{ cursor: 'help' }}>
+                          <div
+                            className={`card-tooltip-trigger ${activeTooltip === `deckB-${card.instanceId}` ? 'active' : ''}`}
+                            style={{ cursor: 'help' }}
+                            onClick={() => handleTooltipToggle(`deckB-${card.instanceId}`)}
+                          >
                             <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{card.name}</span>
                             
                             {/* Tooltip Popup */}
@@ -634,6 +654,20 @@ export default function SealedSimulator() {
 
           </div>
         </div>
+      )}
+
+      {/* Mobile tooltip backdrop overlay */}
+      {activeTooltip && (
+        <div
+          onClick={() => setActiveTooltip(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 299,
+            background: 'rgba(0,0,0,0.4)',
+            touchAction: 'none',
+          }}
+        />
       )}
     </div>
   );
