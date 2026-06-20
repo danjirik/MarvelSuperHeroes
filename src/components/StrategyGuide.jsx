@@ -1,5 +1,6 @@
 import React from 'react';
-import { BookOpen, Users, Sword, Shield, Award, ArrowUpRight, ArrowDownRight, Lightbulb } from 'lucide-react';
+import { BookOpen, Users, Sword, Shield, Award, ArrowUpRight, ArrowDownRight, Lightbulb, Sparkles } from 'lucide-react';
+import { archetypesData } from '../data/archetypesData';
 
 export default function StrategyGuide() {
   return (
@@ -83,6 +84,85 @@ export default function StrategyGuide() {
           </div>
         </div>
 
+      </div>
+
+      {/* 10 Guilds / Archetypes Section */}
+      <div className="glass-panel" style={{ marginBottom: '1.5rem' }}>
+        <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#a78bfa', marginBottom: '1.25rem' }}>
+          <Sparkles size={20} />
+          Rozbor 10 Dvoubarevných Archetypů (Cechů) v Edici
+        </h3>
+        <p style={{ fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+          Každá z 10 dvoubarevných kombinací v edici Marvel Super Heroes reprezentuje konkrétní téma, má specifické mechanické zaměření a v prostředí Two-Headed Giant se chová odlišně. Zde je jejich podrobný přehled:
+        </p>
+
+        <div className="grid-auto" style={{ gap: '1.25rem' }}>
+          {archetypesData.map((arch) => {
+            const getColorsBadges = (id) => {
+              switch (id) {
+                case "UB": return ["U", "B"];
+                case "BR": return ["B", "R"];
+                case "WU": return ["W", "U"];
+                case "UR": return ["U", "R"];
+                case "BG": return ["B", "G"];
+                case "GW": return ["G", "W"];
+                case "RG": return ["R", "G"];
+                case "GU": return ["G", "U"];
+                case "WR": return ["W", "R"];
+                case "WB": return ["W", "B"];
+                default: return [];
+              }
+            };
+
+            return (
+              <div 
+                key={arch.id} 
+                className={`mtg-card-item glow-${arch.tier2HG}`}
+                style={{ 
+                  padding: '1.25rem',
+                  background: 'rgba(15, 15, 22, 0.85)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  borderRadius: '12px',
+                  height: '100%'
+                }}
+              >
+                {/* Header: Name, Colors and Tier */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <h4 style={{ fontSize: '1.05rem', color: '#fff', fontWeight: 700, margin: 0 }}>
+                    {arch.name}
+                  </h4>
+                  <div style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
+                    {getColorsBadges(arch.id).map(c => (
+                      <span key={c} className={`badge-color ${c}`} style={{ width: '16px', height: '16px', fontSize: '0.6rem' }}>{c}</span>
+                    ))}
+                    <span className={`badge-tier ${arch.tier2HG}`} style={{ fontSize: '0.7rem', padding: '0.1rem 0.35rem' }}>
+                      Tier {arch.tier2HG}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Theme */}
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                  <strong style={{ color: '#a78bfa' }}>Téma:</strong> {arch.theme}
+                </div>
+
+                {/* Key Cards */}
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                  <strong style={{ color: '#9ca3af' }}>Klíčové karty:</strong>{' '}
+                  <span style={{ fontStyle: 'italic', color: '#d1d5db' }}>{arch.keyCards.join(', ')}</span>
+                </div>
+
+                {/* Strategy & 2HG Role */}
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.45, marginTop: 'auto' }}>
+                  {arch.strategy}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Audit Rating Changes */}

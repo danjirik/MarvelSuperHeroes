@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
  
 import { cardsData, basicLandsAndFillers } from '../data/cardsData';
-import { Sparkles, Trash2, ArrowRight, BookOpen, AlertTriangle, CheckCircle, BarChart2 } from 'lucide-react';
+import { optimizeSealedPool } from '../utils/deckOptimizer';
+import { Sparkles, Trash2, ArrowRight, BookOpen, AlertTriangle, CheckCircle, BarChart2, Search, Plus, Minus } from 'lucide-react';
  
 export default function SealedSimulator({ initialPool, clearInitialPool }) {
   const [cardPool, setCardPool] = useState(() => {
@@ -11,6 +12,168 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
     return !!(initialPool && initialPool.length > 0);
   });
   const [poolFilterColor, setPoolFilterColor] = useState('All');
+
+  // Card search and manual adder states
+  const [manualSearchTerm, setManualSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  
+  // Card modal state
+  const [selectedCardForModal, setSelectedCardForModal] = useState(null);
+
+  const handleManualSearchChange = (e) => {
+    const query = e.target.value;
+    setManualSearchTerm(query);
+    
+    if (query.trim().length < 2) {
+      setSearchResults([]);
+      return;
+    }
+    
+    // Vyhledáme v cardsData shodné názvy
+    const filtered = cardsData.filter(card => 
+      card.name.toLowerCase().includes(query.toLowerCase())
+    ).slice(0, 5); // Limit na 5 doporučení
+    
+    setSearchResults(filtered);
+  };
+
+  const addCardToPool = (card) => {
+    const newCardInstance = {
+      ...card,
+      instanceId: `manual-add-${card.id}-${Date.now()}-${Math.random()}`,
+      location: 'Sideboard'
+    };
+    
+    setCardPool(prev => [...prev, newCardInstance]);
+    setManualSearchTerm('');
+    setSearchResults([]);
+  };
+
+  const handleAutoBuild = () => {
+    // Odstraníme dřívější základní země vygenerované optimalizací nebo ručně
+    const cleanPool = cardPool.filter(c => !c.instanceId.startsWith('generated-basic') && !c.instanceId.startsWith('basic-land-'));
+    
+    const result = optimizeSealedPool(cleanPool, [...cardsData, ...basicLandsAndFillers], false);
+    
+    if (result.error) {
+      alert(result.error);
+      return;
+    }
+    
+    if (result.success) {
+      setCardPool(result.fullPool);
+    }
+  };
+
+  const addBasicLand = (landName, deckLocation) => {
+    const landTemplate = basicLandsAndFillers.find(l => l.name === landName) || 
+                         cardsData.find(l => l.name === landName) || {
+                           name: landName,
+                           type: 'Land',
+                           color: [landName === 'Plains' ? 'W' : landName === 'Island' ? 'U' : landName === 'Swamp' ? 'B' : landName === 'Mountain' ? 'R' : 'G'],
+                           cost: '',
+                           rarity: 'Common',
+                           tier2HG: 'C',
+                           description: `Basic Land — ${landName}`
+                         };
+                         
+    const newLand = {
+      ...landTemplate,
+      instanceId: `basic-land-${landName}-${Date.now()}-${Math.random()}`,
+      location: deckLocation
+    };
+    
+    setCardPool(prev => [...prev, newLand]);
+  };
+
+  const removeBasicLand = (landName, deckLocation) => {
+    setCardPool(prev => {
+      const index = prev.findIndex(c => c.name === landName && c.location === deckLocation);
+      if (index !== -1) {
+        const copy = [...prev];
+        copy.splice(index, 1);
+        return copy;
+      }
+      return prev;
+    });
+  };
+
+  const autoFillLands = (deckLocation) => {
+    const deck = cardPool.filter(c => c.location === deckLocation);
+    const spells = deck.filter(c => c.type !== 'Land' && c.cost);
+    const deckCount = deck.length;
+    const landsNeeded = 40 - deckCount;
+    
+    if (landsNeeded <= 0) return;
+    
+    const symbolCounts = { W: 0, U: 0, B: 0, R: 0, G: 0 };
+    spells.forEach(s => {
+      if (!s.cost) return;
+      ['W', 'U', 'B', 'R', 'G'].forEach(col => {
+        const matches = s.cost.match(new RegExp(col, 'g'));
+        if (matches) {
+          symbolCounts[col] += matches.length;
+        }
+      });
+    });
+    
+    const totalSymbols = Object.values(symbolCounts).reduce((sum, v) => sum + v, 0);
+    const activeColors = Object.keys(symbolCounts).filter(col => symbolCounts[col] > 0);
+    
+    if (activeColors.length === 0) {
+      activeColors.push('W');
+    }
+    
+    const colToLandName = { W: 'Plains', U: 'Island', B: 'Swamp', R: 'Mountain', G: 'Forest' };
+    const landsToAdd = [];
+    
+    activeColors.forEach((col, idx) => {
+      const ratio = totalSymbols > 0 ? (symbolCounts[col] / totalSymbols) : (1 / activeColors.length);
+      let count = Math.round(ratio * landsNeeded);
+      
+      if (idx === activeColors.length - 1) {
+        const currentSum = landsToAdd.reduce((sum, item) => sum + item.count, 0);
+        count = landsNeeded - currentSum;
+      }
+      
+      if (count > 0) {
+        landsToAdd.push({ name: colToLandName[col], count });
+      }
+    });
+    
+    const newLands = [];
+    const allCards = [...cardsData, ...basicLandsAndFillers];
+    const basicLandsDb = allCards.filter(c => 
+      c.type?.includes('Land') && 
+      ['Plains', 'Island', 'Swamp', 'Mountain', 'Forest'].includes(c.name)
+    );
+    
+    landsToAdd.forEach(({ name, count }) => {
+      const template = basicLandsDb.find(l => l.name === name) || {
+        name,
+        type: 'Land',
+        color: [name === 'Plains' ? 'W' : name === 'Island' ? 'U' : name === 'Swamp' ? 'B' : name === 'Mountain' ? 'R' : 'G'],
+        cost: '',
+        rarity: 'Common',
+        tier2HG: 'C',
+        description: `Basic Land — ${name}`
+      };
+      
+      for (let i = 0; i < count; i++) {
+        newLands.push({
+          ...template,
+          instanceId: `basic-land-${name}-${Date.now()}-${Math.random()}-${i}`,
+          location: deckLocation
+        });
+      }
+    });
+    
+    setCardPool(prev => [...prev, ...newLands]);
+  };
+
+  const getLandCount = (deck, landName) => {
+    return deck.filter(c => c.name === landName).length;
+  };
 
   useEffect(() => {
     if (initialPool && initialPool.length > 0) {
@@ -237,23 +400,84 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
           {/* Action Row */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-              <button className="btn-secondary" onClick={resetSimulator} style={{ flex: '0 0 auto' }}>
-                <Trash2 size={16} />
-                Resetovat a začít znovu
-              </button>
-            </div>
-            <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '0.8rem', color: '#9ca3af', fontWeight: 600, flexShrink: 0 }}>Filtr:</span>
-              {['All', 'W', 'U', 'B', 'R', 'G', 'Multicolor', 'Colorless'].map(col => (
-                <button 
-                  key={col}
-                  onClick={() => setPoolFilterColor(col)}
-                  className={`nav-button ${poolFilterColor === col ? 'active' : ''}`}
-                  style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', borderRadius: '4px', minWidth: 'fit-content' }}
-                >
-                  {col === 'Multicolor' ? 'Multi' : col === 'Colorless' ? 'CL' : col}
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <button className="btn-primary" onClick={handleAutoBuild} style={{ flex: '0 0 auto', background: 'linear-gradient(135deg, #8b5cf6, #ec4899)' }}>
+                  <Sparkles size={16} />
+                  AI Auto-Build balíčků
                 </button>
-              ))}
+                <button className="btn-secondary" onClick={resetSimulator} style={{ flex: '0 0 auto' }}>
+                  <Trash2 size={16} />
+                  Resetovat pool
+                </button>
+              </div>
+            </div>
+            
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              {/* Color filter */}
+              <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '0.8rem', color: '#9ca3af', fontWeight: 600, flexShrink: 0 }}>Filtr:</span>
+                {['All', 'W', 'U', 'B', 'R', 'G', 'Multicolor', 'Colorless'].map(col => (
+                  <button 
+                    key={col}
+                    onClick={() => setPoolFilterColor(col)}
+                    className={`nav-button ${poolFilterColor === col ? 'active' : ''}`}
+                    style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', borderRadius: '4px', minWidth: 'fit-content' }}
+                  >
+                    {col === 'Multicolor' ? 'Multi' : col === 'Colorless' ? 'CL' : col}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Manual Card Search/Adder */}
+              <div style={{ position: 'relative', width: '100%', maxWidth: '320px' }}>
+                <div style={{ position: 'relative' }}>
+                  <input 
+                    type="text" 
+                    className="search-input" 
+                    placeholder="Přidat libovolnou kartu do poolu..." 
+                    value={manualSearchTerm}
+                    onChange={handleManualSearchChange}
+                    style={{ paddingLeft: '2rem', fontSize: '0.8rem', height: '32px' }}
+                  />
+                  <Search size={14} style={{ position: 'absolute', left: '0.65rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+                </div>
+                
+                {searchResults.length > 0 && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    right: 0,
+                    background: '#0e0e12',
+                    border: '1px solid rgba(139, 92, 246, 0.25)',
+                    borderRadius: '8px',
+                    boxShadow: '0 10px 15px -3px rgba(0,0,0,0.5)',
+                    zIndex: 200,
+                    marginTop: '0.25rem',
+                    overflow: 'hidden'
+                  }}>
+                    {searchResults.map(card => (
+                      <div 
+                        key={card.id}
+                        onClick={() => addCardToPool(card)}
+                        style={{
+                          padding: '0.5rem 0.75rem',
+                          cursor: 'pointer',
+                          fontSize: '0.82rem',
+                          borderBottom: '1px solid rgba(255,255,255,0.03)',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center'
+                        }}
+                        className="manual-search-item"
+                      >
+                        <span style={{ fontWeight: 'bold', color: '#fff' }}>{card.name}</span>
+                        <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{card.cost || 'Země'}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -366,56 +590,13 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
                                       Tier {cardData.tier2HG || 'C'}
                                     </span>
                                     
-                                    {/* Tooltip trigger name */}
-                                    <div
-                                       className={`card-tooltip-trigger ${activeTooltip === `pool-${cardData.id}-${idx}` ? 'active' : ''}`}
-                                       onClick={() => handleTooltipToggle(`pool-${cardData.id}-${idx}`)}
-                                     >
-                                      <strong style={{ color: '#fff', fontSize: '0.82rem', cursor: 'help' }}>
-                                        {cardData.name} {count > 1 && <span style={{ color: '#ec4899', fontWeight: 800 }}>({count}x)</span>}
-                                      </strong>
-                                      
-                                      {/* Tooltip Popup */}
-                                      <div className="card-tooltip-content" style={{ width: '260px' }}>
-                                        {cardData.imageUrl && (
-                                          <div style={{ width: '100%', marginBottom: '0.5rem', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                                            <img src={cardData.imageUrl} alt={cardData.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
-                                          </div>
-                                        )}
-                                        <div style={{ 
-                                          fontWeight: 800, 
-                                          marginBottom: '0.35rem', 
-                                          borderBottom: '1px solid rgba(255,255,255,0.08)', 
-                                          paddingBottom: '0.25rem', 
-                                          display: 'flex', 
-                                          justifyContent: 'space-between',
-                                          fontSize: '0.85rem'
-                                        }}>
-                                          <span>{cardData.name}</span>
-                                          <span style={{ color: '#a78bfa' }}>{cardData.cost || 'Země'}</span>
-                                        </div>
-                                        <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.75rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
-                                          {cardData.type} — {cardData.rarity}
-                                        </p>
-                                        {!cardData.imageUrl && (
-                                          <p style={{ margin: '0 0 0.6rem 0', fontSize: '0.78rem', color: 'var(--text-primary)', lineHeight: 1.35 }}>
-                                            {cardData.description}
-                                          </p>
-                                        )}
-                                        <div style={{ 
-                                          background: 'rgba(139, 92, 246, 0.08)', 
-                                          border: '1px dashed rgba(139, 92, 246, 0.25)', 
-                                          borderRadius: '6px', 
-                                          padding: '0.5rem', 
-                                          fontSize: '0.75rem', 
-                                          color: '#c084fc',
-                                          lineHeight: 1.35
-                                        }}>
-                                          <strong style={{ display: 'block', marginBottom: '0.1rem' }}>2HG Taktický audit:</strong> 
-                                          {cardData.impact2HG || 'Bez specifických komentářů.'}
-                                        </div>
-                                      </div>
-                                    </div>
+                                    <span 
+                                      onClick={() => setSelectedCardForModal(cardData)}
+                                      className="clickable-card-name"
+                                      style={{ fontWeight: 'bold', color: '#fff', fontSize: '0.82rem', cursor: 'pointer' }}
+                                    >
+                                      {cardData.name} {count > 1 && <span style={{ color: '#ec4899', fontWeight: 800 }}>({count}x)</span>}
+                                    </span>
                                     
                                     <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{cardData.cost || 'Země'}</span>
                                   </div>
@@ -458,8 +639,6 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
             {/* Split Decks display columns */}
             <div>
               <div className="sealed-split-container">
-                
-                {/* Player A Deck Column */}
                 <div className="deck-column">
                   <div className="deck-column-header">
                     <div>
@@ -479,6 +658,57 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
                       ))}
                     </div>
                   </div>
+
+                  {/* Lands manager Player A */}
+                  <div style={{ 
+                    background: 'rgba(255,255,255,0.02)', 
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    padding: '0.5rem 0.75rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.4rem'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 800, textTransform: 'uppercase' }}>Základní země A:</span>
+                      <button 
+                        className="btn-secondary"
+                        onClick={() => autoFillLands('A')}
+                        style={{ padding: '0.15rem 0.4rem', fontSize: '0.7rem', height: 'auto', background: 'rgba(139, 92, 246, 0.1)', borderColor: 'rgba(139, 92, 246, 0.25)', color: '#c084fc' }}
+                      >
+                        Auto-Doplnit
+                      </button>
+                    </div>
+                    
+                    <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.25rem' }}>
+                      {['Plains', 'Island', 'Swamp', 'Mountain', 'Forest'].map(landName => {
+                        const landSymbols = { Plains: '☀', Island: '💧', Swamp: '💀', Mountain: '🔥', Forest: '🌳' };
+                        const count = getLandCount(deckA, landName);
+                        
+                        return (
+                          <div key={landName} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.2)', padding: '0.2rem', borderRadius: '4px' }}>
+                            <span style={{ fontSize: '0.7rem', fontWeight: 'bold', color: '#fff' }} title={landName}>
+                              {landSymbols[landName]}
+                            </span>
+                            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff', margin: '0.1rem 0' }}>{count}</span>
+                            <div style={{ display: 'flex', gap: '0.15rem' }}>
+                              <button 
+                                onClick={() => removeBasicLand(landName, 'A')}
+                                style={{ width: '16px', height: '16px', borderRadius: '2px', border: 'none', background: 'rgba(239, 68, 68, 0.15)', color: '#f87171', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '0.75rem' }}
+                              >
+                                -
+                              </button>
+                              <button 
+                                onClick={() => addBasicLand(landName, 'A')}
+                                style={{ width: '16px', height: '16px', borderRadius: '2px', border: 'none', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '0.75rem' }}
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
                   
                   <div className="deck-cards-list">
                     {deckA.map(card => (
@@ -492,57 +722,13 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
                             <span key={col} className={`badge-color ${col}`} style={{ width: '12px', height: '12px', fontSize: '0.5rem' }}>{col[0]}</span>
                           ))}
                           
-                          {/* Tooltip trigger */}
-                          <div
-                            className={`card-tooltip-trigger ${activeTooltip === `deckA-${card.instanceId}` ? 'active' : ''}`}
-                            style={{ cursor: 'help' }}
-                            onClick={() => handleTooltipToggle(`deckA-${card.instanceId}`)}
+                          <span 
+                            onClick={() => setSelectedCardForModal(card)}
+                            className="clickable-card-name"
+                            style={{ fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}
                           >
-                            <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{card.name}</span>
-                            
-                            {/* Tooltip Popup */}
-                            <div className="card-tooltip-content" style={{ width: '260px', left: '0', transform: 'none' }}>
-                              {card.imageUrl && (
-                                <div style={{ width: '100%', marginBottom: '0.5rem', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                                  <img src={card.imageUrl} alt={card.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
-                                </div>
-                              )}
-                              <div style={{ 
-                                fontWeight: 800, 
-                                marginBottom: '0.35rem', 
-                                borderBottom: '1px solid rgba(255,255,255,0.08)', 
-                                paddingBottom: '0.25rem', 
-                                display: 'flex', 
-                                justifyContent: 'space-between',
-                                fontSize: '0.85rem'
-                              }}>
-                                <span>{card.name}</span>
-                                <span style={{ color: '#a78bfa' }}>{card.cost || 'Země'}</span>
-                              </div>
-                              <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.75rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
-                                {card.type} — {card.rarity}
-                              </p>
-                              {!card.imageUrl && (
-                                <p style={{ margin: '0 0 0.6rem 0', fontSize: '0.78rem', color: 'var(--text-primary)', lineHeight: 1.35 }}>
-                                  {card.description}
-                                </p>
-                              )}
-                              {card.impact2HG && (
-                                <div style={{ 
-                                  background: 'rgba(139, 92, 246, 0.08)', 
-                                  border: '1px dashed rgba(139, 92, 246, 0.25)', 
-                                  borderRadius: '6px', 
-                                  padding: '0.5rem', 
-                                  fontSize: '0.75rem', 
-                                  color: '#c084fc',
-                                  lineHeight: 1.35
-                                }}>
-                                  <strong style={{ display: 'block', marginBottom: '0.1rem' }}>2HG Taktický audit:</strong> 
-                                  {card.impact2HG}
-                                </div>
-                              )}
-                            </div>
-                          </div>
+                            {card.name}
+                          </span>
                         </div>
                         
                         <div 
@@ -582,6 +768,57 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
                       ))}
                     </div>
                   </div>
+
+                  {/* Lands manager Player B */}
+                  <div style={{ 
+                    background: 'rgba(255,255,255,0.02)', 
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    padding: '0.5rem 0.75rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.4rem'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 800, textTransform: 'uppercase' }}>Základní země B:</span>
+                      <button 
+                        className="btn-secondary"
+                        onClick={() => autoFillLands('B')}
+                        style={{ padding: '0.15rem 0.4rem', fontSize: '0.7rem', height: 'auto', background: 'rgba(139, 92, 246, 0.1)', borderColor: 'rgba(139, 92, 246, 0.25)', color: '#c084fc' }}
+                      >
+                        Auto-Doplnit
+                      </button>
+                    </div>
+                    
+                    <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.25rem' }}>
+                      {['Plains', 'Island', 'Swamp', 'Mountain', 'Forest'].map(landName => {
+                        const landSymbols = { Plains: '☀', Island: '💧', Swamp: '💀', Mountain: '🔥', Forest: '🌳' };
+                        const count = getLandCount(deckB, landName);
+                        
+                        return (
+                          <div key={landName} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.2)', padding: '0.2rem', borderRadius: '4px' }}>
+                            <span style={{ fontSize: '0.7rem', fontWeight: 'bold', color: '#fff' }} title={landName}>
+                              {landSymbols[landName]}
+                            </span>
+                            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#fff', margin: '0.1rem 0' }}>{count}</span>
+                            <div style={{ display: 'flex', gap: '0.15rem' }}>
+                              <button 
+                                onClick={() => removeBasicLand(landName, 'B')}
+                                style={{ width: '16px', height: '16px', borderRadius: '2px', border: 'none', background: 'rgba(239, 68, 68, 0.15)', color: '#f87171', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '0.75rem' }}
+                              >
+                                -
+                              </button>
+                              <button 
+                                onClick={() => addBasicLand(landName, 'B')}
+                                style={{ width: '16px', height: '16px', borderRadius: '2px', border: 'none', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '0.75rem' }}
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
                   
                   <div className="deck-cards-list">
                     {deckB.map(card => (
@@ -595,57 +832,13 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
                             <span key={col} className={`badge-color ${col}`} style={{ width: '12px', height: '12px', fontSize: '0.5rem' }}>{col[0]}</span>
                           ))}
                           
-                          {/* Tooltip trigger */}
-                          <div
-                            className={`card-tooltip-trigger ${activeTooltip === `deckB-${card.instanceId}` ? 'active' : ''}`}
-                            style={{ cursor: 'help' }}
-                            onClick={() => handleTooltipToggle(`deckB-${card.instanceId}`)}
+                          <span 
+                            onClick={() => setSelectedCardForModal(card)}
+                            className="clickable-card-name"
+                            style={{ fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}
                           >
-                            <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{card.name}</span>
-                            
-                            {/* Tooltip Popup */}
-                            <div className="card-tooltip-content" style={{ width: '260px', left: '0', transform: 'none' }}>
-                              {card.imageUrl && (
-                                <div style={{ width: '100%', marginBottom: '0.5rem', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                                  <img src={card.imageUrl} alt={card.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
-                                </div>
-                              )}
-                              <div style={{ 
-                                fontWeight: 800, 
-                                marginBottom: '0.35rem', 
-                                borderBottom: '1px solid rgba(255,255,255,0.08)', 
-                                paddingBottom: '0.25rem', 
-                                display: 'flex', 
-                                justifyContent: 'space-between',
-                                fontSize: '0.85rem'
-                              }}>
-                                <span>{card.name}</span>
-                                <span style={{ color: '#a78bfa' }}>{card.cost || 'Země'}</span>
-                              </div>
-                              <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.75rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
-                                {card.type} — {card.rarity}
-                              </p>
-                              {!card.imageUrl && (
-                                <p style={{ margin: '0 0 0.6rem 0', fontSize: '0.78rem', color: 'var(--text-primary)', lineHeight: 1.35 }}>
-                                  {card.description}
-                                </p>
-                              )}
-                              {card.impact2HG && (
-                                <div style={{ 
-                                  background: 'rgba(139, 92, 246, 0.08)', 
-                                  border: '1px dashed rgba(139, 92, 246, 0.25)', 
-                                  borderRadius: '6px', 
-                                  padding: '0.5rem', 
-                                  fontSize: '0.75rem', 
-                                  color: '#c084fc',
-                                  lineHeight: 1.35
-                                }}>
-                                  <strong style={{ display: 'block', marginBottom: '0.1rem' }}>2HG Taktický audit:</strong> 
-                                  {card.impact2HG}
-                                </div>
-                              )}
-                            </div>
-                          </div>
+                            {card.name}
+                          </span>
                         </div>
                         
                         <div 
@@ -672,18 +865,150 @@ export default function SealedSimulator({ initialPool, clearInitialPool }) {
         </div>
       )}
 
-      {/* Mobile tooltip backdrop overlay */}
-      {activeTooltip && (
-        <div
-          onClick={() => setActiveTooltip(null)}
+      {/* 5. Modal pro detailní náhled karty */}
+      {selectedCardForModal && (
+        <div 
+          onClick={() => setSelectedCardForModal(null)}
           style={{
             position: 'fixed',
-            inset: 0,
-            zIndex: 299,
-            background: 'rgba(0,0,0,0.4)',
-            touchAction: 'none',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(5, 5, 8, 0.85)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000,
+            padding: '1.5rem',
+            animation: 'fadeIn 0.2s ease-out'
           }}
-        />
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: '#0e0e12',
+              border: '1px solid rgba(139, 92, 246, 0.25)',
+              borderRadius: '16px',
+              maxWidth: '420px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.7)',
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '1.25rem',
+              gap: '1rem',
+              animation: 'scaleIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'
+            }}
+          >
+            {/* Close Button */}
+            <button 
+              onClick={() => setSelectedCardForModal(null)}
+              style={{
+                position: 'absolute',
+                top: '0.75rem',
+                right: '0.75rem',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '32px',
+                height: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#fff',
+                fontSize: '1.2rem',
+                cursor: 'pointer',
+                transition: 'background 0.2s',
+                zIndex: 10
+              }}
+            >
+              &times;
+            </button>
+
+            {/* Image Preview Container */}
+            {selectedCardForModal.imageUrl ? (
+              <div style={{ 
+                width: '100%', 
+                display: 'flex', 
+                justifyContent: 'center', 
+                borderRadius: '8px', 
+                overflow: 'hidden',
+                background: '#121217',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                boxShadow: '0 8px 16px rgba(0,0,0,0.6)'
+              }}>
+                <img 
+                  src={selectedCardForModal.imageUrl} 
+                  alt={selectedCardForModal.name} 
+                  style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '380px', objectFit: 'contain' }} 
+                />
+              </div>
+            ) : (
+              <div style={{
+                height: '180px',
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px dashed rgba(255,255,255,0.1)',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--text-muted)'
+              }}>
+                Žádný obrázek k dispozici
+              </div>
+            )}
+
+            {/* Content info */}
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', marginBottom: '0.5rem' }}>
+                <h4 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: '#fff' }}>
+                  {selectedCardForModal.name}
+                </h4>
+                <code style={{ fontSize: '0.9rem', color: '#c084fc', background: 'rgba(139, 92, 246, 0.1)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>
+                  {selectedCardForModal.cost || 'Země'}
+                </code>
+              </div>
+
+              {/* Badges */}
+              <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', marginBottom: '0.75rem', alignItems: 'center' }}>
+                <span className={`badge-tier ${selectedCardForModal.tier2HG || 'C'}`} style={{ fontSize: '0.75rem', padding: '0.1rem 0.4rem' }}>
+                  Tier {selectedCardForModal.tier2HG || 'C'}
+                </span>
+
+                <span style={{ 
+                  fontSize: '0.75rem', 
+                  color: selectedCardForModal.rarity === 'Mythic' ? '#f43f5e' : selectedCardForModal.rarity === 'Rare' ? '#fbbf24' : selectedCardForModal.rarity === 'Uncommon' ? '#60a5fa' : '#9ca3af',
+                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid rgba(255,255,255,0.05)',
+                  padding: '0.1rem 0.4rem',
+                  borderRadius: '4px'
+                }}>
+                  {selectedCardForModal.rarity}
+                </span>
+
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  {selectedCardForModal.type}
+                </span>
+              </div>
+
+              {/* Description */}
+              <div style={{ fontSize: '0.85rem', color: '#d1d5db', lineHeight: '1.45', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)', padding: '0.75rem', borderRadius: '6px', marginBottom: '0.75rem' }}>
+                <span style={{ display: 'block', fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 800, marginBottom: '0.25rem' }}>Pravidla / Text:</span>
+                {selectedCardForModal.description || 'Bez textu.'}
+              </div>
+
+              {/* 2HG Analysis */}
+              <div style={{ fontSize: '0.82rem', color: '#fff', lineHeight: '1.4', background: 'rgba(139, 92, 246, 0.03)', border: '1px dashed rgba(139, 92, 246, 0.15)', padding: '0.75rem', borderRadius: '6px' }}>
+                <span style={{ display: 'block', fontSize: '0.7rem', color: '#c084fc', textTransform: 'uppercase', fontWeight: 800, marginBottom: '0.25rem' }}>2HG Audit / Hodnocení:</span>
+                {selectedCardForModal.impact2HG || 'Bez specifických komentářů.'}
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

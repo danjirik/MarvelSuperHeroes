@@ -165,8 +165,8 @@ export function optimizeSealedPool(scannedCards, fullCardsDatabase, useWinRate =
     }
   });
 
-  if (poolInstances.length < 30) {
-    return { error: 'Příliš málo karet v poolu. Naskenujte alespoň 30 karet.' };
+  if (poolInstances.length === 0) {
+    return { error: 'Prázdný pool karet.' };
   }
 
   // 2. Definice 10 možných dvoubarevných kombinací (Guild)
@@ -211,8 +211,8 @@ export function optimizeSealedPool(scannedCards, fullCardsDatabase, useWinRate =
       const top23_G1 = poolForG1.slice(0, 23);
       const top23_G2 = poolForG2.slice(0, 23);
 
-      // Pokud guilda nemá ani 15 hratelných kouzel v daných barvách, je nehratelná
-      if (top23_G1.length < 15 || top23_G2.length < 15) continue;
+      // Zpracujeme i kombinace s méně kartami (doplní se základními zeměmi)
+      if (top23_G1.length === 0 && top23_G2.length === 0) continue;
 
       const sumG1 = top23_G1.reduce((sum, c) => sum + c.score2HG, 0);
       const sumG2 = top23_G2.reduce((sum, c) => sum + c.score2HG, 0);
@@ -360,7 +360,7 @@ export function optimizeSealedPool(scannedCards, fullCardsDatabase, useWinRate =
     });
 
     const totalSymbols = Object.values(symbolCounts).reduce((sum, v) => sum + v, 0);
-    const neededLandsCount = Math.max(5, 17 - matchedLands.length);
+    const neededLandsCount = Math.max(0, 40 - spells.length - matchedLands.length);
     const basicLands = [];
 
     // Databáze basic lands z cardsData

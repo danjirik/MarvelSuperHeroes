@@ -42,6 +42,11 @@ export default function CardScanner({ onImportToSimulator }) {
   // Ruční zadávání stavy
   const [manualQuery, setManualQuery] = useState('');
   const [manualResults, setManualResults] = useState([]);
+  const [manualModeType, setManualModeType] = useState('single'); // 'single' | 'bulk'
+  const [bulkInputText, setBulkInputText] = useState('');
+  const [bulkParsedResults, setBulkParsedResults] = useState([]);
+  const [focusedSuggestionIndex, setFocusedSuggestionIndex] = useState(-1);
+  const manualInputRef = useRef(null);
 
   // Stavy pro vyhledávání a opravy v jednotlivých řádcích v batch review
   const [rowQueries, setRowQueries] = useState({});
@@ -503,6 +508,33 @@ export default function CardScanner({ onImportToSimulator }) {
     setManualResults(matches);
   };
 
+  const handleManualKeyDown = (e) => {
+    if (manualResults.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setFocusedSuggestionIndex(prev => 
+        prev < manualResults.length - 1 ? prev + 1 : 0
+      );
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setFocusedSuggestionIndex(prev => 
+        prev > 0 ? prev - 1 : manualResults.length - 1
+      );
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const indexToSelect = focusedSuggestionIndex >= 0 ? focusedSuggestionIndex : 0;
+      const cardToAdd = manualResults[indexToSelect];
+      if (cardToAdd) {
+        addManualCard(cardToAdd);
+      }
+    } else if (e.key === 'Escape') {
+      setManualQuery('');
+      setManualResults([]);
+      setFocusedSuggestionIndex(-1);
+    }
+  };
+
   const addManualCard = (card) => {
     setScannedPool(prev => {
       const existing = prev.find(item => item.id === card.id);
@@ -514,7 +546,123 @@ export default function CardScanner({ onImportToSimulator }) {
     });
     setManualQuery('');
     setManualResults([]);
+    setFocusedSuggestionIndex(-1);
     playSuccessSound();
+    
+    // Udržení zaostření na vyhledávacím poli
+    setTimeout(() => {
+      if (manualInputRef.current) {
+        manualInputRef.current.focus();
+      }
+    }, 10);
+  };
+
+  // Hromadný seznam (Bulk import)
+  const handleBulkImport = () => {
+    if (!bulkInputText || !bulkInputText.trim()) return;
+
+    const lines = bulkInputText.split('\n');
+    const parsed = [];
+
+    lines.forEach(lineText => {
+      const trimmed = lineText.trim();
+      if (!trimmed) return;
+
+      const quantityMatch = trimmed.match(/^(\d+)\s*(?:x|X)?\s+(.+)$/);
+      let quantity = 1;
+      let cardName = trimmed;
+
+      if (quantityMatch) {
+        quantity = parseInt(quantityMatch[1], 10);
+        cardName = quantityMatch[2].trim();
+      }
+
+      const matchResult = matchCardByName(cardName);
+
+      if (matchResult && matchResult.confidence > 45) {
+        parsed.push({
+          line: trimmed,
+          card: matchResult.card,
+          quantity,
+          confidence: matchResult.confidence,
+          status: matchResult.confidence > 75 ? 'success' : 'warning'
+        });
+      } else {
+        parsed.push({
+          line: trimmed,
+          card: null,
+          quantity,
+          confidence: 0,
+          status: 'error'
+        });
+      }
+    });
+
+    setBulkParsedResults(parsed);
+  };
+
+  const confirmBulkImport = () => {
+    const validMatches = bulkParsedResults.filter(res => res.card);
+    if (validMatches.length === 0) return;
+
+    setScannedPool(prev => {
+      const updated = [...prev];
+      validMatches.forEach(res => {
+        const existing = updated.find(item => item.id === res.card.id);
+        if (existing) {
+          existing.count += res.quantity;
+        } else {
+          updated.push({ id: res.card.id, count: res.quantity });
+        }
+      });
+      return updated;
+    });
+
+    setBulkInputText('');
+    setBulkParsedResults([]);
+    playSuccessSound();
+  };
+
+  const handleBulkRowSearch = (index, query) => {
+    setRowQueries(prev => ({ ...prev, [`bulk-${index}`]: query }));
+    
+    if (!query || query.trim().length < 2) {
+      setRowResults(prev => ({ ...prev, [`bulk-${index}`]: [] }));
+      return;
+    }
+    
+    const lowerQuery = query.toLowerCase();
+    const matches = cardsData.filter(c => 
+      c.name.toLowerCase().includes(lowerQuery)
+    ).slice(0, 5);
+    
+    setRowResults(prev => ({ ...prev, [`bulk-${index}`]: matches }));
+  };
+
+  const selectBulkRowCard = (index, card) => {
+    setBulkParsedResults(prev => prev.map((res, idx) => 
+      idx === index ? { ...res, card: card, status: 'success', confidence: 100 } : res
+    ));
+    setRowQueries(prev => {
+      const copy = { ...prev };
+      delete copy[`bulk-${index}`];
+      return copy;
+    });
+    setRowResults(prev => {
+      const copy = { ...prev };
+      delete copy[`bulk-${index}`];
+      return copy;
+    });
+  };
+
+  const removeBulkRow = (index) => {
+    setBulkParsedResults(prev => prev.filter((_, idx) => idx !== index));
+  };
+
+  const changeBulkRowQuantity = (index, amount) => {
+    setBulkParsedResults(prev => prev.map((res, idx) => 
+      idx === index ? { ...res, quantity: Math.max(1, res.quantity + amount) } : res
+    ));
   };
 
   // --- SPRÁVA AKTIVNÍHO POOLU ---
@@ -978,60 +1126,262 @@ export default function CardScanner({ onImportToSimulator }) {
         <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
           <h3>Ruční přidání karet do poolu</h3>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
-            Pokud se vám nedaří kartu vyfotit, můžete ji rychle vyhledat a přidat ručně podle názvu.
+            Vyberte si rychlé vyhledávání po jedné nebo vložte hromadný textový seznam karet.
           </p>
+
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255, 255, 255, 0.05)', paddingBottom: '0.75rem' }}>
+            <button 
+              className={`nav-button ${manualModeType === 'single' ? 'active' : ''}`}
+              onClick={() => { setManualModeType('single'); setBulkParsedResults([]); }}
+              style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }}
+            >
+              Vyhledávání po jedné
+            </button>
+            <button 
+              className={`nav-button ${manualModeType === 'bulk' ? 'active' : ''}`}
+              onClick={() => { setManualModeType('bulk'); setManualResults([]); }}
+              style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }}
+            >
+              Hromadný seznam
+            </button>
+          </div>
           
-          <div style={{ position: 'relative' }}>
-            <input 
-              type="text" 
-              className="search-input" 
-              placeholder="Začněte psát název karty (např. Captain America, Doctor Doom...)"
-              value={manualQuery}
-              onChange={(e) => handleManualSearch(e.target.value)}
-            />
-            
-            {manualResults.length > 0 && (
-              <div style={{ 
-                position: 'absolute', 
-                top: '100%', 
-                left: 0, 
-                right: 0, 
-                background: 'var(--panel-bg)', 
-                border: '1px solid rgba(255,255,255,0.1)', 
-                borderRadius: '8px', 
-                boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
-                zIndex: 10,
-                maxHeight: '260px',
-                overflowY: 'auto',
-                marginTop: '0.25rem'
-              }}>
-                {manualResults.map(card => (
-                  <div 
-                    key={card.id} 
-                    onClick={() => addManualCard(card)}
-                    style={{ 
-                      padding: '0.65rem 1rem', 
-                      borderBottom: '1px solid rgba(255,255,255,0.05)', 
-                      cursor: 'pointer',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      transition: 'background 0.2s'
-                    }}
-                    className="manual-search-item"
-                  >
-                    <div>
-                      <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{card.name}</span>
-                      <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', color: '#a78bfa' }}>{card.cost}</span>
+          {manualModeType === 'single' && (
+            <div style={{ position: 'relative' }}>
+              <input 
+                ref={manualInputRef}
+                type="text" 
+                className="search-input" 
+                placeholder="Začněte psát název karty a stiskněte Enter (např. Captain America, Doctor Doom...)"
+                value={manualQuery}
+                onChange={(e) => {
+                  handleManualSearch(e.target.value);
+                  setFocusedSuggestionIndex(-1);
+                }}
+                onKeyDown={handleManualKeyDown}
+                autoFocus
+              />
+              
+              {manualResults.length > 0 && (
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '100%', 
+                  left: 0, 
+                  right: 0, 
+                  background: '#0e0e12', 
+                  border: '1px solid rgba(139, 92, 246, 0.25)', 
+                  borderRadius: '8px', 
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.6)',
+                  zIndex: 100,
+                  maxHeight: '280px',
+                  overflowY: 'auto',
+                  marginTop: '0.25rem'
+                }}>
+                  {manualResults.map((card, idx) => (
+                    <div 
+                      key={card.id} 
+                      onClick={() => addManualCard(card)}
+                      onMouseEnter={() => setFocusedSuggestionIndex(idx)}
+                      style={{ 
+                        padding: '0.65rem 1rem', 
+                        borderBottom: '1px solid rgba(255,255,255,0.05)', 
+                        cursor: 'pointer',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        background: idx === focusedSuggestionIndex ? 'rgba(139, 92, 246, 0.15)' : 'transparent',
+                        transition: 'background 0.2s'
+                      }}
+                      className="manual-search-item"
+                    >
+                      <div>
+                        <span style={{ fontWeight: 'bold', fontSize: '0.9rem', color: '#fff' }}>{card.name}</span>
+                        <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', color: '#a78bfa' }}>{card.cost}</span>
+                      </div>
+                      <span style={{ fontSize: '0.75rem', padding: '0.1rem 0.35rem', borderRadius: '4px', background: 'rgba(139, 92, 246, 0.15)', color: '#c084fc', fontWeight: 600 }}>
+                        Tier {card.tier2HG}
+                      </span>
                     </div>
-                    <span style={{ fontSize: '0.75rem', padding: '0.1rem 0.35rem', borderRadius: '4px', background: 'rgba(139, 92, 246, 0.15)', color: '#c084fc', fontWeight: 600 }}>
-                      Tier {card.tier2HG}
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {manualModeType === 'bulk' && (
+            <div>
+              {bulkParsedResults.length === 0 ? (
+                <div>
+                  <textarea
+                    className="input-field"
+                    placeholder="Vložte sem seznam karet, každou kartu na nový řádek. Např.:&#10;2 Hulk, Gamma Goliath&#10;4 Island&#10;Captain America"
+                    rows={8}
+                    value={bulkInputText}
+                    onChange={(e) => setBulkInputText(e.target.value)}
+                    style={{ 
+                      fontFamily: 'monospace', 
+                      fontSize: '0.85rem', 
+                      resize: 'vertical',
+                      background: 'rgba(10, 10, 12, 0.6)',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      borderRadius: '8px',
+                      color: 'var(--text-primary)',
+                      padding: '0.75rem 1rem'
+                    }}
+                  />
+                  <button 
+                    className="cta-button" 
+                    onClick={handleBulkImport}
+                    disabled={!bulkInputText.trim()}
+                    style={{ marginTop: '1rem', background: '#8b5cf6' }}
+                  >
+                    <Sparkles size={16} />
+                    Analyzovat a spárovat seznam
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <h4 style={{ margin: 0 }}>Náhled rozparsovaného seznamu</h4>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                      Zkontrolujte shody před uložením do poolu.
                     </span>
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem', maxHeight: '350px', overflowY: 'auto', paddingRight: '0.25rem' }}>
+                    {bulkParsedResults.map((res, index) => (
+                      <div 
+                        key={index} 
+                        style={{ 
+                          padding: '0.5rem 0.75rem', 
+                          display: 'flex', 
+                          gap: '0.75rem', 
+                          alignItems: 'center', 
+                          borderRadius: '8px',
+                          border: res.status === 'success' 
+                            ? '1px solid rgba(16, 185, 129, 0.2)' 
+                            : res.status === 'warning' 
+                              ? '1px solid rgba(245, 158, 11, 0.25)' 
+                              : '1px solid rgba(239, 68, 68, 0.25)',
+                          background: res.status === 'success' 
+                            ? 'rgba(16, 185, 129, 0.01)' 
+                            : res.status === 'warning' 
+                              ? 'rgba(245, 158, 11, 0.02)' 
+                              : 'rgba(239, 68, 68, 0.02)'
+                        }}
+                      >
+                        {/* Status Icon */}
+                        <div style={{ flexShrink: 0 }}>
+                          {res.status === 'success' ? (
+                            <CheckCircle2 size={16} style={{ color: '#10b981' }} />
+                          ) : res.status === 'warning' ? (
+                            <Info size={16} style={{ color: '#fbbf24' }} />
+                          ) : (
+                            <AlertCircle size={16} style={{ color: '#ef4444' }} />
+                          )}
+                        </div>
+
+                        {/* Match description */}
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.25rem' }}>
+                            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                              Původní text: "{res.line}"
+                            </span>
+                            {res.card && (
+                              <span style={{ fontSize: '0.65rem', color: res.status === 'success' ? '#34d399' : '#fbbf24', fontWeight: 600 }}>
+                                Fuzzy shoda: {res.confidence}%
+                              </span>
+                            )}
+                          </div>
+
+                          {res.card ? (
+                            <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#fff', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', marginTop: '0.1rem' }}>
+                              {res.card.name} <span style={{ color: '#c084fc', fontSize: '0.75rem', fontWeight: 500 }}>({res.card.cost || 'Země'})</span>
+                            </div>
+                          ) : (
+                            <div style={{ color: '#f87171', fontSize: '0.8rem', fontWeight: 'bold', marginTop: '0.1rem' }}>
+                              Karta nebyla nalezena v databázi!
+                            </div>
+                          )}
+
+                          {/* Inline manual search suggestion if needed */}
+                          <div style={{ marginTop: '0.25rem', position: 'relative' }}>
+                            <input
+                              type="text"
+                              className="search-input"
+                              placeholder="Vyhledat a opravit..."
+                              style={{ padding: '0.2rem 0.5rem', fontSize: '0.72rem', width: '100%', height: '24px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)' }}
+                              value={rowQueries[`bulk-${index}`] !== undefined ? rowQueries[`bulk-${index}`] : ''}
+                              onChange={(e) => handleBulkRowSearch(index, e.target.value)}
+                            />
+                            
+                            {rowResults[`bulk-${index}`]?.length > 0 && (
+                              <div style={{
+                                position: 'absolute',
+                                top: '100%',
+                                left: 0,
+                                right: 0,
+                                background: '#121217',
+                                border: '1px solid rgba(255,255,255,0.15)',
+                                borderRadius: '4px',
+                                zIndex: 100,
+                                maxHeight: '120px',
+                                overflowY: 'auto',
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.5)'
+                              }}>
+                                {rowResults[`bulk-${index}`].map(card => (
+                                  <div
+                                    key={card.id}
+                                    onClick={() => selectBulkRowCard(index, card)}
+                                    style={{ padding: '0.4rem 0.6rem', borderBottom: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer', fontSize: '0.75rem', color: '#fff' }}
+                                    className="manual-search-item"
+                                  >
+                                    {card.name}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Quantity Modifier */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
+                          <button onClick={() => changeBulkRowQuantity(index, -1)} style={{ width: '18px', height: '18px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.05)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '0.65rem' }}>-</button>
+                          <span style={{ fontSize: '0.8rem', fontWeight: 'bold', minWidth: '14px', textAlign: 'center' }}>{res.quantity}</span>
+                          <button onClick={() => changeBulkRowQuantity(index, 1)} style={{ width: '18px', height: '18px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.05)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '0.65rem' }}>+</button>
+                        </div>
+
+                        {/* Delete Row Button */}
+                        <button 
+                          onClick={() => removeBulkRow(index)}
+                          style={{ background: 'none', border: 'none', color: '#9ca3af', cursor: 'pointer', padding: '0.2rem', flexShrink: 0 }}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+                    <button className="nav-button" onClick={() => setBulkParsedResults([])}>
+                      <RotateCcw size={14} />
+                      Zadat nový seznam
+                    </button>
+                    
+                    <button 
+                      className="cta-button" 
+                      onClick={confirmBulkImport}
+                      disabled={bulkParsedResults.filter(r => r.card).length === 0}
+                      style={{ background: '#10b981' }}
+                    >
+                      <Check size={14} />
+                      Uložit do poolu ({bulkParsedResults.filter(r => r.card).length} karet)
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
 
@@ -1161,15 +1511,15 @@ export default function CardScanner({ onImportToSimulator }) {
             <button 
               className="cta-button" 
               onClick={runDeckOptimizer} 
-              disabled={isOptimizing || scannedPool.length < 15}
+              disabled={isOptimizing || scannedPool.length === 0}
               style={{ background: '#8b5cf6', padding: '0.75rem 2rem', fontSize: '1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)' }}
             >
               {isOptimizing ? <Loader2 className="animate-spin" size={20} /> : <Sparkles size={20} />}
               Navrhnout nejsilnější decky {useWinRate ? 'podle 17Lands' : ''}
             </button>
-            {scannedPool.length < 15 && (
+            {scannedPool.length === 0 && (
               <p style={{ color: '#ef4444', fontSize: '0.75rem', margin: 0 }}>
-                * Naskenujte alespoň 15 karet, abyste mohli spustit optimalizaci.
+                * Přidejte nebo naskenujte alespoň 1 kartu pro spuštění optimalizace.
               </p>
             )}
           </div>
